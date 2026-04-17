@@ -160,18 +160,16 @@
         <div class="card-elev" style="min-width: 200px;">
           ${(() => {
             const up = (window.STORAGE && window.STORAGE.getUserProfile) ? window.STORAGE.getUserProfile() : {};
+            const gd = up.gender === 'female' ? '여성' : '남성';
+            const ag = up.age || '—';
             const h = up.height || '—';
             const w = up.weight || '—';
             const st = up.stance === 'southpaw' ? '사우스포' : '오소독스';
             return `
               <div class="label-sm accent mb-16">MY PROFILE</div>
               <div class="flex justify-between mb-8">
-                <span class="body-sm">키</span>
-                <span class="title-md white">${h}<span class="stat-unit"> cm</span></span>
-              </div>
-              <div class="flex justify-between mb-8">
-                <span class="body-sm">몸무게</span>
-                <span class="title-md white">${w}<span class="stat-unit"> kg</span></span>
+                <span class="body-sm">${gd} / ${ag}세</span>
+                <span class="title-md white">${h}<span class="stat-unit">cm</span> · ${w}<span class="stat-unit">kg</span></span>
               </div>
               <div class="flex justify-between">
                 <span class="body-sm">스탠스</span>
@@ -784,7 +782,7 @@
 
       <div class="card mb-24">
         <div class="label-sm accent mb-16">설정</div>
-        <div class="body-sm mb-8"><strong class="white">프로필 설정</strong> — 키(cm), 몸무게(kg), 스탠스(오소독스/사우스포). 체중은 칼로리 계산에 사용, 스탠스는 콤비네이션 좌/우 표시에 사용.</div>
+        <div class="body-sm mb-8"><strong class="white">프로필 설정</strong> — 성별, 나이, 키(cm), 몸무게(kg), 스탠스(오소독스/사우스포). 성별·나이·체중·키로 Harris-Benedict 공식 기반 칼로리 정밀 계산. 스탠스는 콤비네이션 좌/우 표시에 사용.</div>
         <div class="body-sm mb-8"><strong class="white">JSON 내보내기/가져오기</strong> — 기록을 파일로 백업하거나 다른 기기에서 불러오기.</div>
         <div class="body-sm"><strong class="white">전체 삭제</strong> — 현재 계정의 모든 로컬 데이터 초기화.</div>
       </div>
@@ -799,9 +797,10 @@
       <div class="card mb-24">
         <div class="label-sm accent mb-16">칼로리 계산</div>
         <div class="body-sm mb-8">MET(Metabolic Equivalent of Task) 기반 공식 사용:</div>
-        <div class="body-sm mb-8"><strong class="white">칼로리 = MET × 체중(kg) × 시간(h)</strong></div>
+        <div class="body-sm mb-8"><strong class="white">칼로리 = MET × BMR(분당) × 시간(분)</strong></div>
+        <div class="body-sm mb-8">BMR(기초대사량)은 Harris-Benedict 공식으로 성별·나이·키·체중에서 산출.</div>
         <div class="body-sm mb-8">난이도 상(MET 10) / 중(MET 7) / 하(MET 4.5)</div>
-        <div class="body-sm">프로필에 체중을 입력하면 정확한 칼로리가 계산됩니다. 미입력 시 70kg 기준.</div>
+        <div class="body-sm">프로필에 정보를 입력할수록 정확해집니다. 미입력 시 남성/25세/170cm/70kg 기준.</div>
       </div>
 
       <div class="card mb-24">
@@ -838,6 +837,17 @@
 
       <div class="card mb-24 profile-settings">
         <div class="label-sm accent mb-16">프로필 설정</div>
+        <div class="form-group">
+          <label class="form-label">성별</label>
+          <div class="pill-group" data-group="profileGender">
+            <div class="pill ${userProfile.gender !== 'female' ? 'active' : ''}" data-value="male">남성</div>
+            <div class="pill ${userProfile.gender === 'female' ? 'active' : ''}" data-value="female">여성</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">나이</label>
+          <input type="number" id="profileAge" placeholder="25" value="${userProfile.age || ''}" />
+        </div>
         <div class="form-group">
           <label class="form-label">키 (cm)</label>
           <input type="number" id="profileHeight" placeholder="170" value="${userProfile.height || ''}" />
@@ -920,16 +930,29 @@
 
     // 프로필 저장
     view.querySelector('[data-action="save-profile"]').addEventListener('click', () => {
+      const genderPill = view.querySelector('[data-group="profileGender"] .pill.active');
+      const gender = genderPill ? genderPill.dataset.value : 'male';
+      const age = document.getElementById('profileAge').value.trim();
       const height = document.getElementById('profileHeight').value.trim();
       const weight = document.getElementById('profileWeight').value.trim();
       const stancePill = view.querySelector('[data-group="profileStance"] .pill.active');
       const stance = stancePill ? stancePill.dataset.value : 'orthodox';
-      const profile = { height: height, weight: weight, stance: stance };
+      const profile = { gender: gender, age: age, height: height, weight: weight, stance: stance };
       STORAGE.saveUserProfile(profile);
       if (window.AUTH && window.AUTH.user) {
         window.AUTH.saveProfileCloud(profile);
       }
       alert('프로필이 저장되었습니다.');
+    });
+
+    // 프로필 pill 클릭 핸들러
+    view.querySelectorAll('.profile-settings .pill-group').forEach(group => {
+      group.addEventListener('click', (e) => {
+        const pill = e.target.closest('.pill');
+        if (!pill) return;
+        group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
     });
   }
 

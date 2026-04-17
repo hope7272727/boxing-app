@@ -126,8 +126,11 @@
     // 메타
     const estMinutes = estimateTime(blocks);
     const intensity = params.intensityLabel;
-    const weightKg = profile.weight || 70;
-    const calories = estimateCalories(estMinutes, intensity, weightKg);
+    const weightKg = parseFloat(profile.weight) || 70;
+    const gender = profile.gender || 'male';
+    const age = parseInt(profile.age) || 25;
+    const heightCm = parseFloat(profile.height) || 170;
+    const calories = estimateCalories(estMinutes, intensity, weightKg, gender, age, heightCm);
 
     return {
       id: 'session_' + Date.now(),
@@ -183,10 +186,20 @@
     return Math.round(m);
   }
 
-  function estimateCalories(minutes, intensity, weightKg) {
+  function estimateCalories(minutes, intensity, weightKg, gender, age, heightCm) {
     const w = weightKg || 70;
+    const h = heightCm || 170;
+    const a = age || 25;
     const met = intensity === 'HIGH_VOLTAGE' ? 10 : intensity === 'MODERATE' ? 7 : 4.5;
-    return Math.round(met * w * (minutes / 60));
+    // Harris-Benedict BMR → 시간당 기초대사 → MET 적용
+    var bmr;
+    if (gender === 'female') {
+      bmr = 655.1 + (9.563 * w) + (1.85 * h) - (4.676 * a);
+    } else {
+      bmr = 66.5 + (13.75 * w) + (5.003 * h) - (6.755 * a);
+    }
+    var bmrPerMin = bmr / 1440; // 분당 기초대사
+    return Math.round(met * bmrPerMin * minutes);
   }
 
   function buildTitle(venue, goal, fatigue) {
