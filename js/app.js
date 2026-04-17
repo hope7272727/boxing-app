@@ -287,7 +287,8 @@
     view.innerHTML = `
       <div class="main-header">
         <div style="flex:1">
-          <div class="chip mb-16">일일 퀘스트</div>
+          <div class="label-sm mb-8">일일 퀘스트</div>
+          <h1 class="font-display display-lg"><span class="white">TODAY'S</span><span class="accent">_MISSION</span></h1>
         </div>
         <div class="card-elev" style="min-width: 220px;">
           <div class="font-display headline-md accent mb-8">${escape(formatProfileSummary(current.profile))}</div>
