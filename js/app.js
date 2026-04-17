@@ -784,7 +784,9 @@
     const recent5 = sessions.slice(0, 5).map(s => {
       const d = new Date(s.completedAt);
       const dateStr = `${d.getMonth() + 1}/${d.getDate()}`;
-      return `<div class="recent-mission-item"><span class="muted">${dateStr}</span> <span class="white">${escape(s.title)}</span> <span class="accent">${s.intensity.replace(/_/g, ' ')}</span><button class="btn btn-sm btn-ghost recent-mission-delete" data-delete="${escape(s.id)}">✗</button></div>`;
+      const p = s.profile || {};
+      const summary = formatProfileSummary(p);
+      return `<div class="recent-mission-item"><span class="muted">${dateStr}</span> <span class="accent">${escape(summary)}</span><button class="btn btn-sm btn-ghost recent-mission-delete" data-delete="${escape(s.id)}">✗</button></div>`;
     }).join('');
 
     view.innerHTML = `
