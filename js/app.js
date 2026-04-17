@@ -252,7 +252,7 @@
       view.innerHTML = `
         <div class="main-header">
           <div>
-            <div class="label-sm mb-8">오늘의 루틴</div>
+            <div class="label-sm mb-8">오늘의 목표</div>
             <h1 class="font-display display-lg">아직 <span class="accent">세션이 없다.</span></h1>
           </div>
         </div>
@@ -272,7 +272,7 @@
     view.innerHTML = `
       <div class="main-header">
         <div style="flex:1">
-          <div class="chip mb-16">오늘의 미션</div>
+          <div class="chip mb-16">일일 퀘스트</div>
           <div class="font-display headline-md accent mt-8">${escape(formatProfileSummary(current.profile))}</div>
         </div>
         <div class="card-elev" style="min-width: 220px;">
