@@ -729,7 +729,8 @@
       if (isToday) cls += ' cal-today';
       if (isFuture) cls += ' cal-future';
       if (isDone) cls += ' cal-done';
-      cells += `<div class="${cls}"><span class="cal-day">${day}</span>${isDone ? '<span class="cal-check">✓</span>' : ''}</div>`;
+      const dateAttr = isDone ? ` data-cal-date="${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}"` : '';
+      cells += `<div class="${cls}"${dateAttr}><span class="cal-day">${day}</span>${isDone ? '<span class="cal-check">✓</span>' : ''}</div>`;
     }
 
     return `
@@ -783,7 +784,7 @@
     const recent5 = sessions.slice(0, 5).map(s => {
       const d = new Date(s.completedAt);
       const dateStr = `${d.getMonth() + 1}/${d.getDate()}`;
-      return `<div class="recent-mission-item"><span class="muted">${dateStr}</span> <span class="white">${escape(s.title)}</span> <span class="accent">${s.intensity.replace(/_/g, ' ')}</span></div>`;
+      return `<div class="recent-mission-item"><span class="muted">${dateStr}</span> <span class="white">${escape(s.title)}</span> <span class="accent">${s.intensity.replace(/_/g, ' ')}</span><button class="btn btn-sm btn-ghost recent-mission-delete" data-delete="${escape(s.id)}">✗</button></div>`;
     }).join('');
 
     view.innerHTML = `
@@ -834,6 +835,7 @@
           </div>
 
           ${buildMonthCalendar(sessions, calViewYear, calViewMonth)}
+          <div id="calDetail"></div>
         </div>
 
         <div>
@@ -877,6 +879,54 @@
       calViewMonth++;
       if (calViewMonth > 11) { calViewMonth = 0; calViewYear++; }
       renderLogs();
+    });
+
+    // Calendar day click → show missions for that day
+    let calSelectedDate = null;
+    view.querySelectorAll('[data-cal-date]').forEach(cell => {
+      cell.addEventListener('click', () => {
+        const dateStr = cell.dataset.calDate;
+        const detailEl = document.getElementById('calDetail');
+        if (!detailEl) return;
+        if (calSelectedDate === dateStr) {
+          calSelectedDate = null;
+          detailEl.innerHTML = '';
+          return;
+        }
+        calSelectedDate = dateStr;
+        const clickedDate = new Date(dateStr);
+        const daySessions = sessions.filter(s => {
+          const d = new Date(s.completedAt);
+          return d.getFullYear() === clickedDate.getFullYear() && d.getMonth() === clickedDate.getMonth() && d.getDate() === clickedDate.getDate();
+        });
+        const dateHeader = `${clickedDate.getMonth() + 1}월 ${clickedDate.getDate()}일`;
+        const missionList = daySessions.map(s => {
+          const blocks = s.completedBlocks != null ? s.completedBlocks : (s.blocks || []).filter(b => b.completed).length;
+          const total = s.totalBlocks != null ? s.totalBlocks : (s.blocks || []).length;
+          return `<div style="margin-bottom:8px;">
+            <div class="title-md white">${escape(s.title)}</div>
+            <div class="body-sm"><span class="accent">${escape(s.intensity.replace(/_/g, ' '))}</span> · ${blocks}/${total} 블록 완료</div>
+          </div>`;
+        }).join('');
+        detailEl.innerHTML = `
+          <div class="cal-detail card mt-16">
+            <div class="label-sm accent mb-8">${dateHeader}</div>
+            ${missionList}
+          </div>
+        `;
+      });
+    });
+
+    // Recent mission delete buttons
+    view.querySelectorAll('[data-delete]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!confirm('이 미션 기록을 삭제하시겠습니까?')) return;
+        const id = btn.dataset.delete;
+        STORAGE.deleteSession(id);
+        if (window.AUTH && window.AUTH.user) window.AUTH.deleteSessionCloud(id);
+        renderLogs();
+      });
     });
   }
 
