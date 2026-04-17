@@ -109,6 +109,7 @@
       case 'today':     return renderToday();
       case 'logs':      return renderLogs();
       case 'settings':  return renderSettings();
+      case 'guide':     return renderGuide();
       default:          return renderDashboard();
     }
   }
@@ -674,6 +675,119 @@
   }
 
   // ---------- SETTINGS ----------
+  // ---------- GUIDE ----------
+  function renderGuide() {
+    view.innerHTML = `
+      <div class="main-header">
+        <div>
+          <div class="label-sm mb-8">GUIDE</div>
+          <h1 class="font-display display-lg">이용<span class="accent">가이드</span></h1>
+        </div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">펀치 넘버링 시스템</div>
+        <div class="body-sm mb-8">모든 콤비네이션은 아래 번호로 표시됩니다.</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;">
+          <div class="card-elev" style="padding:12px;"><strong class="accent">1</strong> — 잽 (앞손 직선)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">2</strong> — 스트레이트/크로스 (뒷손 직선)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">3</strong> — 리드 훅 (앞손 훅)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">4</strong> — 리어 훅 (뒷손 훅)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">5</strong> — 리드 어퍼컷 (앞손 어퍼)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">6</strong> — 리어 어퍼컷 (뒷손 어퍼)</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">2b</strong> — 바디 크로스</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">5b/6b</strong> — 바디 어퍼컷</div>
+        </div>
+        <div class="body-sm mt-16">오소독스: 앞손=좌, 뒷손=우 / 사우스포: 앞손=우, 뒷손=좌</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">방어 동작</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+          <div class="card-elev" style="padding:12px;"><strong>SL</strong> — 슬립 (머리를 좌우로 피하기)</div>
+          <div class="card-elev" style="padding:12px;"><strong>WV</strong> — 위브 (상체를 U자로 숙여 피하기)</div>
+          <div class="card-elev" style="padding:12px;"><strong>DK</strong> — 더킹 (무릎 굽혀 숙이기)</div>
+          <div class="card-elev" style="padding:12px;"><strong>SB</strong> — 스텝백 (뒤로 빠지기)</div>
+          <div class="card-elev" style="padding:12px;"><strong>PV</strong> — 피벗 (발을 축으로 각도 변경)</div>
+        </div>
+        <div class="body-sm mt-16">더킹 후에는 항상 같은 손으로 바디어퍼가 이어집니다.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">메인 화면</div>
+        <div class="body-sm mb-8"><strong class="white">오늘의 콤비네이션</strong> — 매일 자동으로 바뀌는 롱 콤보. "다른 콤보" 버튼으로 랜덤 교체 가능.</div>
+        <div class="body-sm mb-8"><strong class="white">일일 퀘스트</strong> — 진행 중인 미션이 있으면 "이어하기"로 바로 이동. 없으면 "START MISSION"으로 새 미션 생성.</div>
+        <div class="body-sm mb-8"><strong class="white">이번 주 미션</strong> — 월~일 요일별 미션 완료 여부. ✓ 완료, ✗ 미완료, — 오늘.</div>
+        <div class="body-sm"><strong class="white">하단 통계</strong> — 총 미션 수 / 최대 연속 달성 / 이번 주 완료 / 총 소모 칼로리.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">미션 생성 (NEW MISSION)</div>
+        <div class="body-sm mb-8"><strong class="white">난이도</strong> — 하(초보, 가벼운 강도) / 중(중급, 보통 강도) / 상(상급, 높은 강도). 라운드 수와 운동 개수에 영향.</div>
+        <div class="body-sm mb-8"><strong class="white">훈련 장소</strong> — 복싱장(샌드백+콤비네이션+스파링) / 집(섀도우+맨몸+컨디셔닝). 집은 기구 없이 좁은 공간에서 가능한 것만.</div>
+        <div class="body-sm mb-8"><strong class="white">가용 시간</strong> — 30분/45분/60분/90분. 시간에 맞춰 운동 수 자동 조절.</div>
+        <div class="body-sm"><strong class="white">오늘의 목표</strong> — 기술(폼/정확도 중심) / 체력(심폐+지구력) / 감량(고강도 칼로리 소모).</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">오늘의 목표 (미션 진행)</div>
+        <div class="body-sm mb-8"><strong class="white">운동 블록</strong> — 각 운동이 번호와 함께 나열됨. 이름 옆 [i] 아이콘을 누르면 상세 설명(자세, 스텝, 흔한 실수) 확인.</div>
+        <div class="body-sm mb-8"><strong class="white">체크 버튼 (○/✓)</strong> — 오른쪽 버튼을 눌러 완료 체크. 체크하면 해당 운동이 완료 처리됨.</div>
+        <div class="body-sm mb-8"><strong class="white">콤비네이션 블록</strong> — 펀치 넘버가 시각적으로 표시. 아래에 좌/우 방향 포함 설명. 스탠스 설정에 따라 자동 변환.</div>
+        <div class="body-sm mb-8"><strong class="white">FINISH & LOG</strong> — 미션 종료 후 기록 저장. 로그인 시 클라우드에도 자동 백업.</div>
+        <div class="body-sm"><strong class="white">루틴 다시 뽑기</strong> — 현재 미션을 버리고 같은 조건으로 새 루틴 생성.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">훈련 기록</div>
+        <div class="body-sm mb-8"><strong class="white">미션 히스토리</strong> — 완료된 모든 미션이 날짜순으로 나열. 각 미션의 블록 수, 라운드, 시간 표시.</div>
+        <div class="body-sm mb-8"><strong class="white">월간 목표</strong> — 월 12회 기준 달성률. 주황색 바로 진행도 표시.</div>
+        <div class="body-sm"><strong class="white">삭제</strong> — 각 기록 옆 삭제 버튼으로 개별 삭제 가능.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">설정</div>
+        <div class="body-sm mb-8"><strong class="white">프로필 설정</strong> — 키(cm), 몸무게(kg), 스탠스(오소독스/사우스포). 체중은 칼로리 계산에 사용, 스탠스는 콤비네이션 좌/우 표시에 사용.</div>
+        <div class="body-sm mb-8"><strong class="white">JSON 내보내기/가져오기</strong> — 기록을 파일로 백업하거나 다른 기기에서 불러오기.</div>
+        <div class="body-sm"><strong class="white">전체 삭제</strong> — 현재 계정의 모든 로컬 데이터 초기화.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">Google 로그인</div>
+        <div class="body-sm mb-8"><strong class="white">로그인</strong> — 메인 화면 우측 상단 "로그인" 버튼. 구글 계정으로 로그인.</div>
+        <div class="body-sm mb-8"><strong class="white">계정별 데이터</strong> — 로그인한 계정마다 미션 기록, 프로필이 따로 저장됨.</div>
+        <div class="body-sm"><strong class="white">클라우드 동기화</strong> — 미션 완료 시 Firestore에 자동 백업. 다른 기기에서 같은 계정으로 로그인하면 기록 동기화.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">칼로리 계산</div>
+        <div class="body-sm mb-8">MET(Metabolic Equivalent of Task) 기반 공식 사용:</div>
+        <div class="body-sm mb-8"><strong class="white">칼로리 = MET × 체중(kg) × 시간(h)</strong></div>
+        <div class="body-sm mb-8">난이도 상(MET 10) / 중(MET 7) / 하(MET 4.5)</div>
+        <div class="body-sm">프로필에 체중을 입력하면 정확한 칼로리가 계산됩니다. 미입력 시 70kg 기준.</div>
+      </div>
+
+      <div class="card mb-24">
+        <div class="label-sm accent mb-16">랭크 시스템</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+          <div class="card-elev" style="padding:12px;"><strong>ROOKIE</strong> — 0~4 미션</div>
+          <div class="card-elev" style="padding:12px;"><strong>AMATEUR</strong> — 5~14 미션</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">CONTENDER</strong> — 15~29 미션</div>
+          <div class="card-elev" style="padding:12px;"><strong class="accent">CHAMPION</strong> — 30+ 미션</div>
+        </div>
+        <div class="body-sm mt-16">사이드바 로고 아래에 현재 랭크가 표시됩니다.</div>
+      </div>
+
+      <div class="card">
+        <div class="label-sm accent mb-16">복싱장 vs 집 루틴 차이</div>
+        <div class="body-sm mb-8"><strong class="white">복싱장</strong> — 워밍업(줄넘기) → 섀도우 → 오늘의 콤비네이션 + 콤보 → 샌드백 2종 → (중급↑ 스파링)</div>
+        <div class="body-sm mb-8"><strong class="white">집</strong> — 워밍업(동적스트레칭) → 섀도우 → (기술 목표 시 콤보) → 맨몸 3~4종 → (컨디셔닝)</div>
+        <div class="body-sm">집 루틴은 줄넘기, 풀업, 셔틀런 등 기구/공간이 필요한 운동을 제외하고 좁은 방에서 가능한 것만 포함.</div>
+      </div>
+    `;
+  }
+
+  // ---------- SETTINGS ----------
   function renderSettings() {
     const sessions = STORAGE.getSessions();
     const userProfile = STORAGE.getUserProfile();
@@ -898,7 +1012,7 @@
   }
 
   const hash = (window.location.hash || '').replace('#', '');
-  if (['dashboard', 'today', 'logs', 'settings'].includes(hash)) {
+  if (['dashboard', 'today', 'logs', 'guide', 'settings'].includes(hash)) {
     setRoute(hash);
   } else {
     render();
