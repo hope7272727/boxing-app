@@ -14,6 +14,10 @@
     },
   };
 
+  // Calendar view state (not persisted)
+  let calViewYear = new Date().getFullYear();
+  let calViewMonth = new Date().getMonth();
+
   const mobileNav = document.getElementById('mobileNav');
 
   // ---------- ROUTER ----------
@@ -543,6 +547,53 @@
   }
 
   // ---------- LOGS ----------
+  function buildMonthCalendar(sessions, year, month) {
+    const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+    const dayLabels = ['일', '월', '화', '수', '목', '금', '토'];
+    const today = new Date();
+    const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Build set of days with completed missions
+    const doneDays = new Set();
+    sessions.forEach(s => {
+      const d = new Date(s.completedAt);
+      if (d.getFullYear() === year && d.getMonth() === month) {
+        doneDays.add(d.getDate());
+      }
+    });
+
+    let cells = dayLabels.map(l => `<div class="cal-cell cal-header-cell"><span class="label-sm">${l}</span></div>`).join('');
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      cells += `<div class="cal-cell cal-empty"></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isToday = (day === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+      const isFuture = new Date(year, month, day) > today;
+      const isDone = doneDays.has(day);
+      let cls = 'cal-cell';
+      if (isToday) cls += ' cal-today';
+      if (isFuture) cls += ' cal-future';
+      if (isDone) cls += ' cal-done';
+      cells += `<div class="${cls}"><span class="cal-day">${day}</span>${isDone ? '<span class="cal-check">✓</span>' : ''}</div>`;
+    }
+
+    return `
+      <div class="card mb-24">
+        <div class="cal-header flex items-center justify-between mb-16">
+          <button class="btn btn-sm btn-ghost" data-cal-prev>◀</button>
+          <div class="font-display headline-md">${year}년 ${monthNames[month]}</div>
+          <button class="btn btn-sm btn-ghost" data-cal-next>▶</button>
+        </div>
+        <div class="label-sm mb-8">월간 활동 기록</div>
+        <div class="month-calendar">${cells}</div>
+      </div>
+    `;
+  }
+
   function renderLogs() {
     const sessions = STORAGE.getSessions()
       .filter(s => s.completedAt)
@@ -576,6 +627,13 @@
     }).length;
     const monthGoal = 12;
     const monthPct = Math.min(100, Math.round((thisMonth / monthGoal) * 100));
+
+    // Recent 5 missions for sidebar compact list
+    const recent5 = sessions.slice(0, 5).map(s => {
+      const d = new Date(s.completedAt);
+      const dateStr = `${d.getMonth() + 1}/${d.getDate()}`;
+      return `<div class="recent-mission-item"><span class="muted">${dateStr}</span> <span class="white">${escape(s.title)}</span> <span class="accent">${s.intensity.replace(/_/g, ' ')}</span></div>`;
+    }).join('');
 
     view.innerHTML = `
       <div class="main-header">
@@ -624,24 +682,7 @@
             </div>
           </div>
 
-          <div class="label-sm mb-16">최근 미션</div>
-          ${sessions.slice(0, 20).map(s => {
-            const d = new Date(s.completedAt);
-            const dd = String(d.getDate()).padStart(2, '0');
-            const mm = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][d.getMonth()];
-            const rounds = countRounds(s);
-            return `
-              <div class="log-row" data-session-id="${s.id}">
-                <div class="log-date"><div class="month">${mm}</div><div class="day">${dd}</div></div>
-                <div>
-                  <div class="log-title">${escape(s.title)}</div>
-                  <div class="log-meta">${s.completedBlocks || 0}/${s.totalBlocks || s.blocks.length} 블록 · ${rounds} RDS</div>
-                </div>
-                <div class="accent label-md">${s.intensity.replace(/_/g, ' ')}</div>
-                <button class="btn btn-sm btn-ghost" data-delete="${s.id}">삭제</button>
-              </div>
-            `;
-          }).join('')}
+          ${buildMonthCalendar(sessions, calViewYear, calViewMonth)}
         </div>
 
         <div>
@@ -659,23 +700,32 @@
             ${renderGoalDist(sessions.slice(0, 30))}
           </div>
 
-          <div class="card-elev">
+          <div class="card-elev mb-16">
             <div class="label-sm mb-8">NEXT PHASE</div>
             <div class="font-display accent" style="font-size: 1.4rem;">${sessions.length >= 30 ? 'CHAMPION' : sessions.length >= 15 ? 'CONTENDER' : sessions.length >= 5 ? 'AMATEUR' : 'ROOKIE'}</div>
             <p class="body-sm mt-8">${sessions.length >= 30 ? '최정상입니다. 계속 유지하세요.' : `다음 티어까지 ${sessions.length >= 15 ? 30 - sessions.length : sessions.length >= 5 ? 15 - sessions.length : 5 - sessions.length} 미션입니다.`}</p>
+          </div>
+
+          <div class="card-elev">
+            <div class="label-sm mb-8">최근 미션</div>
+            ${recent5 || '<div class="body-sm muted">기록 없음</div>'}
           </div>
         </div>
       </div>
     `;
 
-    view.querySelectorAll('[data-delete]').forEach(b => {
-      b.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (confirm('이 미션 기록을 삭제하시겠습니까?')) {
-          STORAGE.deleteSession(b.dataset.delete);
-          renderLogs();
-        }
-      });
+    // Calendar navigation
+    const prevBtn = view.querySelector('[data-cal-prev]');
+    const nextBtn = view.querySelector('[data-cal-next]');
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      calViewMonth--;
+      if (calViewMonth < 0) { calViewMonth = 11; calViewYear--; }
+      renderLogs();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      calViewMonth++;
+      if (calViewMonth > 11) { calViewMonth = 0; calViewYear++; }
+      renderLogs();
     });
   }
 

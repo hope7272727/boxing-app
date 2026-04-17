@@ -942,4 +942,74 @@ input:focus, select:focus, textarea:focus {
   max-width: 360px;
 }
 
+/* =========================
+   MONTH CALENDAR (Logs)
+   ========================= */
+.month-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.cal-cell {
+  text-align: center;
+  padding: 10px 4px;
+  background: var(--surface-highest);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 48px;
+  justify-content: center;
+}
+.cal-header-cell {
+  background: transparent;
+  min-height: auto;
+  padding: 6px 4px;
+}
+.cal-day {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--on-surface-dim);
+}
+.cal-check {
+  font-size: 0.7rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+.cal-done {
+  background: rgba(255, 143, 116, 0.12);
+}
+.cal-done .cal-day {
+  color: var(--primary);
+}
+.cal-today {
+  border: 2px solid var(--primary);
+}
+.cal-future {
+  opacity: 0.3;
+}
+.cal-empty {
+  background: transparent;
+  min-height: auto;
+}
+.cal-header {
+  gap: 12px;
+}
+
+/* Recent mission compact list */
+.recent-mission-item {
+  padding: 8px 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--outline-variant);
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.recent-mission-item:last-child {
+  border-bottom: none;
+}
+
 .mobile-nav { display: none; }
