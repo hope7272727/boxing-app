@@ -679,7 +679,7 @@
   }
 
   function renderGoalDist(sessions) {
-    const labels = { technique: '기술', power: '파워', cardio: '카디오', endurance: '지구력', weightloss: '감량' };
+    const labels = { technique: 'TECHNIQUE', power: 'POWER', cardio: 'HEALTH', endurance: 'ENDURANCE', weightloss: 'DIET' };
     const counts = {};
     sessions.forEach(s => {
       const g = s.profile?.goal || 'technique';
