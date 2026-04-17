@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ff8f74",
+                        "tertiary-fixed": "#ffffff",
+                        "surface-container-lowest": "#000000",
+                        "on-surface-variant": "#adaaaa",
+                        "on-primary-fixed-variant": "#5a0f00",
+                        "on-primary-container": "#490a00",
+                        "secondary-fixed-dim": "#d4d4d4",
+                        "error-container": "#a70138",
+                        "surface-tint": "#ff8f74",
+                        "on-primary-fixed": "#000000",
+                        "surface-container-low": "#131313",
+                        "surface-dim": "#0e0e0e",
+                        "on-tertiary-container": "#575656",
+                        "on-tertiary-fixed-variant": "#6e6d6d",
+                        "inverse-primary": "#b62700",
+                        "inverse-on-surface": "#565555",
+                        "on-error": "#490013",
+                        "tertiary-dim": "#edeaea",
+                        "on-primary": "#5e1000",
+                        "background": "#0e0e0e",
+                        "primary-dim": "#dd3200",
+                        "on-secondary-fixed": "#3e4040",
+                        "error": "#ff6e84",
+                        "surface-bright": "#2c2c2c",
+                        "outline-variant": "#484847",
+                        "outline": "#767575",
+                        "on-error-container": "#ffb2b9",
+                        "secondary-dim": "#d4d4d4",
+                        "tertiary-fixed-dim": "#f3f0ef",
+                        "secondary-container": "#454747",
+                        "primary-fixed-dim": "#ff5c35",
+                        "error-dim": "#d73357",
+                        "on-secondary-fixed-variant": "#5a5c5c",
+                        "secondary": "#e2e2e2",
+                        "surface": "#0e0e0e",
+                        "secondary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ff7857",
+                        "tertiary-container": "#edeaea",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-high": "#20201f",
+                        "on-background": "#ffffff",
+                        "on-surface": "#ffffff",
+                        "on-secondary": "#505252",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-container-highest": "#262626",
+                        "tertiary": "#fcf9f8",
+                        "surface-variant": "#262626",
+                        "on-tertiary": "#605f5f",
+                        "on-secondary-container": "#d0d0d0",
+                        "primary-container": "#ff7857",
+                        "on-tertiary-fixed": "#515050"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-surface overflow-x-hidden">
+<div class="fixed inset-0 kinetic-grain pointer-events-none"></div>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-full py-8 gap-4 fixed left-0 w-64 bg-[#0e0e0e] z-50">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-black text-[#ffffff] font-headline uppercase tracking-tighter">아이언 펀치</h1>
+<p class="text-[10px] text-primary font-bold tracking-[0.2em] mt-1">RANK: AMATEUR</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 bg-[#ff3b00] text-[#ffffff] font-black font-headline uppercase transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>대시보드</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span>루틴 설정</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>훈련 기록</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span>설정</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed font-black py-4 font-headline uppercase text-sm tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                START WORKOUT
+            </button>
+</div>
+</aside>
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0e]">
+<h1 class="text-2xl font-black text-[#ff3b00] italic font-headline uppercase tracking-tighter">아이언 펀치</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ffffff]/60" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up of a professional boxer's face in shadow with intense focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3iL1mosr6V4V88mkqLcWPwFwozlzkpCOBTKsASXHZISzHUtkTHghQqtw5CJ51KQg31p8bpAcR6TssaAYAMMbEoyjvUOeajQHFctzCtbHd64FnaQykPkho-gtJUlNvM8ds24h2J4NZsbnx5dU6eyKSeG74rbIN4T7vio0GJlGn01wkZLdHD66PQCrfRajOdbtUS8ccJ2I7ppfFg6ZEYj4Gi_HE6HxRpNW0bS9njiPjh6-Z5yIBHmnVc7O2Q0IR0rEWPVqmtVza"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 md:pt-8 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Hero Section: Main Mission -->
+<section class="mb-12 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover grayscale opacity-50 transition-transform duration-700 group-hover:scale-105" data-alt="dramatic wide shot of a boxer shadow boxing in a dark industrial gym with single overhead light source and smoke" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtk3IMEUDoIr20bsFSgRJfcJZ7YlnA3D5OYNut9WWSQlXxzZRnHvP3_7pY31bko9W_JeBKL98P-3ltoxeKpIR1YOW1p5tz_kLBytqCFsxhxwBMjPchEsTtDSaVBN-5FXG3ABfje0N4S7LkuCBr8wb4xlfqimFQ0udRli_RUDDU5jAw2g-kgWqBjp5bmZltVlokOY1YsT3kW2aK2TfEleCWaNgUvIxYFhfFIO5Dc6Vvef9qh5cbrTlzRUZURoDzWYj74myAyKvt"/>
+<div class="relative z-20 py-12 md:py-20 max-w-2xl">
+<div class="inline-block bg-primary text-on-primary-fixed font-black px-3 py-1 font-headline text-xs tracking-tighter mb-4 uppercase">
+                    MAIN MISSION
+                </div>
+<h2 class="text-5xl md:text-7xl font-black font-headline uppercase leading-[0.9] tracking-tighter mb-6">
+                    오늘의 기초 훈련:<br/>
+<span class="text-primary">섀도우 &amp; 스텝</span>
+</h2>
+<p class="text-on-surface-variant font-body mb-8 max-w-md">
+                    장비 없이 맨몸으로 진행하는 고강도 풋워크와 섀도우 복싱 콤비네이션입니다. 민첩성과 정확도에 집중하세요.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed px-8 py-4 font-headline font-black text-lg tracking-widest flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+                        훈련 시작 <span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="bg-surface-container-highest/60 backdrop-blur-md border border-primary/15 text-primary px-8 py-4 font-headline font-black text-lg tracking-widest hover:bg-surface-container-highest transition-all">
+                        루틴 상세
+                    </button>
+</div>
+</div>
+</section>
+<!-- Bento Grid Stats Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Weekly Activity (Large Card) -->
+<div class="md:col-span-2 bg-surface-container-low p-8 relative overflow-hidden">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline text-2xl font-black uppercase mb-1">주간 활동</h3>
+<p class="text-on-surface-variant text-sm">WEEKLY INTENSITY</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-headline text-4xl font-black">12.4</span>
+<span class="text-on-surface-variant text-xs font-bold ml-1 uppercase">Hours</span>
+</div>
+</div>
+<div class="flex items-end justify-between h-40 gap-2">
+<div class="flex-1 bg-surface-container-highest h-[40%] hover:bg-primary transition-colors cursor-pointer group">
+<div class="opacity-0 group-hover:opacity-100 absolute top-0 bg-primary text-surface p-1 text-[10px] font-black -translate-y-full">MON</div>
+</div>
+<div class="flex-1 bg-surface-container-highest h-[65%] hover:bg-primary transition-colors cursor-pointer group"></div>
+<div class="flex-1 bg-surface-container-highest h-[90%] hover:bg-primary transition-colors cursor-pointer group"></div>
+<div class="flex-1 bg-primary h-[55%]"></div>
+<div class="flex-1 bg-surface-container-highest h-[30%] hover:bg-primary transition-colors cursor-pointer group"></div>
+<div class="flex-1 bg-surface-container-highest h-[75%] hover:bg-primary transition-colors cursor-pointer group"></div>
+<div class="flex-1 bg-surface-container-highest h-[45%] hover:bg-primary transition-colors cursor-pointer group"></div>
+</div>
+</div>
+<!-- Current Streak (Small Card) -->
+<div class="bg-surface-container-high p-8 flex flex-col justify-between border-b-4 border-primary">
+<div>
+<h3 class="font-headline text-2xl font-black uppercase mb-1">현재 스트릭</h3>
+<p class="text-on-surface-variant text-sm">CURRENT STREAK</p>
+</div>
+<div class="py-6">
+<div class="flex items-baseline gap-2">
+<span class="text-7xl font-black font-headline text-primary">14</span>
+<span class="text-2xl font-bold font-headline">DAYS</span>
+</div>
+</div>
+<div class="flex gap-1">
+<div class="h-1 flex-1 bg-primary"></div>
+<div class="h-1 flex-1 bg-primary"></div>
+<div class="h-1 flex-1 bg-primary"></div>
+<div class="h-1 flex-1 bg-primary"></div>
+<div class="h-1 flex-1 bg-surface-container-highest"></div>
+<div class="h-1 flex-1 bg-surface-container-highest"></div>
+<div class="h-1 flex-1 bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+<!-- Yesterday's Log & Details -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<!-- Quick Log Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<div class="h-px flex-1 bg-outline-variant opacity-30"></div>
+<h3 class="font-headline text-xl font-black uppercase tracking-widest shrink-0">어제 훈련 기록</h3>
+<div class="h-px flex-1 bg-outline-variant opacity-30"></div>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-6 flex justify-between items-center group hover:bg-surface-container-high transition-colors border-l-2 border-transparent hover:border-primary">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="timer">timer</span>
+<div>
+<p class="text-on-surface font-black font-headline uppercase">웜업 &amp; 동적 스트레칭</p>
+<p class="text-on-surface-variant text-xs">15 MINUTES • COMPLETED</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="bg-surface-container-lowest p-6 flex justify-between items-center group hover:bg-surface-container-high transition-colors border-l-2 border-transparent hover:border-primary">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sports_kabaddi">sports_kabaddi</span>
+<div>
+<p class="text-on-surface font-black font-headline uppercase">섀도우 복싱 (5라운드)</p>
+<p class="text-on-surface-variant text-xs">20 MINUTES • COMPLETED</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="bg-surface-container-lowest p-6 flex justify-between items-center group hover:bg-surface-container-high transition-colors border-l-2 border-transparent hover:border-primary">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="bolt">bolt</span>
+<div>
+<p class="text-on-surface font-black font-headline uppercase">코어 컨디셔닝</p>
+<p class="text-on-surface-variant text-xs">10 MINUTES • COMPLETED</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Community / Next Challenge Section -->
+<section class="bg-surface-container-low p-8 relative">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-primary opacity-20 text-8xl" data-icon="format_quote">format_quote</span>
+</div>
+<h3 class="font-headline text-2xl font-black uppercase mb-6">코치 어드바이스</h3>
+<blockquote class="text-xl font-medium leading-relaxed italic mb-8 relative z-10">
+                    "속도보다 정확한 궤적이 먼저입니다. 주먹을 뻗을 때 반대쪽 손은 반드시 턱을 보호하세요. 실전처럼 움직이는 것이 핵심입니다."
+                </blockquote>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary">
+<img class="w-full h-full object-cover" data-alt="portrait of a gritty veteran boxing coach with a stern look in a dark gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN5R0k-r4jFYUL71Ko8REGH5FTJvWwtMEnrJiDtGEJ86P24ALYg0gIlrmdjgQzhRa6MzA0XuVHeKZfmpEKO7tigvUDddIe6uIDw7hAPBsR_VvmKCcyWd_2It2vtD6bUa9_-JBhX_UqT0nV-VDE_xmv5_EmR_6Jf9ZT80NRNAIMN1wE5FUlMMmrJWHapSaqfSsxczkVRKB-lTqoNHqX3q-BJ00QIdXNFE6CtOjpJuUObuLSCEeN_Rf_AHNtHCFmkfTOl8uO7dzO"/>
+</div>
+<div>
+<p class="font-headline font-black uppercase text-sm">COACH PARK</p>
+<p class="text-primary text-xs font-bold uppercase tracking-widest">HEAD TRAINER</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-[#131313] z-50 flex justify-around items-center h-20 px-4">
+<a class="flex flex-col items-center gap-1 text-[#ff3b00]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-black font-headline uppercase">대시보드</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#ffffff]/60" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="text-[10px] font-bold font-headline uppercase">루틴</span>
+</a>
+<div class="relative -top-6">
+<button class="bg-primary text-on-primary-fixed w-14 h-14 flex items-center justify-center shadow-[0_0_20px_rgba(255,143,116,0.4)]">
+<span class="material-symbols-outlined text-3xl font-black" data-icon="add">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-[#ffffff]/60" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="text-[10px] font-bold font-headline uppercase">기록</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#ffffff]/60" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="text-[10px] font-bold font-headline uppercase">설정</span>
+</a>
+</nav>
+</body></html>

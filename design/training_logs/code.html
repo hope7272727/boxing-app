@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IRON_PUNCH | TRAINING_LOGS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#000000",
+                        "surface": "#0e0e0e",
+                        "tertiary-fixed": "#ffffff",
+                        "tertiary-dim": "#edeaea",
+                        "tertiary-container": "#edeaea",
+                        "on-secondary-container": "#d0d0d0",
+                        "inverse-on-surface": "#565555",
+                        "surface-container": "#1a1a1a",
+                        "on-surface": "#ffffff",
+                        "on-tertiary-fixed": "#515050",
+                        "secondary-fixed-dim": "#d4d4d4",
+                        "inverse-primary": "#b62700",
+                        "on-primary": "#5e1000",
+                        "primary": "#ff8f74",
+                        "surface-dim": "#0e0e0e",
+                        "on-primary-fixed": "#000000",
+                        "secondary-container": "#454747",
+                        "on-secondary-fixed": "#3e4040",
+                        "on-tertiary-fixed-variant": "#6e6d6d",
+                        "on-surface-variant": "#adaaaa",
+                        "on-primary-fixed-variant": "#5a0f00",
+                        "error-container": "#a70138",
+                        "on-primary-container": "#490a00",
+                        "secondary-dim": "#d4d4d4",
+                        "on-error": "#490013",
+                        "error-dim": "#d73357",
+                        "on-tertiary-container": "#575656",
+                        "primary-container": "#ff7857",
+                        "surface-bright": "#2c2c2c",
+                        "primary-fixed-dim": "#ff5c35",
+                        "surface-container-low": "#131313",
+                        "inverse-surface": "#fcf9f8",
+                        "on-tertiary": "#605f5f",
+                        "on-background": "#ffffff",
+                        "secondary": "#e2e2e2",
+                        "outline": "#767575",
+                        "on-error-container": "#ffb2b9",
+                        "error": "#ff6e84",
+                        "surface-tint": "#ff8f74",
+                        "on-secondary-fixed-variant": "#5a5c5c",
+                        "tertiary": "#fcf9f8",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-container-high": "#20201f",
+                        "tertiary-fixed-dim": "#f3f0ef",
+                        "background": "#0e0e0e",
+                        "primary-dim": "#dd3200",
+                        "on-secondary": "#505252",
+                        "outline-variant": "#484847",
+                        "primary-fixed": "#ff7857",
+                        "surface-container-highest": "#262626",
+                        "surface-variant": "#262626"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.grainy-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBH-UktoAbcrCHOQin6l6HSQ0MiHkjLv01mwdifhHHSNvh7ZI-YuALO3NuTqUYzI8Jp9Javp3ioeQYudm9LnvzY4YxGPUkgmHYEXTjkYUzB-ByCx1vHXoPRv76CAkDMpFK3jkX5DH_irLL0h7SgN4R4JhfnnW6GoksnQS2wBc_vVwKaDQVafFUqKKbotLuwz1q2f7U9CfGF5bDkSegRyqH-qn6NyS7_5kCN0IIal1bmjxqMRA_WdKZIRk7Z0GwKvFepQmUaoUfG);
+    opacity: 0.04;
+    pointer-events: none
+    }
+::-webkit-scrollbar {
+    width: 4px
+    }
+::-webkit-scrollbar-track {
+    background: #0e0e0e
+    }
+::-webkit-scrollbar-thumb {
+    background: #ff3b00
+    }</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-surface-container-lowest">
+<div class="grainy-overlay fixed inset-0 z-[100]"></div>
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="fixed left-0 h-full w-64 bg-[#0e0e0e] flex flex-col h-full py-8 gap-4 z-40 hidden md:flex">
+<div class="px-6 mb-8">
+<h2 class="text-xl font-black text-[#ffffff] font-headline uppercase tracking-tighter">FIGHTER_UI</h2>
+<p class="text-xs text-primary font-bold tracking-widest mt-1">RANK: AMATEUR</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-6 py-4 text-[#ffffff]/40 font-headline font-bold uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>DASHBOARD</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#ffffff]/40 font-headline font-bold uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span>ROUTINES</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 bg-[#ff3b00] text-[#ffffff] font-black font-headline uppercase transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>LOGS</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#ffffff]/40 font-headline font-bold uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>SETTINGS</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-gradient-to-br from-primary to-primary-dim text-surface-container-lowest font-black py-4 uppercase font-headline tracking-tighter hover:brightness-110 active:scale-95 transition-all">
+                START WORKOUT
+            </button>
+</div>
+</aside>
+<!-- Top Navigation (Mobile/Global) -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e0e] flex justify-between items-center px-6 h-16 w-full md:pl-72">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#ff3b00] italic font-headline uppercase tracking-tighter">IRON_PUNCH</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center bg-surface-container-low px-4 h-10 gap-3 border-l-2 border-primary">
+<span class="material-symbols-outlined text-primary scale-75">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs font-headline font-bold tracking-widest text-on-surface-variant placeholder:text-on-surface-variant/30 uppercase" placeholder="SEARCH LOGS..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="Fighter Profile" class="w-full h-full object-cover grayscale contrast-125" data-alt="close-up portrait of a gritty, determined athlete with dramatic shadows and cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhnBKeqePjxXxofCLO4QfJvKQfvP-Ksu7ayjfnLbBMZpv4St0Rd5JeXiKZtinJiYUbbpOgMLRyhpCUsOn-H88NkcFmmtl64ZSjN6fSYI-5_Ns47S0-0xiVkV0nZlVvBeKk1xM0vlKbGOGpO1pe619QxOgzRisjkcfXKWQPhLua6ROU49PkxPqJf2y4E3n2izj3NacJs-hosaC6n8HhmvaAu9CDGey8mKU3whAVP7YEtK7YY7zYpKJaCyuwqRgcJ7i4NysjD30"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-12 px-6 md:pl-72 max-w-7xl mx-auto">
+<!-- Header Section -->
+<section class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-6xl md:text-8xl font-black font-headline uppercase tracking-tighter leading-none mb-2">
+                    TRAINING_<span class="text-primary">LOGS</span>
+</h1>
+<p class="text-on-surface-variant font-headline font-bold tracking-[0.3em] uppercase text-sm">Session History &amp; Performance Data</p>
+</div>
+<div class="flex gap-1">
+<button class="bg-surface-container-highest px-6 py-3 font-headline font-black text-xs uppercase tracking-widest text-primary border-b-2 border-primary">LIST_VIEW</button>
+<button class="bg-surface-container-low px-6 py-3 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors">CALENDAR</button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Logs List -->
+<div class="lg:col-span-8 space-y-4">
+<!-- Log Entry 1: Active/Selected State -->
+<div class="group relative bg-surface-container-highest p-1 transition-all">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-10"></div>
+<div class="bg-surface-container-highest p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+<div class="flex gap-6 items-center">
+<div class="flex flex-col items-center justify-center bg-surface-container-lowest w-16 h-16 border-l-4 border-primary">
+<span class="text-xs font-black font-headline text-primary leading-none uppercase">OCT</span>
+<span class="text-2xl font-black font-headline text-on-surface leading-none">24</span>
+</div>
+<div>
+<h3 class="text-xl font-black font-headline uppercase leading-tight group-hover:text-primary transition-colors">HEAVY BAG POWER DRILLS</h3>
+<div class="flex items-center gap-4 mt-1">
+<span class="flex items-center gap-1 text-xs font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 65 MIN
+                                    </span>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-tighter">COMPLETED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">INTENSITY</p>
+<p class="text-lg font-black font-headline text-primary uppercase leading-none italic">HIGH_VOLTAGE</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<!-- Expanded Performance Details (Contextual) -->
+<div class="bg-surface-container-low p-8 grid grid-cols-2 md:grid-cols-4 gap-8 border-t-4 border-primary/20">
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">TOTAL_ROUNDS</p>
+<p class="text-4xl font-black font-headline text-on-surface">12</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">AVG_HEART_RATE</p>
+<p class="text-4xl font-black font-headline text-on-surface">164 <span class="text-sm text-on-surface-variant font-medium">BPM</span></p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">TOTAL_PUNCHES</p>
+<p class="text-4xl font-black font-headline text-primary">2,481</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">CALORIES_BURNED</p>
+<p class="text-4xl font-black font-headline text-on-surface">842</p>
+</div>
+<div class="col-span-full pt-6 border-t border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em] mb-4">ROUND_INTENSITY_GRAPH</p>
+<div class="flex items-end gap-1 h-20">
+<div class="flex-1 bg-primary/20 h-[40%]"></div>
+<div class="flex-1 bg-primary/40 h-[60%]"></div>
+<div class="flex-1 bg-primary/60 h-[85%]"></div>
+<div class="flex-1 bg-primary h-[95%]"></div>
+<div class="flex-1 bg-primary/80 h-[70%]"></div>
+<div class="flex-1 bg-primary/50 h-[50%]"></div>
+<div class="flex-1 bg-primary/90 h-[90%]"></div>
+<div class="flex-1 bg-primary h-full"></div>
+<div class="flex-1 bg-primary/30 h-[30%]"></div>
+<div class="flex-1 bg-primary/70 h-[75%]"></div>
+<div class="flex-1 bg-primary/40 h-[45%]"></div>
+<div class="flex-1 bg-primary/90 h-[88%]"></div>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="group bg-surface-container-low p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex gap-6 items-center">
+<div class="flex flex-col items-center justify-center bg-surface-container-lowest w-16 h-16 border-l-4 border-on-surface-variant/30">
+<span class="text-xs font-black font-headline text-on-surface-variant leading-none uppercase">OCT</span>
+<span class="text-2xl font-black font-headline text-on-surface-variant leading-none">22</span>
+</div>
+<div>
+<h3 class="text-xl font-black font-headline uppercase leading-tight group-hover:text-primary transition-colors">SPARRING SESSION</h3>
+<div class="flex items-center gap-4 mt-1">
+<span class="flex items-center gap-1 text-xs font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 45 MIN
+                                </span>
+<span class="px-2 py-0.5 bg-on-surface-variant/10 text-on-surface-variant text-[10px] font-black uppercase tracking-tighter">COMPLETED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">INTENSITY</p>
+<p class="text-lg font-black font-headline text-on-surface-variant uppercase leading-none italic">MODERATE</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="group bg-surface-container-low p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex gap-6 items-center">
+<div class="flex flex-col items-center justify-center bg-surface-container-lowest w-16 h-16 border-l-4 border-on-surface-variant/30">
+<span class="text-xs font-black font-headline text-on-surface-variant leading-none uppercase">OCT</span>
+<span class="text-2xl font-black font-headline text-on-surface-variant leading-none">21</span>
+</div>
+<div>
+<h3 class="text-xl font-black font-headline uppercase leading-tight group-hover:text-primary transition-colors">TECHNICAL FOOTWORK</h3>
+<div class="flex items-center gap-4 mt-1">
+<span class="flex items-center gap-1 text-xs font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 30 MIN
+                                </span>
+<span class="px-2 py-0.5 bg-on-surface-variant/10 text-on-surface-variant text-[10px] font-black uppercase tracking-tighter">COMPLETED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">INTENSITY</p>
+<p class="text-lg font-black font-headline text-on-surface-variant uppercase leading-none italic">TECHNICAL</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<!-- Sidebar Stats / Bento -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Performance Card -->
+<div class="bg-primary p-8 text-surface-container-lowest">
+<h4 class="font-black font-headline text-2xl uppercase tracking-tighter mb-6 italic leading-none">MONTHLY_GOAL_STATUS</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-black font-headline text-xs uppercase tracking-widest">SESSIONS</span>
+<span class="font-black font-headline text-xl">18/25</span>
+</div>
+<div class="h-3 bg-surface-container-lowest/20">
+<div class="h-full bg-surface-container-lowest w-[72%]"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-container-lowest/10">
+<p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-2">LAST 7 DAYS</p>
+<p class="text-3xl font-black font-headline italic leading-none">+12.4% VOLUME</p>
+</div>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 border-t-2 border-primary/40">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">TOTAL HOURS</p>
+<p class="text-2xl font-black font-headline">42.5</p>
+</div>
+<div class="bg-surface-container-low p-6 border-t-2 border-primary/40">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">AVG STREAK</p>
+<p class="text-2xl font-black font-headline">4 DAYS</p>
+</div>
+<div class="bg-surface-container-low p-6 col-span-2 relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">TOP MUSCLE GROUP</p>
+<p class="text-2xl font-black font-headline uppercase italic">CORE &amp; SHOULDERS</p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-5 text-on-surface">fitness_center</span>
+</div>
+</div>
+<!-- CTA Card -->
+<div class="relative bg-surface-container-highest h-48 flex flex-col justify-end p-6 group cursor-pointer overflow-hidden">
+<img alt="Training Routine" class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale group-hover:scale-110 transition-transform duration-700" data-alt="black and white moody photograph of a gym with hanging heavy bags and harsh industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP1c9kAROp65g0Wf50v4yQirhsaoZmGxYjQdLOftI2b_mIwUxZH_x1cGrBmxWhUf2bCpA8fycP5Yjjh1VOKOWPNHuFG-P_2hbv23FNYRkRGE7F9G3jIfPzIs_EndejeO7NOaD5MgP0E1VrXrF54vbJPhhPghxZxNpCW77TIrp3P0EzBcpIJUH1dJ9hvbGagHMpTVg850gQsnYHYQE2Wm2jIXejS4H0OeMB2cTWQPgDIIZp5oGDnz66S_HBbnNxiqR34Ql0gBAd"/>
+<div class="relative z-10">
+<p class="text-xs font-black text-primary uppercase tracking-[0.3em] mb-1">NEXT PHASE</p>
+<h4 class="text-2xl font-black font-headline uppercase tracking-tighter leading-none">ANALYZE_RECOVERY</h4>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 w-full bg-[#0e0e0e] flex md:hidden h-16 items-center justify-around z-50">
+<a class="flex flex-col items-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase mt-1 font-headline">DASH</span>
+</a>
+<a class="flex flex-col items-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="text-[10px] font-bold uppercase mt-1 font-headline">TRAIN</span>
+</a>
+<a class="flex flex-col items-center text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="text-[10px] font-black uppercase mt-1 font-headline">LOGS</span>
+</a>
+<a class="flex flex-col items-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-[10px] font-bold uppercase mt-1 font-headline">SET</span>
+</a>
+</nav>
+</body></html>

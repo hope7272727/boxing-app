@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>아이언 펀치 | 맞춤 루틴 설정</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ff8f74",
+                    "tertiary-fixed": "#ffffff",
+                    "surface-container-lowest": "#000000",
+                    "on-surface-variant": "#adaaaa",
+                    "on-primary-fixed-variant": "#5a0f00",
+                    "on-primary-container": "#490a00",
+                    "secondary-fixed-dim": "#d4d4d4",
+                    "error-container": "#a70138",
+                    "surface-tint": "#ff8f74",
+                    "on-primary-fixed": "#000000",
+                    "surface-container-low": "#131313",
+                    "surface-dim": "#0e0e0e",
+                    "on-tertiary-container": "#575656",
+                    "on-tertiary-fixed-variant": "#6e6d6d",
+                    "inverse-primary": "#b62700",
+                    "inverse-on-surface": "#565555",
+                    "on-error": "#490013",
+                    "tertiary-dim": "#edeaea",
+                    "on-primary": "#5e1000",
+                    "background": "#0e0e0e",
+                    "primary-dim": "#dd3200",
+                    "on-secondary-fixed": "#3e4040",
+                    "error": "#ff6e84",
+                    "surface-bright": "#2c2c2c",
+                    "outline-variant": "#484847",
+                    "outline": "#767575",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-dim": "#d4d4d4",
+                    "tertiary-fixed-dim": "#f3f0ef",
+                    "secondary-container": "#454747",
+                    "primary-fixed-dim": "#ff5c35",
+                    "error-dim": "#d73357",
+                    "on-secondary-fixed-variant": "#5a5c5c",
+                    "secondary": "#e2e2e2",
+                    "surface": "#0e0e0e",
+                    "secondary-fixed": "#e2e2e2",
+                    "primary-fixed": "#ff7857",
+                    "tertiary-container": "#edeaea",
+                    "surface-container": "#1a1a1a",
+                    "surface-container-high": "#20201f",
+                    "on-background": "#ffffff",
+                    "on-surface": "#ffffff",
+                    "on-secondary": "#505252",
+                    "inverse-surface": "#fcf9f8",
+                    "surface-container-highest": "#262626",
+                    "tertiary": "#fcf9f8",
+                    "surface-variant": "#262626",
+                    "on-tertiary": "#605f5f",
+                    "on-secondary-container": "#d0d0d0",
+                    "primary-container": "#ff7857",
+                    "on-tertiary-fixed": "#515050"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+body {
+    background-color: #0e0e0e;
+    color: #fff;
+    font-family: "Inter", sans-serif
+    }
+.kinetic-gradient {
+    background: linear-gradient(135deg, #ff8f74 0%, #dd3200 100%)
+    }
+.grain-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB6nmZ7jMRR4nJrJ45qhnXx_2p_Tj3MX5x1bdbSUsExye8H67jRLLy0QhhuMqxwb4Qr9zConxBKNIFqa8vv1xg3xcO5sfvKrisd2GcamsHmYq1WAacE1S5p43zetflTQE63CeJ_s31GcZdX8DTQD2ia6cI3KITZhgLXtbkW1ckzkp8Hbt_kSrDNoxRi3dKx5DHEE9_uiHN0fx8z7J72X470pPLxH8e-DNGyp_agpIclqyJxKfR9Y0hhpSz0ygzkywnQu9Xx-1Y2);
+    opacity: 0.03
+    }</style>
+</head>
+<body class="overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#ff3b00] italic font-['Space_Grotesk'] uppercase tracking-tighter">아이언 펀치</span>
+</div>
+<div class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] uppercase tracking-tighter">
+<a class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150" href="#">대시보드</a>
+<a class="text-[#ffffff] border-b-2 border-[#ff3b00] hover:text-[#ff3b00] transition-colors duration-150" href="#">루틴 설정</a>
+<a class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150" href="#">훈룐 기록</a>
+<a class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150" href="#">설정</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white cursor-pointer hover:text-[#ff3b00]">notifications</span>
+<span class="material-symbols-outlined text-white cursor-pointer hover:text-[#ff3b00]">settings</span>
+<div class="w-8 h-8 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Intense close-up of a boxer's eyes focused and sweating in dark cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZJdfEWMhEMsNinLJaXEc1tgtKxOhSn8713OY7maIv5mE9eSasfzRKjOwHhXLnT6d1NcbYw-6OmDLRRYMrQ8IgdQkovHgX9AGpbn8CUsJsp3VQBqAnZoWRJop3KkLWM34b0EtaHJWtAxAufc5GISanDpioXi5zMPQWqAaAz2Kq2pufzWU3EMdvsnOAOFhdhOWOymI7XlhnlyCOirHbngxJPvmoCxlxteTzzGW6qhxy9CuEMPxgyZtEyRmL3o7cNG07meVEivAk"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation Bar (Desktop) -->
+<aside class="hidden md:flex fixed left-0 h-full w-64 bg-[#0e0e0e] flex-col py-8 gap-4 mt-16">
+<div class="px-8 mb-6">
+<h2 class="text-xl font-black text-[#ffffff] font-['Space_Grotesk'] font-bold uppercase">아이언 펀치</h2>
+<p class="text-xs text-primary font-bold tracking-widest mt-1">RANK: AMATEUR</p>
+</div>
+<nav class="flex flex-col gap-1 px-4">
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">dashboard</span>대시보드
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 bg-[#ff3b00] text-[#ffffff] font-black font-['Space_Grotesk'] uppercase" href="#">
+<span class="material-symbols-outlined">fitness_center</span>루틴 설정
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">history</span>훈룐 기록
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">tune</span>설정
+            </a>
+</nav>
+<div class="mt-auto px-6 mb-20">
+<button class="kinetic-gradient w-full py-4 text-sm font-black tracking-widest uppercase hover:opacity-90 transition-all active:scale-95">
+                START WORKOUT
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 mt-16 p-6 md:p-12 min-h-screen">
+<!-- Header Section -->
+<header class="mb-12 relative">
+<div class="absolute -left-12 top-0 w-2 h-24 bg-primary"></div>
+<h1 class="text-6xl md:text-8xl font-black font-headline uppercase leading-none tracking-tighter mb-4 italic">
+                맞춤 루틴 설정
+            </h1>
+<p class="text-on-surface-variant font-body max-w-2xl text-lg">
+                최고의 퍼포먼스를 위한 나만의 훈련 세션을 설계하십시오. 각 라운드의 강도와 휴식 시간을 세밀하게 조정하여 한계를 돌파하세요.
+            </p>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-12">
+<!-- Parameters and Block Editor -->
+<div class="xl:col-span-8 space-y-12">
+<!-- Parameter Controls: Bento Style -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-1">
+<div class="bg-surface-container-low p-8 border-l-4 border-primary">
+<label class="block text-xs font-black text-primary tracking-widest uppercase mb-4">라운드 수</label>
+<div class="flex items-center justify-between">
+<span class="text-5xl font-black font-headline tracking-tighter">12</span>
+<div class="flex flex-col gap-2">
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 border-l-4 border-primary/40">
+<label class="block text-xs font-black text-on-surface-variant tracking-widest uppercase mb-4">라운드 시간</label>
+<div class="flex items-center justify-between">
+<span class="text-5xl font-black font-headline tracking-tighter">03:00</span>
+<div class="flex flex-col gap-2">
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">expand_less</span>
+</button>
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 border-l-4 border-primary/40">
+<label class="block text-xs font-black text-on-surface-variant tracking-widest uppercase mb-4">휴식 시간</label>
+<div class="flex items-center justify-between">
+<span class="text-5xl font-black font-headline tracking-tighter">01:00</span>
+<div class="flex flex-col gap-2">
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">expand_less</span>
+</button>
+<button class="w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Block Editor -->
+<section>
+<div class="flex items-end justify-between mb-8">
+<h3 class="text-3xl font-black font-headline uppercase italic">훈련 블록 편집</h3>
+<button class="bg-surface-container-highest px-6 py-2 text-xs font-bold hover:bg-white hover:text-black transition-colors">
+                            항목 초기화
+                        </button>
+</div>
+<div class="space-y-4">
+<!-- Exercise Block 1 -->
+<div class="group flex items-center bg-surface-container-low hover:bg-surface-container-high transition-colors p-6">
+<div class="flex flex-col items-center mr-8 text-on-surface-variant group-hover:text-primary">
+<span class="material-symbols-outlined">drag_indicator</span>
+<span class="text-xs font-black mt-2">01</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-2xl font-black font-headline uppercase">푸쉬업</h4>
+<p class="text-xs text-on-surface-variant font-bold">STRENGTH &amp; STABILITY</p>
+</div>
+<div class="flex gap-4">
+<div class="text-right">
+<span class="block text-[10px] font-black text-primary tracking-widest mb-1 uppercase">횟수</span>
+<span class="text-xl font-black font-headline">50 REPS</span>
+</div>
+<button class="w-12 h-12 bg-surface-container-highest flex items-center justify-center hover:bg-primary-dim transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Exercise Block 2 -->
+<div class="group flex items-center bg-surface-container-low hover:bg-surface-container-high transition-colors p-6">
+<div class="flex flex-col items-center mr-8 text-on-surface-variant group-hover:text-primary">
+<span class="material-symbols-outlined">drag_indicator</span>
+<span class="text-xs font-black mt-2">02</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-2xl font-black font-headline uppercase">섀도우 복싱</h4>
+<p class="text-xs text-on-surface-variant font-bold">TECHNIQUE &amp; FLOW</p>
+</div>
+<div class="flex gap-4">
+<div class="text-right">
+<span class="block text-[10px] font-black text-primary tracking-widest mb-1 uppercase">시간</span>
+<span class="text-xl font-black font-headline">3 MINS</span>
+</div>
+<button class="w-12 h-12 bg-surface-container-highest flex items-center justify-center hover:bg-primary-dim transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Exercise Block 3 -->
+<div class="group flex items-center bg-surface-container-low hover:bg-surface-container-high transition-colors p-6">
+<div class="flex flex-col items-center mr-8 text-on-surface-variant group-hover:text-primary">
+<span class="material-symbols-outlined">drag_indicator</span>
+<span class="text-xs font-black mt-2">03</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-2xl font-black font-headline uppercase">버피</h4>
+<p class="text-xs text-on-surface-variant font-bold">EXPLOSIVE POWER</p>
+</div>
+<div class="flex gap-4">
+<div class="text-right">
+<span class="block text-[10px] font-black text-primary tracking-widest mb-1 uppercase">횟수</span>
+<span class="text-xl font-black font-headline">30 REPS</span>
+</div>
+<button class="w-12 h-12 bg-surface-container-highest flex items-center justify-center hover:bg-primary-dim transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Add Block Button -->
+<button class="w-full py-8 border-2 border-dashed border-outline-variant hover:border-primary hover:bg-surface-container-low transition-all group">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">add_box</span>
+<span class="text-sm font-black tracking-widest text-on-surface-variant group-hover:text-white uppercase">추가 운동 항목 삽입</span>
+</div>
+</button>
+</div>
+</section>
+</div>
+<!-- Summary Sidebar -->
+<div class="xl:col-span-4">
+<div class="sticky top-28 space-y-6">
+<div class="bg-surface-container-high p-8 relative overflow-hidden">
+<div class="absolute inset-0 grain-texture"></div>
+<h3 class="text-2xl font-black font-headline uppercase italic mb-8 relative z-10">루틴 요약</h3>
+<div class="space-y-6 relative z-10">
+<div class="flex justify-between items-end border-b border-outline-variant pb-4">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">총 훈련 시간</span>
+<span class="text-3xl font-black font-headline tracking-tighter">48:00</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-4">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">강도</span>
+<span class="text-lg font-black text-primary uppercase">Extreme</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-4">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">예상 칼로리</span>
+<span class="text-3xl font-black font-headline tracking-tighter text-white">850 KCAL</span>
+</div>
+</div>
+<div class="mt-12 space-y-4 relative z-10">
+<button class="kinetic-gradient w-full py-6 text-xl font-black tracking-tighter uppercase italic hover:scale-[1.02] active:scale-95 transition-all">
+                                루틴 적용
+                            </button>
+<button class="w-full py-4 text-xs font-black tracking-widest uppercase border border-outline-variant hover:bg-white hover:text-black transition-colors">
+                                프리셋으로 저장
+                            </button>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/30">
+<p class="text-[10px] text-on-surface-variant font-medium leading-relaxed">
+                                * 루틴을 적용하면 즉시 세션 준비 모드로 전환됩니다. 심박수 센서가 연결되어 있는지 확인하십시오.
+                            </p>
+</div>
+</div>
+<!-- Motivational Backdrop Image Card -->
+<div class="relative h-64 bg-surface-container-low group overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" data-alt="B&amp;W photo of a heavy boxing bag hanging in a dark, gritty gym with high-contrast dramatic lighting and dust motes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvgBJQEISM1z_x0gVyoR3y4XKQRv-GvWYkLMr51ta7w5ZmGhnPr8iDPQC65MSm7vWiTvkeUYuOb-MG1bNn25YwzgU3BTm-zRQreIY_RfVcB2-7gNX43oPrKx5-Dl0SdAkndyk6v8PB176hiOvXc2oh3qfvXt3RYUvDG_LPfyosxiNrux82gJ_fLQd6c1qJqyCvskOmrnmJ-0y_A6jdfewUo5jVkghUDaUDV4047HxVpluXBtz4RkspTkHkExd29sk-H9YUwf1T"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="block text-[10px] font-black text-primary uppercase tracking-widest mb-1">Coach Tip</span>
+<p class="text-lg font-black leading-tight italic uppercase font-headline">"지루함은 패배의 전조다. 루틴을 파괴하라."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#131313] grid grid-cols-4 h-16 z-50">
+<a class="flex flex-col items-center justify-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase mt-1">대시보드</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ff3b00]" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="text-[10px] font-bold uppercase mt-1">루틴</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold uppercase mt-1">기록</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ffffff]/40" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold uppercase mt-1">설정</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IRON_PUNCH | DASHBOARD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#000000",
+                      "surface": "#0e0e0e",
+                      "tertiary-fixed": "#ffffff",
+                      "tertiary-dim": "#edeaea",
+                      "tertiary-container": "#edeaea",
+                      "on-secondary-container": "#d0d0d0",
+                      "inverse-on-surface": "#565555",
+                      "surface-container": "#1a1a1a",
+                      "on-surface": "#ffffff",
+                      "on-tertiary-fixed": "#515050",
+                      "secondary-fixed-dim": "#d4d4d4",
+                      "inverse-primary": "#b62700",
+                      "on-primary": "#5e1000",
+                      "primary": "#ff8f74",
+                      "surface-dim": "#0e0e0e",
+                      "on-primary-fixed": "#000000",
+                      "secondary-container": "#454747",
+                      "on-secondary-fixed": "#3e4040",
+                      "on-tertiary-fixed-variant": "#6e6d6d",
+                      "on-surface-variant": "#adaaaa",
+                      "on-primary-fixed-variant": "#5a0f00",
+                      "error-container": "#a70138",
+                      "on-primary-container": "#490a00",
+                      "secondary-dim": "#d4d4d4",
+                      "on-error": "#490013",
+                      "error-dim": "#d73357",
+                      "on-tertiary-container": "#575656",
+                      "primary-container": "#ff7857",
+                      "surface-bright": "#2c2c2c",
+                      "primary-fixed-dim": "#ff5c35",
+                      "surface-container-low": "#131313",
+                      "inverse-surface": "#fcf9f8",
+                      "on-tertiary": "#605f5f",
+                      "on-background": "#ffffff",
+                      "secondary": "#e2e2e2",
+                      "outline": "#767575",
+                      "on-error-container": "#ffb2b9",
+                      "error": "#ff6e84",
+                      "surface-tint": "#ff8f74",
+                      "on-secondary-fixed-variant": "#5a5c5c",
+                      "tertiary": "#fcf9f8",
+                      "secondary-fixed": "#e2e2e2",
+                      "surface-container-high": "#20201f",
+                      "tertiary-fixed-dim": "#f3f0ef",
+                      "background": "#0e0e0e",
+                      "primary-dim": "#dd3200",
+                      "on-secondary": "#505252",
+                      "outline-variant": "#484847",
+                      "primary-fixed": "#ff7857",
+                      "surface-container-highest": "#262626",
+                      "surface-variant": "#262626"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0e;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.02) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="fixed left-0 h-full w-64 bg-[#0e0e0e] flex flex-col py-8 gap-4 hidden md:flex z-50 border-r-0">
+<div class="px-8 mb-8">
+<h1 class="text-xl font-black text-[#ffffff] font-headline uppercase">FIGHTER_UI</h1>
+<p class="text-xs font-bold text-[#ff3b00] font-headline uppercase tracking-widest mt-1">RANK: AMATEUR</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-8 py-4 bg-[#ff3b00] text-[#ffffff] font-black font-headline uppercase transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>DASHBOARD</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-4 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span>ROUTINES</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-4 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>LOGS</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-4 text-[#ffffff]/40 font-bold font-headline uppercase hover:bg-[#262626] hover:text-[#ffffff] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span>SETTINGS</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-dim text-on-surface font-black font-headline uppercase tracking-tighter text-sm">
+                START WORKOUT
+            </button>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full h-16 bg-[#0e0e0e] flex justify-between items-center px-6 z-50 md:pl-72">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined md:hidden" data-icon="menu">menu</span>
+<span class="text-2xl font-black text-[#ff3b00] italic font-headline uppercase tracking-tighter">IRON_PUNCH</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-6 mr-8">
+<a class="text-[#ffffff] border-b-2 border-[#ff3b00] font-headline uppercase tracking-tighter py-1 text-sm" href="#">Overview</a>
+<a class="text-[#ffffff]/60 font-headline uppercase tracking-tighter py-1 text-sm hover:text-[#ff3b00] transition-colors duration-150" href="#">Ranks</a>
+<a class="text-[#ffffff]/60 font-headline uppercase tracking-tighter py-1 text-sm hover:text-[#ff3b00] transition-colors duration-150" href="#">Community</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#ffffff]/60 hover:text-[#ff3b00] cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-[#ffffff]/60 hover:text-[#ff3b00] cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 bg-surface-container-highest overflow-hidden">
+<img alt="Fighter Profile" data-alt="Close-up portrait of a determined female athlete with sweat on her face in a dimly lit gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB3IYKouQBP_zh8-vNTA9pDdZKzTB_7teh1N6Pr81eBhrsghXPExsVtBYufaC7VmEyVuuEoigtp3yzeRPH5WrTfS_5sKn2meZk2qkEm7s2lTPfSG7Uni3V7NR621jbbqvnlKW770uqteWWEweQrJlW6woj9XNyTtbp-HdJNkScJS37NIQ2oq9DQbTYKFfwZOb-l27DHQwwiR9gO9LuU-XZwB3LJsOeyUEx1GRQNgGLTSR-e-CMbP7XmGx3gFhHPSnFOPkg8kzu"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-12 px-6 md:ml-64 md:px-12 max-w-7xl">
+<!-- Welcome Header & Streak -->
+<section class="mb-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-8">
+<h2 class="text-6xl md:text-8xl font-black font-headline uppercase tracking-tighter leading-[0.85] mb-4">
+                    PUSH THE <span class="text-primary">LIMITS.</span>
+</h2>
+<p class="text-on-surface-variant font-medium tracking-wide max-w-md">
+                    Welcome back, Fighter. You're 3 sessions away from reaching the "Contender" rank. 
+                </p>
+</div>
+<div class="md:col-span-4 bg-surface-container-low p-6 flex flex-col justify-between aspect-square md:aspect-video lg:aspect-square group overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-xs font-black text-primary font-headline tracking-[0.2em] mb-2 uppercase">Current Streak</p>
+<div class="flex items-baseline gap-2">
+<span class="text-8xl font-black font-headline tracking-tighter leading-none">12</span>
+<span class="text-xl font-bold font-headline uppercase text-on-surface-variant">DAYS</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[12rem]" data-icon="local_fire_department" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+</section>
+<!-- Recommended Routine (Hero Card) -->
+<section class="mb-12">
+<div class="relative w-full aspect-[21/9] min-h-[400px] bg-surface-container-lowest overflow-hidden group">
+<img alt="Heavy Bag Workout" class="absolute inset-0 w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 hover:scale-105 transition-all duration-1000" data-alt="Intense action shot of a boxer striking a heavy bag with dramatic shadows and dust particles in the air of a gritty boxing gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWIQsfhyASXpcpqL7z0nZMFXSkxO-8CivXoYdMZeSOfv29KE2S-dgefGCoNl_uLaiBVlcCTr-UrDCiOvRxfEiZwMgl2DqC8J9vIDRaPYbR3u-y97X5yTXRWJKCGTouJ6uidDJ2ta6_lQnvjX4nVniTVe4a5nvHLyurempcaoaa_p60wLGV7cE_3_WUt2V55s_c8Xxs9QVc2QZFWBNLTvGw1wbLVHJQ1ccSbTuVUtW2oCT63DNFgOy3oS-YmdJrJCFREvFaZEZB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<span class="inline-block px-3 py-1 bg-primary text-on-primary-container font-black text-xs font-headline uppercase mb-4 tracking-widest">Today's Mission</span>
+<h3 class="text-4xl md:text-6xl font-black font-headline uppercase tracking-tighter leading-none mb-4">Heavy Bag Power Rounds</h3>
+<div class="flex gap-6 text-sm font-bold font-headline uppercase tracking-wider text-on-surface-variant">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-primary" data-icon="timer">timer</span> 45 MINS</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-primary" data-icon="flash_on">flash_on</span> HIGH INTENSITY</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-primary" data-icon="fitness_center">fitness_center</span> POWER</span>
+</div>
+</div>
+<button class="px-10 py-5 bg-on-surface text-surface font-black font-headline uppercase tracking-tighter hover:bg-primary transition-colors duration-300 whitespace-nowrap">
+                        START MISSION
+                    </button>
+</div>
+</div>
+</section>
+<!-- Secondary Grid: Weekly Progress & Quick Log -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Weekly Progress Chart -->
+<div class="lg:col-span-2 bg-surface-container-low p-8">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h4 class="text-2xl font-black font-headline uppercase tracking-tighter">Weekly Progress</h4>
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Rounds Completed</p>
+</div>
+<div class="text-right">
+<span class="text-4xl font-black font-headline text-primary italic leading-none">42</span>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-tighter">Total Rounds</p>
+</div>
+</div>
+<div class="h-48 flex items-end gap-3 md:gap-6">
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[30%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">MON</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[65%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">TUE</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[45%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">WED</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[85%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-80 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-primary">THU</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[20%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-30 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">FRI</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[40%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-30 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">SAT</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-highest h-[15%] relative group">
+<div class="absolute bottom-0 w-full bg-primary h-full opacity-30 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="text-[10px] font-black font-headline uppercase text-on-surface-variant">SUN</span>
+</div>
+</div>
+</div>
+<!-- Quick Log Section -->
+<div class="bg-surface-container-high p-8">
+<h4 class="text-xl font-black font-headline uppercase tracking-tighter mb-6">Quick Log</h4>
+<p class="text-sm text-on-surface-variant mb-8">Missing data for <span class="text-primary font-bold">Yesterday</span>. Record your progress to keep the streak alive.</p>
+<div class="space-y-6">
+<div>
+<label class="block text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-2">Rounds Shadow Boxed</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary text-2xl font-black font-headline p-2 outline-none transition-colors" placeholder="0" type="number"/>
+</div>
+<div>
+<label class="block text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-2">Sparring Minutes</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary text-2xl font-black font-headline p-2 outline-none transition-colors" placeholder="0" type="number"/>
+</div>
+<button class="w-full py-4 border-2 border-primary text-primary font-black font-headline uppercase tracking-tighter hover:bg-primary hover:text-on-primary transition-all duration-200">
+                        SAVE LOG ENTRY
+                    </button>
+</div>
+</div>
+</section>
+<!-- Stats Grid (Punch Counter Aesthetic) -->
+<section class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-6">
+<p class="text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-1">Cals Burned</p>
+<p class="text-4xl font-black font-headline text-primary tracking-tighter">1,240</p>
+</div>
+<div class="bg-surface-container-low p-6">
+<p class="text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-1">Avg Heart Rate</p>
+<p class="text-4xl font-black font-headline text-primary tracking-tighter">162 <span class="text-sm">BPM</span></p>
+</div>
+<div class="bg-surface-container-low p-6">
+<p class="text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-1">Punch Velocity</p>
+<p class="text-4xl font-black font-headline text-primary tracking-tighter">24.2 <span class="text-sm">MPH</span></p>
+</div>
+<div class="bg-surface-container-low p-6">
+<p class="text-[10px] font-black font-headline uppercase tracking-widest text-on-surface-variant mb-1">Rest Timer</p>
+<p class="text-4xl font-black font-headline text-primary tracking-tighter">0:45</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full h-16 bg-[#0e0e0e] flex md:hidden items-center justify-around px-4 z-50">
+<a class="flex flex-col items-center text-[#ffffff] border-b-2 border-[#ff3b00] pb-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</a>
+<a class="flex flex-col items-center text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</a>
+<a class="flex flex-col items-center text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</a>
+<a class="flex flex-col items-center text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</a>
+</nav>
+<!-- Floating Action Button (Only on Mobile Dashboard) -->
+<button class="fixed bottom-20 right-6 w-16 h-16 bg-primary text-on-primary-container flex items-center justify-center shadow-2xl md:hidden z-40">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</body></html>

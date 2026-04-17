@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ff8f74",
+                        "tertiary-fixed": "#ffffff",
+                        "surface-container-lowest": "#000000",
+                        "on-surface-variant": "#adaaaa",
+                        "on-primary-fixed-variant": "#5a0f00",
+                        "on-primary-container": "#490a00",
+                        "secondary-fixed-dim": "#d4d4d4",
+                        "error-container": "#a70138",
+                        "surface-tint": "#ff8f74",
+                        "on-primary-fixed": "#000000",
+                        "surface-container-low": "#131313",
+                        "surface-dim": "#0e0e0e",
+                        "on-tertiary-container": "#575656",
+                        "on-tertiary-fixed-variant": "#6e6d6d",
+                        "inverse-primary": "#b62700",
+                        "inverse-on-surface": "#565555",
+                        "on-error": "#490013",
+                        "tertiary-dim": "#edeaea",
+                        "on-primary": "#5e1000",
+                        "background": "#0e0e0e",
+                        "primary-dim": "#dd3200",
+                        "on-secondary-fixed": "#3e4040",
+                        "error": "#ff6e84",
+                        "surface-bright": "#2c2c2c",
+                        "outline-variant": "#484847",
+                        "outline": "#767575",
+                        "on-error-container": "#ffb2b9",
+                        "secondary-dim": "#d4d4d4",
+                        "tertiary-fixed-dim": "#f3f0ef",
+                        "secondary-container": "#454747",
+                        "primary-fixed-dim": "#ff5c35",
+                        "error-dim": "#d73357",
+                        "on-secondary-fixed-variant": "#5a5c5c",
+                        "secondary": "#e2e2e2",
+                        "surface": "#0e0e0e",
+                        "secondary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ff7857",
+                        "tertiary-container": "#edeaea",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-high": "#20201f",
+                        "on-background": "#ffffff",
+                        "on-surface": "#ffffff",
+                        "on-secondary": "#505252",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-container-highest": "#262626",
+                        "tertiary": "#fcf9f8",
+                        "surface-variant": "#262626",
+                        "on-tertiary": "#605f5f",
+                        "on-secondary-container": "#d0d0d0",
+                        "primary-container": "#ff7857",
+                        "on-tertiary-fixed": "#515050"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .kinetic-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<div class="fixed inset-0 kinetic-grain pointer-events-none z-[1]"></div>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e0e] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#ff3b00] italic font-['Space_Grotesk'] uppercase tracking-tighter">아이언 펀치</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-[#ffffff]/60 hover:text-[#ff3b00] transition-colors duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="Fighter Profile" data-alt="Close-up profile photo of a focused professional boxer with subtle lighting highlights on facial features and athletic physique" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH9X2SiVN2hGTr2c_ATRFzQaciwO1MJC-t3N-SYJCdDnf4g5cn8i-SprmAkPvEqu6VXK2LX-uqQ4W4Xw8oA2B_C9P7OPPTfrvt-4SIarnt_xz3Bxym6dlQQJWHC1x4YiLSofscWAYWYrAcyQCniKlRZprWSwcUvqtQ25fJsNPFUxBOqrkjI7BdEiJpVsvF9GO6BoxvhL651B7u5MDjbDIZSKdsdUaVur4sShrGtm6ngpGO04sjdh6Rqz24dX49m6tGL2Vi2Qox"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation Bar (Web) -->
+<aside class="hidden md:flex fixed left-0 h-full w-64 bg-[#0e0e0e] flex flex-col h-full py-8 gap-4 z-40 pt-20">
+<div class="px-6 mb-8">
+<span class="text-xl font-black text-[#ffffff] font-['Space_Grotesk'] uppercase">아이언 펀치</span>
+<p class="text-[10px] text-primary font-bold tracking-[0.2em] mt-1">RANK: AMATEUR</p>
+</div>
+<nav class="flex flex-col w-full">
+<a class="px-6 py-4 flex items-center gap-4 transition-all duration-200 ease-in-out bg-[#ff3b00] text-[#ffffff] font-black font-['Space_Grotesk'] uppercase" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>대시보드</span>
+</a>
+<a class="px-6 py-4 flex items-center gap-4 transition-all duration-200 ease-in-out text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span>루틴 설정</span>
+</a>
+<a class="px-6 py-4 flex items-center gap-4 transition-all duration-200 ease-in-out text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>훈련 기록</span>
+</a>
+<a class="px-6 py-4 flex items-center gap-4 transition-all duration-200 ease-in-out text-[#ffffff]/40 hover:bg-[#262626] hover:text-[#ffffff] font-['Space_Grotesk'] font-bold uppercase" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>설정</span>
+</a>
+</nav>
+<div class="mt-auto px-6">
+<button class="w-full py-4 bg-primary text-on-primary-fixed font-black font-['Space_Grotesk'] uppercase tracking-widest text-sm">
+                START WORKOUT
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-16 min-h-screen pb-24">
+<!-- Hero Section -->
+<section class="relative h-[409px] w-full flex items-end overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Boxing Background" class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="High contrast black and white image of a dark boxing gym with sunlight beams hitting heavy bags through high windows, dusty atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtEEl95UQmCinknwFJ3wEP-vhhAwcOiavQmayhe8SHuNqer5GBwAhSQ1c1cTN0RRMyvqs_jw9YZmzguVctjfZKjBAXFMdJw87bGvaVdaLEkx1ivE3buYfA5dT33KX01UG7sIL3NZGuuxNh24Yj7ofKHYjEAINtGswyxTASzNsIEZWNNNXqPKRxqp-s4y-3JV4T-xFo_SNC7NyBr8EFUhpGssJghtADDcf5eE2-hAfvZE5pcgjuf0EhnBjsUWBwRO7lAvv_N9CH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 px-6 pb-10 w-full">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-primary text-black text-[10px] font-black uppercase">Beginner</span>
+<span class="text-white/60 text-[10px] font-bold uppercase tracking-widest">35 MINS</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-black font-headline uppercase leading-[0.9] tracking-tighter max-w-2xl">
+                    기초 자세 &amp; <span class="text-primary">풋워크</span>
+</h1>
+</div>
+</section>
+<!-- Progress Sticky Header -->
+<div class="sticky top-16 z-30 bg-surface-container-low px-6 py-4 flex items-center justify-between border-b border-white/5">
+<div class="flex flex-col w-full max-w-md">
+<div class="flex justify-between items-end mb-1">
+<span class="text-[10px] font-bold uppercase text-primary tracking-widest">Total Progress</span>
+<span class="text-xl font-black font-headline">25%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-primary w-1/4"></div>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-4 ml-8">
+<div class="text-right">
+<p class="text-[10px] text-white/40 font-bold uppercase">Current Session</p>
+<p class="font-bold text-sm">1 / 4 SESSIONS</p>
+</div>
+</div>
+</div>
+<!-- Session Bento Grid -->
+<section class="px-6 py-12 grid grid-cols-1 md:grid-cols-12 gap-6 max-w-[1400px]">
+<!-- Session 1: Active -->
+<div class="md:col-span-8 bg-surface-container-high p-8 flex flex-col md:flex-row gap-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="text-primary/20 text-8xl font-black font-headline absolute -top-4 -right-4 italic">01</span>
+</div>
+<div class="w-full md:w-1/3 aspect-square bg-surface-container-highest overflow-hidden">
+<img alt="Warmup" class="w-full h-full object-cover grayscale" data-alt="Dramatic close-up of a speed rope hitting the concrete floor of a gym, motion blur, moody studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ409HRze5m4Dhfk2Pu0CSqTdVQdMMUP7EJzdfmD3hW49jVmu1zi1l0obsnN-SxgRgKF9RGXvlVf1lTlbAPsHAQEtds4HhwPS3sOXdDcGzgNeWe5HO8qUA8WLdVfB2H12B3quv9jYf6ebLS_8uz4b4o6D7bV3aXpXhaHDevmetgDJseX4bafDoGPqGilx_fTlPD2R5hew8wT4uxgC2nBWbahsRDDgeXHH3inUpt1Qt2bS16TGv5u-crA69LEMJswDF0DmZG_5Y"/>
+</div>
+<div class="flex-1 z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">timer</span>
+<span class="text-primary font-black uppercase text-sm tracking-widest">Active Session</span>
+</div>
+<h3 class="text-3xl font-black font-headline uppercase mb-4 leading-none">워밍업(줄넘기)</h3>
+<p class="text-white/60 mb-6 font-body leading-relaxed max-w-md text-sm">
+                        전신 근육을 활성화하고 심박수를 높입니다. 가벼운 바운스를 유지하며 일정한 리듬을 찾으세요. 발 끝으로 부드럽게 착지합니다.
+                    </p>
+<div class="flex items-center gap-6 mb-8">
+<div>
+<p class="text-[10px] text-white/40 font-black uppercase mb-1">Time</p>
+<p class="text-xl font-bold font-headline">05:00</p>
+</div>
+<div class="w-px h-8 bg-white/10"></div>
+<div>
+<p class="text-[10px] text-white/40 font-black uppercase mb-1">Intensity</p>
+<p class="text-xl font-bold font-headline">LOW-MID</p>
+</div>
+</div>
+<button class="bg-primary text-black font-black py-4 px-10 flex items-center gap-3 uppercase text-sm hover:bg-primary-dim transition-colors group">
+<span>시작하기</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Session 2 -->
+<div class="md:col-span-4 bg-surface-container-low p-8 border-l-4 border-white/5 flex flex-col justify-between">
+<div>
+<span class="text-white/20 text-4xl font-black font-headline italic mb-4 block leading-none">02</span>
+<h3 class="text-2xl font-black font-headline uppercase mb-4">기본 자세 점검(스탠스)</h3>
+<p class="text-white/40 text-xs font-body leading-relaxed mb-6">
+                        체중 분배와 가드 높이를 일정하게 유지합니다. 가장 중요한 기초 중의 기초입니다.
+                    </p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-white/40 text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>08 MINS</span>
+</div>
+<span class="material-symbols-outlined text-white/20">lock</span>
+</div>
+</div>
+<!-- Session 3 -->
+<div class="md:col-span-6 bg-surface-container-low p-8 flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-32 h-32 bg-surface-container-highest flex-shrink-0">
+<img alt="Footwork" class="w-full h-full object-cover grayscale opacity-50" data-alt="Athletic shoes on gym floor marking out footwork patterns, focus on professional training equipment and textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVDIAXVwNpNX7wzAD-QKpaB5D7YUCfauMdxUS_FT8_BGra7lIlx_k8yu_16IKwG5cM58HSOU6szPMwKA2FZ2lMQhuWYhEKwqaijiW9YdpzJq5wJWX617JBPi_AdnbTH6NhS2XwEX9c5SJK3LT48-m_DzA7Zu19Bi8JjW8UnLAGItkiGp3wKTeJUTHxMF-1vmJkLK-YaPQwDR8L-KLo0SvHFIBK86r4X4oQ56qoq-2KxloFvrJm9mC085QtXTC-iaQ3wB_7NSgl"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<span class="text-white/20 text-4xl font-black font-headline italic mb-2 block leading-none">03</span>
+<h3 class="text-2xl font-black font-headline uppercase mb-2">전후좌우 스텝 훈련(풋워크)</h3>
+<p class="text-white/40 text-xs font-body leading-relaxed mb-4">
+                            거리 조절의 핵심. 발이 꼬이지 않도록 간격을 유지하며 민첩하게 이동합니다.
+                        </p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-white/40 text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>10 MINS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Session 4 -->
+<div class="md:col-span-6 bg-surface-container-low p-8 flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-32 h-32 bg-surface-container-highest flex-shrink-0">
+<img alt="Shadow Boxing" class="w-full h-full object-cover grayscale opacity-50" data-alt="Silhouette of a boxer practicing punches in a dark studio with dramatic backlight, smoke effects and grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW9XpS2x1RWeBe3ILgYrFR6AERsaxYBUjbarrWO8hadfXV060C3BEc7iCK5Tkqtsg3_czJytXVSc71zbXgzDBrzQvvRnk__r-tQZLuI1oC0E7hGHMj8IlU2ucwh6KRTu7kLte-o4mDsz4SRV09l8qIxIMzG07xN5yVJkodz1YgwoGYCl044_B9HM7OYqD1L4peKuEy1LV1XuBd_B6aIWt50tTMctDxB84TmdL1M4Y_mFJSaNrTw1WazJK5or6LJM1njdupObur"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<span class="text-white/20 text-4xl font-black font-headline italic mb-2 block leading-none">04</span>
+<h3 class="text-2xl font-black font-headline uppercase mb-2">기본 잽-스트레이트 섀도우</h3>
+<p class="text-white/40 text-xs font-body leading-relaxed mb-4">
+                            거울을 보며 타격 지점을 명확히 합니다. 회전력과 호흡에 집중하세요.
+                        </p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-white/40 text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>12 MINS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats & Tips Bento Footer -->
+<section class="px-6 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1400px]">
+<div class="bg-surface-container-highest p-6">
+<p class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">COACH'S NOTE</p>
+<p class="font-body text-sm text-white/80 leading-relaxed italic">
+                    "오늘 훈련은 체력보다는 '정확성'에 집중하세요. 기초가 흔들리면 실전에서 무너집니다. 스탠스 간격을 항상 잊지 마세요."
+                </p>
+</div>
+<div class="bg-surface-container-highest p-6 flex items-center justify-between">
+<div>
+<p class="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Calories Est.</p>
+<p class="text-4xl font-black font-headline">240 <span class="text-sm font-bold text-white/40 uppercase">kcal</span></p>
+</div>
+<span class="material-symbols-outlined text-primary text-4xl">local_fire_department</span>
+</div>
+<div class="bg-surface-container-highest p-6 flex items-center justify-between">
+<div>
+<p class="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Heart Rate Zone</p>
+<p class="text-4xl font-black font-headline">AEROBIC</p>
+</div>
+<span class="material-symbols-outlined text-primary text-4xl">ecg</span>
+</div>
+</section>
+<!-- Bottom Action Bar (Mobile Responsive) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-low px-6 py-4 flex items-center justify-between md:justify-end gap-4 z-50 md:left-64 md:w-[calc(100%-16rem)]">
+<button class="flex-1 md:flex-none px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors font-black uppercase text-xs tracking-widest">
+                훈련 일시중지
+            </button>
+<button class="flex-[2] md:flex-none px-12 py-4 bg-primary text-black font-black uppercase text-sm tracking-widest hover:bg-primary-dim transition-colors">
+                훈련 종료
+            </button>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0e0e0e] flex justify-around items-center h-16 z-50 border-t border-white/5">
+<a class="flex flex-col items-center gap-1 text-[#ff3b00]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase">홈</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="text-[10px] font-bold uppercase">훈련</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold uppercase">기록</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase">내정보</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IRON_PUNCH — 복싱 훈련 트래커</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">IRON_PUNCH</div>
+      <div class="brand-rank" id="sidebarRank">RANK · ROOKIE</div>
+    </div>
+    <nav class="nav" id="nav">
+      <a data-route="dashboard" class="active"><span class="icon">▣</span> 대시보드</a>
+      <a data-route="today"><span class="icon">⚡</span> 오늘의 루틴</a>
+      <a data-route="logs"><span class="icon">◉</span> 훈련 기록</a>
+      <a data-route="settings"><span class="icon">⚙</span> 설정</a>
+    </nav>
+    <div class="sidebar-cta">
+      <button class="btn btn-primary" id="sideStartBtn">START WORKOUT</button>
+    </div>
+  </aside>
+
+  <main class="main" id="view"></main>
+</div>
+
+<!-- 프로필 입력 모달 -->
+<div class="modal-backdrop" id="profileModal">
+  <div class="modal">
+    <div class="label-md accent mb-8">NEW SESSION</div>
+    <h2 class="font-display display-md mb-24">오늘의 <span class="accent">파이터</span> 정보</h2>
+
+    <div class="form-group">
+      <label class="form-label">이름 (선택)</label>
+      <input type="text" id="fName" placeholder="익명의 파이터" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">경력 / 레벨</label>
+      <div class="pill-group" data-group="level">
+        <div class="pill" data-value="beginner">초보</div>
+        <div class="pill active" data-value="intermediate">중급</div>
+        <div class="pill" data-value="advanced">상급</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">오늘 훈련 장소</label>
+      <div class="pill-group" data-group="venue">
+        <div class="pill active" data-value="gym">복싱장</div>
+        <div class="pill" data-value="home">집</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">가용 시간 (분)</label>
+      <div class="pill-group" data-group="minutes">
+        <div class="pill" data-value="30">30분</div>
+        <div class="pill active" data-value="45">45분</div>
+        <div class="pill" data-value="60">60분</div>
+        <div class="pill" data-value="90">90분</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">오늘 컨디션</label>
+      <div class="pill-group" data-group="fatigue">
+        <div class="pill active" data-value="low">좋음</div>
+        <div class="pill" data-value="medium">보통</div>
+        <div class="pill" data-value="high">피곤함</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">오늘의 목표</label>
+      <div class="pill-group" data-group="goal">
+        <div class="pill active" data-value="technique">기술</div>
+        <div class="pill" data-value="power">파워</div>
+        <div class="pill" data-value="cardio">카디오</div>
+        <div class="pill" data-value="endurance">지구력</div>
+        <div class="pill" data-value="weightloss">감량</div>
+      </div>
+    </div>
+
+    <div class="flex gap-16 mt-32">
+      <button class="btn btn-ghost" id="cancelProfile">취소</button>
+      <button class="btn btn-primary" id="generateBtn">루틴 생성</button>
+    </div>
+  </div>
+</div>
+
+<!-- 운동 상세 모달 -->
+<div class="modal-backdrop" id="exerciseModal">
+  <div class="modal modal-lg" id="exerciseModalContent"></div>
+</div>
+
+<script src="js/exercises.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/recommender.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
