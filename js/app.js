@@ -142,7 +142,7 @@
         <button class="btn btn-primary" data-action="go-today">이어하기</button>
       `
       : `
-        <button class="btn btn-primary" data-action="new-session">START WORKOUT</button>
+        <button class="btn btn-primary" data-action="new-session">START MISSION</button>
       `;
 
     view.innerHTML = `
@@ -168,11 +168,11 @@
         <div class="card-hero">${todayBlock}</div>
         <div class="card">
           ${completed.length > 0
-            ? `<div class="label-sm mb-8">완료 세션</div>
+            ? `<div class="label-sm mb-8">완료 미션</div>
                <div class="font-display accent" style="font-size: 2.5rem; line-height: 1;">${completed.length}</div>`
             : ''
           }
-          <button class="btn btn-secondary w-full ${completed.length > 0 ? 'mt-24' : ''}" data-action="new-session">NEW SESSION</button>
+          <button class="btn btn-secondary w-full ${completed.length > 0 ? 'mt-24' : ''}" data-action="new-session">NEW MISSION</button>
         </div>
       </div>
 
@@ -204,7 +204,7 @@
 
       <div class="grid grid-stats">
         <div class="stat-card">
-          <div class="label-sm mb-8">총 세션</div>
+          <div class="label-sm mb-8">총 미션</div>
           <div class="stat-value white">${completed.length}</div>
         </div>
         <div class="stat-card">
@@ -253,12 +253,12 @@
         <div class="main-header">
           <div>
             <div class="label-sm mb-8">오늘의 목표</div>
-            <h1 class="font-display display-lg">아직 <span class="accent">세션이 없다.</span></h1>
+            <h1 class="font-display display-lg">아직 <span class="accent">미션이 없다.</span></h1>
           </div>
         </div>
         <div class="empty">
           <p class="body-lg mb-24">프로필 입력하고 오늘 루틴 뽑아라.</p>
-          <button class="btn btn-primary" data-action="new-session">START NEW SESSION</button>
+          <button class="btn btn-primary" data-action="new-session">START NEW MISSION</button>
         </div>
       `;
       view.querySelector('[data-action="new-session"]').addEventListener('click', openProfileModal);
@@ -334,7 +334,7 @@
     });
 
     view.querySelector('[data-action="discard"]').addEventListener('click', () => {
-      if (confirm('이 세션을 버리시겠습니까?')) {
+      if (confirm('이 미션을 버리시겠습니까?')) {
         STORAGE.clearCurrent();
         setRoute('dashboard');
       }
@@ -357,7 +357,7 @@
       STORAGE.saveSession(current);
       if (window.AUTH && window.AUTH.user) window.AUTH.saveSessionCloud(current);
       STORAGE.clearCurrent();
-      alert(`세션 완료! ${done}/${total} 블록 기록됨.`);
+      alert(`미션 완료! ${done}/${total} 블록 기록됨.`);
       setRoute('logs');
     });
   }
@@ -549,8 +549,8 @@
           </div>
         </div>
         <div class="empty">
-          <p class="body-lg mb-24">아직 기록이 없다. 첫 세션부터 시작하자.</p>
-          <button class="btn btn-primary" data-action="new-session">첫 세션 시작</button>
+          <p class="body-lg mb-24">아직 기록이 없다. 첫 미션부터 시작하자.</p>
+          <button class="btn btn-primary" data-action="new-session">첫 미션 시작</button>
         </div>
       `;
       view.querySelector('[data-action="new-session"]').addEventListener('click', openProfileModal);
@@ -573,7 +573,7 @@
     view.innerHTML = `
       <div class="main-header">
         <div>
-          <div class="label-sm mb-8">SESSION HISTORY &amp; PERFORMANCE DATA</div>
+          <div class="label-sm mb-8">MISSION HISTORY &amp; PERFORMANCE DATA</div>
           <h1 class="font-display display-lg"><span class="white">TRAINING</span><span class="accent">_LOGS</span></h1>
         </div>
       </div>
@@ -582,7 +582,7 @@
         <div>
           <div class="grid grid-stats mb-24">
             <div class="stat-card">
-              <div class="label-sm mb-8">TOTAL SESSIONS</div>
+              <div class="label-sm mb-8">TOTAL MISSIONS</div>
               <div class="stat-value white">${sessions.length}</div>
             </div>
             <div class="stat-card">
@@ -599,7 +599,7 @@
             </div>
           </div>
 
-          <div class="label-sm mb-16">최근 세션</div>
+          <div class="label-sm mb-16">최근 미션</div>
           ${sessions.slice(0, 20).map(s => {
             const d = new Date(s.completedAt);
             const dd = String(d.getDate()).padStart(2, '0');
@@ -637,7 +637,7 @@
           <div class="card-elev">
             <div class="label-sm mb-8">NEXT PHASE</div>
             <div class="font-display accent" style="font-size: 1.4rem;">${sessions.length >= 30 ? 'CHAMPION' : sessions.length >= 15 ? 'CONTENDER' : sessions.length >= 5 ? 'AMATEUR' : 'ROOKIE'}</div>
-            <p class="body-sm mt-8">${sessions.length >= 30 ? '최정상. 계속 유지하라.' : `다음 티어까지 ${sessions.length >= 15 ? 30 - sessions.length : sessions.length >= 5 ? 15 - sessions.length : 5 - sessions.length} 세션.`}</p>
+            <p class="body-sm mt-8">${sessions.length >= 30 ? '최정상. 계속 유지하라.' : `다음 티어까지 ${sessions.length >= 15 ? 30 - sessions.length : sessions.length >= 5 ? 15 - sessions.length : 5 - sessions.length} 미션.`}</p>
           </div>
         </div>
       </div>
@@ -646,7 +646,7 @@
     view.querySelectorAll('[data-delete]').forEach(b => {
       b.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (confirm('이 세션 기록을 삭제하시겠습니까?')) {
+        if (confirm('이 미션 기록을 삭제하시겠습니까?')) {
           STORAGE.deleteSession(b.dataset.delete);
           renderLogs();
         }
@@ -710,7 +710,7 @@
 
       <div class="card mb-24">
         <div class="label-sm accent mb-16">데이터 관리</div>
-        <p class="body-sm mb-24">현재 저장된 세션: <strong>${sessions.length}개</strong>. 모든 데이터는 이 브라우저에만 저장된다.</p>
+        <p class="body-sm mb-24">현재 저장된 미션: <strong>${sessions.length}개</strong>. 모든 데이터는 이 브라우저에만 저장된다.</p>
         <div class="flex gap-16">
           <button class="btn btn-secondary" data-action="export">JSON 내보내기</button>
           <button class="btn btn-secondary" data-action="import">JSON 가져오기</button>
@@ -752,7 +752,7 @@
           const data = JSON.parse(reader.result);
           if (data.sessions && Array.isArray(data.sessions)) {
             data.sessions.forEach(s => STORAGE.saveSession(s));
-            alert(`${data.sessions.length}개 세션을 가져왔다.`);
+            alert(`${data.sessions.length}개 미션을 가져왔다.`);
             renderSettings();
           } else alert('잘못된 파일 형식.');
         } catch { alert('JSON 파싱 실패.'); }
