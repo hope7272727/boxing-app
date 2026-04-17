@@ -93,7 +93,7 @@
     const userProf = STORAGE.getUserProfile();
     const stanceVal = userProf.stance || 'orthodox';
     const weightVal = parseFloat(userProf.weight) || 70;
-    const buildProfile = { ...state.profile, minutes: 45, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal };
+    const buildProfile = { ...state.profile, minutes: 45, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal, height: userProf.height, age: userProf.age, gender: userProf.gender };
     const session = RECOMMENDER.buildSession(buildProfile);
     STORAGE.setCurrent(session);
     closeProfileModal();
@@ -679,7 +679,7 @@
   }
 
   function renderGoalDist(sessions) {
-    const labels = { technique: 'TECHNIQUE', cardio: 'HEALTH', weightloss: 'DIET' };
+    const labels = { technique: 'TECHNIQUE', power: 'POWER', cardio: 'HEALTH', weightloss: 'DIET' };
     const counts = {};
     sessions.forEach(s => {
       const g = s.profile?.goal || 'technique';
@@ -1001,7 +1001,7 @@
   function formatProfileSummary(p) {
     const diff = { easy: 'LOW', normal: 'MIDDLE', hard: 'HIGH' }[p.difficulty] || 'MIDDLE';
     const v = p.venue === 'gym' ? 'GYM' : 'HOME';
-    const g = { technique: 'TECHNIQUE', cardio: 'HEALTH', weightloss: 'DIET' }[p.goal] || '';
+    const g = { technique: 'TECHNIQUE', power: 'POWER', cardio: 'HEALTH', weightloss: 'DIET' }[p.goal] || '';
     return `${diff} · ${v} · ${g}`;
   }
 

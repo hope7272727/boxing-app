@@ -68,14 +68,16 @@
       // 섀도우 1개
       if (shadows[0]) blocks.push(makeBlock(shadows[0], 'shadow', { rounds: Math.max(2, Math.round(params.rounds / 3)), roundMin: params.roundMin, restSec: params.restSec }));
 
-      // 콤비네이션: 오늘의 콤보 1개 + 랜덤 1개
-      const dailyCombo = window.getDailyCombo ? window.getDailyCombo() : null;
-      if (dailyCombo) {
-        blocks.push(makeBlock(
-          { id: 'daily_combo', name: dailyCombo.name, category: 'combo', focus: dailyCombo.focus, cue: dailyCombo.cue },
-          'combo',
-          { rounds: 3, roundMin: params.roundMin, restSec: params.restSec, combo: dailyCombo.combo }
-        ));
+      // 콤비네이션: HIGH(advanced)면 오늘의 콤보 + 랜덤, 아니면 랜덤만
+      if (level === 'advanced') {
+        const dailyCombo = window.getDailyCombo ? window.getDailyCombo() : null;
+        if (dailyCombo) {
+          blocks.push(makeBlock(
+            { id: 'daily_combo', name: dailyCombo.name, category: 'combo', focus: dailyCombo.focus, cue: dailyCombo.cue },
+            'combo',
+            { rounds: 3, roundMin: params.roundMin, restSec: params.restSec, combo: dailyCombo.combo }
+          ));
+        }
       }
       const comboPick = pickByGoal(comboEx, goal);
       if (comboPick[0]) blocks.push(makeBlock(comboPick[0], 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: comboPick[0].combo }));
