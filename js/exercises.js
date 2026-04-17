@@ -1313,7 +1313,12 @@ window.getDailyCombo = function() {
   return window.DAILY_COMBOS[dayIndex];
 };
 window.shuffleDailyCombo = function() {
-  window._dailyComboOffset = (window._dailyComboOffset + 1) % window.DAILY_COMBOS.length;
+  var current = window._dailyComboOffset;
+  var next;
+  do {
+    next = Math.floor(Math.random() * window.DAILY_COMBOS.length);
+  } while (next === current && window.DAILY_COMBOS.length > 1);
+  window._dailyComboOffset = next;
   return window.getDailyCombo();
 };
 
