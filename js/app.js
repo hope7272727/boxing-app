@@ -149,7 +149,7 @@
       ${renderAuthBar()}
       <div class="main-header">
         <div>
-          <div class="label-sm mb-8">대시보드</div>
+          <div class="label-sm mb-8">메인 화면</div>
           <h1 class="font-display display-lg">
             <span class="white">Round One,</span><br />
             <span class="accent">Fight!</span>
