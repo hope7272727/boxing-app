@@ -276,8 +276,11 @@
     view.innerHTML = `
       <div class="main-header">
         <div style="flex:1">
-          <div class="label-sm mb-8">오늘의 루틴</div>
-          <h1 class="font-display display-lg">${escape(formatProfileSummary(current.profile))}</h1>
+          <div class="chip mb-16">오늘의 미션</div>
+          <div class="flex gap-16" style="flex-wrap:wrap;">
+            <span class="label-sm">${escape(formatProfileSummary(current.profile))}</span>
+            <span class="label-sm accent">${current.blocks.length} 블록</span>
+          </div>
         </div>
         <div class="card-elev" style="min-width: 220px;">
           <div class="flex justify-between mb-16">
