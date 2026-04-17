@@ -427,19 +427,9 @@
     const seq = renderComboSequence(dc.combo);
     return `
       <div class="card-hero daily-combo-card mb-32">
-        <div class="flex justify-between items-center mb-16">
-          <div>
-            <div class="chip mb-8">TODAY'S COMBINATION</div>
-            <h2 class="font-display headline-lg">${escape(dc.name)}</h2>
-          </div>
-          <div class="text-right">
-            <div class="label-sm mb-8">${escape(dc.difficulty)}</div>
-            <div class="label-sm accent">${dc.combo.length} HITS</div>
-          </div>
-        </div>
+        <div class="chip mb-16">TODAY'S COMBINATION</div>
         ${seq}
         <p class="body-lg mt-16">${escape(dc.cue)}</p>
-        <div class="label-sm mt-16 muted">FOCUS · ${escape(dc.focus)}</div>
       </div>
     `;
   }
