@@ -1101,11 +1101,16 @@ window.DAILY_COMBOS = [
   },
 ];
 
-// 오늘의 콤보 가져오기 (날짜 기반 로테이션)
+// 오늘의 콤보 가져오기 (날짜 기반 + 셔플 오프셋)
+window._dailyComboOffset = 0;
 window.getDailyCombo = function() {
   const today = new Date();
-  const dayIndex = Math.floor(today.getTime() / 86400000) % window.DAILY_COMBOS.length;
+  const dayIndex = (Math.floor(today.getTime() / 86400000) + window._dailyComboOffset) % window.DAILY_COMBOS.length;
   return window.DAILY_COMBOS[dayIndex];
+};
+window.shuffleDailyCombo = function() {
+  window._dailyComboOffset = (window._dailyComboOffset + 1) % window.DAILY_COMBOS.length;
+  return window.getDailyCombo();
 };
 
 // 경력별 볼륨 파라미터

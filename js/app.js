@@ -231,6 +231,10 @@
         const act = el.dataset.action;
         if (act === 'new-session') openProfileModal();
         else if (act === 'go-today') setRoute('today');
+        else if (act === 'shuffle-combo') {
+          window.shuffleDailyCombo();
+          renderDashboard();
+        }
       });
     });
   }
@@ -427,7 +431,10 @@
     const seq = renderComboSequence(dc.combo);
     return `
       <div class="card-hero daily-combo-card mb-32">
-        <div class="chip mb-16">TODAY'S COMBINATION</div>
+        <div class="flex justify-between items-center mb-16">
+          <div class="chip">TODAY'S COMBINATION</div>
+          <button class="btn btn-sm btn-ghost" data-action="shuffle-combo">다른 콤보</button>
+        </div>
         ${seq}
         <p class="body-lg mt-16">${escape(dc.cue)}</p>
       </div>
