@@ -243,6 +243,10 @@
         else if (act === 'logout' && window.AUTH) {
           window.AUTH.logout().then(function () { renderDashboard(); });
         }
+        else if (act === 'toggle-profile-menu') {
+          const menu = document.getElementById('profileMenu');
+          if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
       });
     });
   }
@@ -775,13 +779,27 @@
   function renderAuthBar() {
     const user = window.AUTH ? window.AUTH.user : null;
     if (user) {
+      const photo = user.photoURL || '';
+      const name = user.displayName || user.email || '';
       return `<div class="auth-bar">
-        <span class="body-sm">${escape(user.displayName || user.email)}</span>
-        <button class="btn btn-sm btn-ghost" data-action="logout">로그아웃</button>
+        <div class="auth-profile" data-action="toggle-profile-menu">
+          ${photo ? `<img class="auth-avatar" src="${escape(photo)}" alt="" />` : `<div class="auth-avatar auth-avatar-placeholder">${escape(name.charAt(0))}</div>`}
+          <span class="auth-name">${escape(name)}</span>
+        </div>
+        <div class="profile-menu" id="profileMenu" style="display:none;">
+          <div class="profile-menu-header">
+            ${photo ? `<img class="profile-menu-avatar" src="${escape(photo)}" alt="" />` : ''}
+            <div>
+              <div class="title-md">${escape(name)}</div>
+              <div class="body-sm muted">${escape(user.email || '')}</div>
+            </div>
+          </div>
+          <button class="btn btn-sm btn-ghost w-full mt-16" data-action="logout">로그아웃</button>
+        </div>
       </div>`;
     }
     return `<div class="auth-bar">
-      <button class="btn btn-sm btn-primary" data-action="google-login">Google 로그인</button>
+      <button class="btn btn-sm btn-secondary" data-action="google-login">로그인</button>
     </div>`;
   }
 

@@ -774,8 +774,57 @@ input:focus, select:focus, textarea:focus {
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  margin-bottom: 16px;
-  padding: 8px 0;
+  margin-bottom: 8px;
+  position: relative;
+}
+.auth-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: background 0.15s;
+}
+.auth-profile:hover { background: var(--surface-highest); }
+.auth-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
+.auth-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-dim);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.auth-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--on-surface-dim);
+}
+.profile-menu {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  background: var(--surface-low);
+  padding: 20px;
+  min-width: 240px;
+  z-index: 60;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.profile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.profile-menu-avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
 }
 
 /* PWA standalone mode */
