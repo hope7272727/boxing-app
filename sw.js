@@ -1,10 +1,11 @@
-const CACHE_NAME = 'ironpunch-v10';
+const CACHE_NAME = 'ironpunch-v11';
 const ASSETS = [
   '/',
   '/index.html',
   '/styles.css',
   '/js/exercises.js',
   '/js/storage.js',
+  '/js/auth.js',
   '/js/recommender.js',
   '/js/app.js',
   '/manifest.json',

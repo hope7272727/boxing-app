@@ -894,4 +894,20 @@ input:focus, select:focus, textarea:focus {
   .modal-hero { height: 200px; padding: 20px; }
 }
 
+/* =========================
+   PROFILE SETTINGS
+   ========================= */
+.profile-settings {
+  border-left: 4px solid var(--primary);
+}
+.profile-settings .form-group {
+  max-width: 360px;
+}
+.profile-settings input[type="number"] {
+  max-width: 360px;
+}
+.profile-settings .btn-primary {
+  max-width: 360px;
+}
+
 .mobile-nav { display: none; }

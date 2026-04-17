@@ -9,7 +9,6 @@
     profile: {
       name: '',
       difficulty: 'normal',
-      stance: 'orthodox',
       venue: 'gym',
       minutes: 45,
       goal: 'technique',
@@ -91,7 +90,10 @@
     state.profile.name = fName ? fName.value.trim() : '';
     STORAGE.saveLastProfile(state.profile);
     const dp = difficultyToParams(state.profile.difficulty);
-    const buildProfile = { ...state.profile, level: dp.level, fatigue: dp.fatigue };
+    const userProf = STORAGE.getUserProfile();
+    const stanceVal = userProf.stance || 'orthodox';
+    const weightVal = parseFloat(userProf.weight) || 70;
+    const buildProfile = { ...state.profile, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal };
     const session = RECOMMENDER.buildSession(buildProfile);
     STORAGE.setCurrent(session);
     closeProfileModal();
@@ -457,7 +459,8 @@
   function renderComboSequence(combo) {
     if (!combo || !combo.length) return '';
     const legend = window.PUNCH_LEGEND || {};
-    const stance = (state.profile && state.profile.stance) || 'orthodox';
+    const userProfile = STORAGE.getUserProfile();
+    const stance = (userProfile && userProfile.stance) || 'orthodox';
     const pills = combo.map(p => {
       const key = String(p);
       const info = legend[key];
@@ -662,12 +665,33 @@
   // ---------- SETTINGS ----------
   function renderSettings() {
     const sessions = STORAGE.getSessions();
+    const userProfile = STORAGE.getUserProfile();
     view.innerHTML = `
       <div class="main-header">
         <div>
           <div class="label-sm mb-8">설정</div>
           <h1 class="font-display display-lg"><span class="white">SETTINGS</span></h1>
         </div>
+      </div>
+
+      <div class="card mb-24 profile-settings">
+        <div class="label-sm accent mb-16">프로필 설정</div>
+        <div class="form-group">
+          <label class="form-label">키 (cm)</label>
+          <input type="number" id="profileHeight" placeholder="170" value="${userProfile.height || ''}" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">몸무게 (kg)</label>
+          <input type="number" id="profileWeight" placeholder="70" value="${userProfile.weight || ''}" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">스탠스</label>
+          <div class="pill-group" data-group="profileStance">
+            <div class="pill ${userProfile.stance !== 'southpaw' ? 'active' : ''}" data-value="orthodox">오소독스</div>
+            <div class="pill ${userProfile.stance === 'southpaw' ? 'active' : ''}" data-value="southpaw">사우스포</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" data-action="save-profile">저장</button>
       </div>
 
       <div class="card mb-24">
@@ -727,6 +751,31 @@
         STORAGE.clearAll();
         renderSettings();
       }
+    });
+
+    // 프로필 스탠스 pill group
+    const stanceGroup = view.querySelector('[data-group="profileStance"]');
+    if (stanceGroup) {
+      stanceGroup.addEventListener('click', (e) => {
+        const pill = e.target.closest('.pill');
+        if (!pill) return;
+        stanceGroup.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    }
+
+    // 프로필 저장
+    view.querySelector('[data-action="save-profile"]').addEventListener('click', () => {
+      const height = document.getElementById('profileHeight').value.trim();
+      const weight = document.getElementById('profileWeight').value.trim();
+      const stancePill = view.querySelector('[data-group="profileStance"] .pill.active');
+      const stance = stancePill ? stancePill.dataset.value : 'orthodox';
+      const profile = { height: height, weight: weight, stance: stance };
+      STORAGE.saveUserProfile(profile);
+      if (window.AUTH && window.AUTH.user) {
+        window.AUTH.saveProfileCloud(profile);
+      }
+      alert('프로필이 저장되었습니다.');
     });
   }
 
@@ -807,7 +856,18 @@
   if (window.AUTH) {
     window.AUTH.onAuthChange(function (user) {
       if (user) {
-        window.AUTH.syncFromCloud().then(function () { render(); });
+        window.AUTH.syncFromCloud().then(function () {
+          // 클라우드에서 프로필도 로드
+          return window.AUTH.getProfileCloud();
+        }).then(function (cloudProfile) {
+          if (cloudProfile) {
+            var local = STORAGE.getUserProfile();
+            if (!local.height && !local.weight) {
+              STORAGE.saveUserProfile(cloudProfile);
+            }
+          }
+          render();
+        });
       } else {
         render();
       }

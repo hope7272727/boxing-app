@@ -34,5 +34,7 @@
     clearCurrent: () => localStorage.removeItem(userKey('current')),
     getLastProfile: () => read(userKey('lastProfile'), null),
     saveLastProfile: (p) => write(userKey('lastProfile'), p),
+    getUserProfile: () => read(userKey('userProfile'), { height: '', weight: '', stance: 'orthodox' }),
+    saveUserProfile: (profile) => write(userKey('userProfile'), profile),
   };
 })();

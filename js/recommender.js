@@ -126,12 +126,14 @@
     // 메타
     const estMinutes = estimateTime(blocks);
     const intensity = params.intensityLabel;
-    const calories = estimateCalories(estMinutes, intensity);
+    const weightKg = profile.weight || 70;
+    const calories = estimateCalories(estMinutes, intensity, weightKg);
 
     return {
       id: 'session_' + Date.now(),
       createdAt: new Date().toISOString(),
       profile,
+      weightKg,
       title: buildTitle(venue, goal, fatigue),
       subtitle: buildSubtitle(venue, goal),
       estMinutes,
@@ -181,9 +183,10 @@
     return Math.round(m);
   }
 
-  function estimateCalories(minutes, intensity) {
-    const rate = intensity === 'HIGH_VOLTAGE' ? 13 : intensity === 'MODERATE' ? 10 : 7;
-    return minutes * rate;
+  function estimateCalories(minutes, intensity, weightKg) {
+    const w = weightKg || 70;
+    const met = intensity === 'HIGH_VOLTAGE' ? 10 : intensity === 'MODERATE' ? 7 : 4.5;
+    return Math.round(met * w * (minutes / 60));
   }
 
   function buildTitle(venue, goal, fatigue) {
