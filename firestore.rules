@@ -1,0 +1,19 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 사용자별 본인 문서/하위 컬렉션 접근만 허용
+    // /users/{uid}                 - 프로필
+    // /users/{uid}/sessions/{id}   - 훈련 세션
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+    }
+
+    // 그 외 모든 경로는 거부
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
