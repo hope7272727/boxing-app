@@ -471,8 +471,8 @@
       let handTag = '';
       if (info && info.hand && info.hand !== 'none') {
         const handLabel = stance === 'southpaw'
-          ? (info.hand === 'lead' ? '오' : '왼')
-          : (info.hand === 'lead' ? '왼' : '오');
+          ? (info.hand === 'lead' ? '우' : '좌')
+          : (info.hand === 'lead' ? '좌' : '우');
         handTag = `<span class="combo-hand">${handLabel}</span>`;
       }
       return `<span class="${cls}" title="${info ? info.name : key}"><span class="combo-num">${key}</span><span class="combo-label">${label}</span>${handTag}</span>`;
