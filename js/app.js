@@ -580,20 +580,38 @@
         <div>
           <div class="grid grid-stats mb-24">
             <div class="stat-card">
-              <div class="label-sm mb-8">TOTAL MISSIONS</div>
+              <div class="label-sm mb-8">총 미션</div>
               <div class="stat-value white">${sessions.length}</div>
             </div>
             <div class="stat-card">
-              <div class="label-sm mb-8">TOTAL ROUNDS</div>
+              <div class="label-sm mb-8">최대 연속</div>
+              <div class="stat-value">${calcMaxStreak(sessions)}<span class="stat-unit"> 일</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="label-sm mb-8">이번 주</div>
+              <div class="stat-value white">${calcWeekly(sessions).filter(m => m > 0).length}<span class="stat-unit"> / 7</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="label-sm mb-8">총 칼로리</div>
+              <div class="stat-value">${totalCals.toLocaleString()}<span class="stat-unit"> kcal</span></div>
+            </div>
+          </div>
+          <div class="grid grid-stats mb-24">
+            <div class="stat-card">
+              <div class="label-sm mb-8">총 라운드</div>
               <div class="stat-value">${totalRounds}</div>
             </div>
             <div class="stat-card">
-              <div class="label-sm mb-8">TOTAL MIN</div>
-              <div class="stat-value white">${totalMin}</div>
+              <div class="label-sm mb-8">누적 시간</div>
+              <div class="stat-value white">${totalMin}<span class="stat-unit"> 분</span></div>
             </div>
             <div class="stat-card">
-              <div class="label-sm mb-8">KCAL</div>
-              <div class="stat-value">${totalCals.toLocaleString()}</div>
+              <div class="label-sm mb-8">평균 시간</div>
+              <div class="stat-value">${sessions.length ? Math.round(totalMin / sessions.length) : 0}<span class="stat-unit"> 분</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="label-sm mb-8">평균 칼로리</div>
+              <div class="stat-value white">${sessions.length ? Math.round(totalCals / sessions.length) : 0}<span class="stat-unit"> kcal</span></div>
             </div>
           </div>
 
