@@ -952,6 +952,160 @@ window.PUNCH_LEGEND = {
   '4b': { name: '바디 리어훅',   short: 'B.R.HOOK', hand: 'rear',  type: 'hook',     level: 'body' },
   'SL': { name: '슬립',         short: 'SLIP',     hand: 'none',  type: 'defense',  level: 'none' },
   'WV': { name: '위브',         short: 'WEAVE',    hand: 'none',  type: 'defense',  level: 'none' },
+  'DK': { name: '더킹',         short: 'DUCK',     hand: 'none',  type: 'defense',  level: 'none' },
+  'SB': { name: '스텝백',       short: 'S.BACK',   hand: 'none',  type: 'defense',  level: 'none' },
+  'PV': { name: '피벗',         short: 'PIVOT',    hand: 'none',  type: 'defense',  level: 'none' },
+};
+
+// 오늘의 콤비네이션 — 긴 실전 콤보 (매일 1개 추천)
+window.DAILY_COMBOS = [
+  {
+    name: '더킹 카운터 스톰',
+    combo: [1, 2, 'DK', 5, 6, 3, 2],
+    cue: '원투로 진입 → 더킹으로 카운터 회피 → 어퍼-어퍼-훅-크로스 폭풍',
+    focus: '공방전환',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '바디 브레이커',
+    combo: [1, '3b', 2, 'DK', '2b', 3, 2],
+    cue: '잽-바디훅으로 숙이게 만들고 더킹 후 바디크로스-훅-크로스 마무리',
+    focus: '바디 파괴',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '슬립 투 킬',
+    combo: [1, 2, 'SL', 2, 3, 'SL', 2, 3, 2],
+    cue: '원투-슬립-크로스-훅, 다시 슬립-크로스-훅-크로스. 슬립마다 카운터',
+    focus: '슬립 카운터 연쇄',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '레벨 체인지 러시',
+    combo: [1, 2, '3b', 6, 3, 'DK', 5, 2],
+    cue: '직선-바디훅-어퍼-훅 → 더킹 → 어퍼-크로스. 위-아래-위 교란',
+    focus: '레벨 체인지',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '위브 앤 디스트로이',
+    combo: [1, 2, 'WV', 3, 4, 'WV', 5, 6, 2],
+    cue: '원투-위브-좌훅-우훅-위브-좌어퍼-우어퍼-크로스. 위브마다 폭격',
+    focus: '위브 후 연타',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '더블 더킹 콤보',
+    combo: [1, 'DK', 5, 2, 3, 'DK', 6, 3, 2],
+    cue: '잽-더킹-어퍼-크로스-훅, 다시 더킹-어퍼-훅-크로스. 더킹이 리듬',
+    focus: '더킹 활용',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '피벗 앵글 체인지',
+    combo: [1, 2, 3, 'PV', 2, '3b', 6, 2],
+    cue: '원투-훅 후 피벗으로 각도 바꾸고 크로스-바디훅-어퍼-크로스',
+    focus: '각도 변환',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '풀 아스날',
+    combo: [1, 1, 2, 'SL', 2, 3, 'DK', 5, 6, 3, 2],
+    cue: '더블잽-크로스-슬립-크로스-훅-더킹-더블어퍼-훅-크로스. 11연타 풀세트',
+    focus: '올라운드',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '인파이터 드릴',
+    combo: [5, 6, 3, 'WV', 5, '3b', 4, 2],
+    cue: '어퍼-어퍼-훅-위브-어퍼-바디훅-리어훅-크로스. 근거리 압도',
+    focus: '인파이팅',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '스텝백 카운터',
+    combo: [1, 2, 'SB', 1, 2, 3, 'DK', 6, 3, 2],
+    cue: '원투 던지고 스텝백으로 거리 만든 뒤 재진입 잽-크로스-훅-더킹-어퍼-훅-크로스',
+    focus: '거리 조절',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '사우스포 킬러',
+    combo: [2, 3, 2, 'PV', 1, '2b', 5, 3, 2],
+    cue: '크로스-훅-크로스 후 피벗으로 사이드 이동, 잽-바디-어퍼-훅-크로스',
+    focus: '앵글 공격',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '프레셔 파이터',
+    combo: [1, 2, 1, 3, 'DK', 5, 6, 'WV', 3, 4, 2],
+    cue: '잽-크로스-잽-훅-더킹-더블어퍼-위브-좌훅-우훅-크로스. 쉬지 않는 압박',
+    focus: '프레셔',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '히트 앤 무브',
+    combo: [1, 2, 'SB', 1, 'SL', 2, 3, 'PV', 2],
+    cue: '원투-빠지기-잽-슬립-크로스-훅-피벗-크로스. 치고 빠지기의 정석',
+    focus: '아웃복싱',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '더킹 훅 러시',
+    combo: [1, 'DK', 3, 4, 'DK', 3, 4, 2],
+    cue: '잽-더킹-좌훅-우훅-더킹-좌훅-우훅-크로스. 더킹 후 훅 연타',
+    focus: '훅 연타',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '카오스 콤보',
+    combo: [1, 2, 'WV', 6, 3, 'SL', 2, '3b', 'DK', 5, 2],
+    cue: '직선-위브-어퍼-훅-슬립-크로스-바디-더킹-어퍼-크로스. 모든 각도',
+    focus: '불규칙 패턴',
+    difficulty: 'EXPERT',
+  },
+  {
+    name: '심플 킬러',
+    combo: [1, 2, 'DK', 2, 3, 2],
+    cue: '원투-더킹-크로스-훅-크로스. 심플하지만 파괴적',
+    focus: '효율적 콤보',
+    difficulty: 'INTERMEDIATE',
+  },
+  {
+    name: '어퍼컷 시티',
+    combo: [1, 5, 2, 6, 'DK', 5, 6, 3, 2],
+    cue: '잽-리드어퍼-크로스-리어어퍼-더킹-더블어퍼-훅-크로스. 어퍼컷 축제',
+    focus: '어퍼컷',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '디펜스 투 오펜스',
+    combo: ['SL', 2, 'WV', 3, 'DK', 5, 6, 2],
+    cue: '슬립-크로스-위브-훅-더킹-더블어퍼-크로스. 방어로 시작, 공격으로 끝',
+    focus: '방어 시작 콤보',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '트리플 레벨',
+    combo: [1, 2, '3b', '2b', 'DK', 5, 3, 2],
+    cue: '잽-크로스(헤드)-바디훅-바디크로스(바디)-더킹-어퍼(아래)-훅-크로스(헤드). 3단 높이',
+    focus: '3레벨 공격',
+    difficulty: 'ADVANCED',
+  },
+  {
+    name: '파이널 라운드',
+    combo: [1, 1, 2, 3, 'DK', 5, 6, 'WV', 3, 4, '2b', 5, 2],
+    cue: '더블잽-크로스-훅-더킹-더블어퍼-위브-훅-훅-바디-어퍼-크로스. 13연타 마무리',
+    focus: '올아웃',
+    difficulty: 'EXPERT',
+  },
+];
+
+// 오늘의 콤보 가져오기 (날짜 기반 로테이션)
+window.getDailyCombo = function() {
+  const today = new Date();
+  const dayIndex = Math.floor(today.getTime() / 86400000) % window.DAILY_COMBOS.length;
+  return window.DAILY_COMBOS[dayIndex];
 };
 
 // 경력별 볼륨 파라미터
