@@ -435,6 +435,27 @@
     if (e.key === 'Escape') { closeExerciseModal(); closeProfileModal(); }
   });
 
+  function comboToText(combo) {
+    const legend = window.PUNCH_LEGEND || {};
+    const userProfile = (window.STORAGE && window.STORAGE.getUserProfile) ? window.STORAGE.getUserProfile() : {};
+    const stance = userProfile.stance || 'orthodox';
+    const names = {
+      1: '잽', 2: '크로스', 3: '훅', 4: '훅', 5: '어퍼', 6: '어퍼',
+      '2b': '바디', '5b': '바디', '6b': '바디',
+      'SL': '슬립', 'WV': '위브', 'DK': '더킹', 'SB': '스텝백', 'PV': '피벗',
+    };
+    return combo.map(p => {
+      const key = String(p);
+      const info = legend[key];
+      if (!info || info.type === 'defense') return names[key] || key;
+      const dir = stance === 'southpaw'
+        ? (info.hand === 'lead' ? '우' : '좌')
+        : (info.hand === 'lead' ? '좌' : '우');
+      const base = info.level === 'body' ? '바디' : names[key] || key;
+      return dir + base;
+    }).join('-');
+  }
+
   function renderDailyCombo() {
     const dc = window.getDailyCombo ? window.getDailyCombo() : null;
     if (!dc) return '';
@@ -446,7 +467,7 @@
           <button class="btn btn-sm btn-ghost" data-action="shuffle-combo">다른 콤보</button>
         </div>
         ${seq}
-        <p class="body-lg mt-16">${escape(dc.cue)}</p>
+        <p class="body-lg mt-16">${escape(comboToText(dc.combo))}</p>
       </div>
     `;
   }
@@ -507,7 +528,7 @@
             </button>
           </div>
           ${comboHtml}
-          <div class="block-cue">${escape(b.cue)}</div>
+          <div class="block-cue">${b.params && b.params.combo ? escape(comboToText(b.params.combo)) : escape(b.cue)}</div>
           <div class="block-meta">${metaText}</div>
         </div>
         <button class="check-btn" data-block-toggle="${i}">${b.completed ? '✓' : '○'}</button>

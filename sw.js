@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ironpunch-v13';
+const CACHE_NAME = 'ironpunch-v14';
 const ASSETS = [
   '/',
   '/index.html',
