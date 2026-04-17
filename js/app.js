@@ -10,7 +10,6 @@
       name: '',
       difficulty: 'normal',
       venue: 'gym',
-      minutes: 45,
       goal: 'technique',
     },
   };
@@ -67,7 +66,7 @@
       pill.classList.add('active');
       const key = group.dataset.group;
       const val = pill.dataset.value;
-      state.profile[key] = (key === 'minutes') ? parseInt(val, 10) : val;
+      state.profile[key] = val;
     }
     if (e.target === profileModal) closeProfileModal();
   });
@@ -94,7 +93,7 @@
     const userProf = STORAGE.getUserProfile();
     const stanceVal = userProf.stance || 'orthodox';
     const weightVal = parseFloat(userProf.weight) || 70;
-    const buildProfile = { ...state.profile, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal };
+    const buildProfile = { ...state.profile, minutes: 45, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal };
     const session = RECOMMENDER.buildSession(buildProfile);
     STORAGE.setCurrent(session);
     closeProfileModal();
@@ -131,7 +130,6 @@
     const current = STORAGE.getCurrent();
     const streak = calcStreak(completed);
     const weeklyStats = calcWeekly(completed);
-    const weeklyMinutes = weeklyStats.reduce((a, b) => a + b, 0);
     const totalRounds = completed.reduce((sum, s) => sum + countRounds(s), 0);
 
     const todayBlock = current
@@ -155,7 +153,6 @@
             <span class="white">Round One,</span><br />
             <span class="accent">Fight!</span>
           </h1>
-          ${weeklyMinutes > 0 ? `<p class="body-lg mt-16">이번 주 ${weeklyMinutes}분</p>` : ''}
         </div>
         <div class="card-elev" style="min-width: 200px;">
           ${(() => {
@@ -272,11 +269,11 @@
         <div class="main-header">
           <div>
             <div class="label-sm mb-8">오늘의 목표</div>
-            <h1 class="font-display display-lg">아직 <span class="accent">미션이 없다.</span></h1>
+            <h1 class="font-display display-lg">아직 <span class="accent">미션이 없습니다.</span></h1>
           </div>
         </div>
         <div class="empty">
-          <p class="body-lg mb-24">프로필 입력하고 오늘 루틴 뽑아라.</p>
+          <p class="body-lg mb-24">프로필을 입력하고 오늘의 루틴을 생성해보세요.</p>
           <button class="btn btn-primary" data-action="new-session">START NEW MISSION</button>
         </div>
       `;
@@ -296,10 +293,6 @@
         <div class="card-elev" style="min-width: 220px;">
           <div class="font-display headline-md accent mb-8">${escape(formatProfileSummary(current.profile))}</div>
           <div class="flex justify-between">
-            <div>
-              <div class="label-sm">예상</div>
-              <div class="title-md mt-8">${current.estMinutes}분</div>
-            </div>
             <div class="text-right">
               <div class="label-sm">칼로리</div>
               <div class="title-md mt-8 accent">${current.estCalories} KCAL</div>
@@ -363,7 +356,7 @@
     });
     view.querySelector('[data-action="finish"]').addEventListener('click', () => {
       if (done === 0) {
-        if (!confirm('완료된 블록이 없다. 그래도 기록하시겠습니까?')) return;
+        if (!confirm('완료된 블록이 없습니다. 그래도 기록하시겠습니까?')) return;
       }
       current.completedAt = new Date().toISOString();
       current.actualMinutes = current.estMinutes;
@@ -372,7 +365,7 @@
       STORAGE.saveSession(current);
       if (window.AUTH && window.AUTH.user) window.AUTH.saveSessionCloud(current);
       STORAGE.clearCurrent();
-      alert(`미션 완료! ${done}/${total} 블록 기록됨.`);
+      alert(`미션 완료! ${done}/${total} 블록이 기록되었습니다.`);
       setRoute('logs');
     });
   }
@@ -564,7 +557,7 @@
           </div>
         </div>
         <div class="empty">
-          <p class="body-lg mb-24">아직 기록이 없다. 첫 미션부터 시작하자.</p>
+          <p class="body-lg mb-24">아직 기록이 없습니다. 첫 미션을 시작해보세요.</p>
           <button class="btn btn-primary" data-action="new-session">첫 미션 시작</button>
         </div>
       `;
@@ -572,7 +565,6 @@
       return;
     }
 
-    const totalMin = sessions.reduce((s, ss) => s + (ss.actualMinutes || ss.estMinutes || 0), 0);
     const totalRounds = sessions.reduce((s, ss) => s + countRounds(ss), 0);
     const totalCals = sessions.reduce((s, ss) => s + (ss.estCalories || 0), 0);
 
@@ -619,14 +611,6 @@
               <div class="stat-value">${totalRounds}</div>
             </div>
             <div class="stat-card">
-              <div class="label-sm mb-8">누적 시간</div>
-              <div class="stat-value white">${totalMin}<span class="stat-unit"> 분</span></div>
-            </div>
-            <div class="stat-card">
-              <div class="label-sm mb-8">평균 시간</div>
-              <div class="stat-value">${sessions.length ? Math.round(totalMin / sessions.length) : 0}<span class="stat-unit"> 분</span></div>
-            </div>
-            <div class="stat-card">
               <div class="label-sm mb-8">평균 칼로리</div>
               <div class="stat-value white">${sessions.length ? Math.round(totalCals / sessions.length) : 0}<span class="stat-unit"> kcal</span></div>
             </div>
@@ -643,7 +627,7 @@
                 <div class="log-date"><div class="month">${mm}</div><div class="day">${dd}</div></div>
                 <div>
                   <div class="log-title">${escape(s.title)}</div>
-                  <div class="log-meta">${s.completedBlocks || 0}/${s.totalBlocks || s.blocks.length} 블록 · ${rounds} RDS · ${s.actualMinutes || s.estMinutes} MIN</div>
+                  <div class="log-meta">${s.completedBlocks || 0}/${s.totalBlocks || s.blocks.length} 블록 · ${rounds} RDS</div>
                 </div>
                 <div class="accent label-md">${s.intensity.replace(/_/g, ' ')}</div>
                 <button class="btn btn-sm btn-ghost" data-delete="${s.id}">삭제</button>
@@ -670,7 +654,7 @@
           <div class="card-elev">
             <div class="label-sm mb-8">NEXT PHASE</div>
             <div class="font-display accent" style="font-size: 1.4rem;">${sessions.length >= 30 ? 'CHAMPION' : sessions.length >= 15 ? 'CONTENDER' : sessions.length >= 5 ? 'AMATEUR' : 'ROOKIE'}</div>
-            <p class="body-sm mt-8">${sessions.length >= 30 ? '최정상. 계속 유지하라.' : `다음 티어까지 ${sessions.length >= 15 ? 30 - sessions.length : sessions.length >= 5 ? 15 - sessions.length : 5 - sessions.length} 미션.`}</p>
+            <p class="body-sm mt-8">${sessions.length >= 30 ? '최정상입니다. 계속 유지하세요.' : `다음 티어까지 ${sessions.length >= 15 ? 30 - sessions.length : sessions.length >= 5 ? 15 - sessions.length : 5 - sessions.length} 미션입니다.`}</p>
           </div>
         </div>
       </div>
@@ -760,7 +744,6 @@
         <div class="label-sm accent mb-16">미션 생성 (NEW MISSION)</div>
         <div class="body-sm mb-8"><strong class="white">난이도</strong> — 하(초보, 가벼운 강도) / 중(중급, 보통 강도) / 상(상급, 높은 강도). 라운드 수와 운동 개수에 영향.</div>
         <div class="body-sm mb-8"><strong class="white">훈련 장소</strong> — 복싱장(샌드백+콤비네이션+스파링) / 집(섀도우+맨몸+컨디셔닝). 집은 기구 없이 좁은 공간에서 가능한 것만.</div>
-        <div class="body-sm mb-8"><strong class="white">가용 시간</strong> — 30분/45분/60분/90분. 시간에 맞춰 운동 수 자동 조절.</div>
         <div class="body-sm"><strong class="white">오늘의 목표</strong> — 기술(폼/정확도 중심) / 체력(심폐+지구력) / 감량(고강도 칼로리 소모).</div>
       </div>
 
@@ -775,7 +758,7 @@
 
       <div class="card mb-24">
         <div class="label-sm accent mb-16">훈련 기록</div>
-        <div class="body-sm mb-8"><strong class="white">미션 히스토리</strong> — 완료된 모든 미션이 날짜순으로 나열. 각 미션의 블록 수, 라운드, 시간 표시.</div>
+        <div class="body-sm mb-8"><strong class="white">미션 히스토리</strong> — 완료된 모든 미션이 날짜순으로 나열. 각 미션의 블록 수, 라운드 표시.</div>
         <div class="body-sm mb-8"><strong class="white">월간 목표</strong> — 월 12회 기준 달성률. 주황색 바로 진행도 표시.</div>
         <div class="body-sm"><strong class="white">삭제</strong> — 각 기록 옆 삭제 버튼으로 개별 삭제 가능.</div>
       </div>
@@ -868,7 +851,7 @@
 
       <div class="card mb-24">
         <div class="label-sm accent mb-16">데이터 관리</div>
-        <p class="body-sm mb-24">현재 저장된 미션: <strong>${sessions.length}개</strong>. 모든 데이터는 이 브라우저에만 저장된다.</p>
+        <p class="body-sm mb-24">현재 저장된 미션: <strong>${sessions.length}개</strong>. 모든 데이터는 이 브라우저에만 저장됩니다.</p>
         <div class="flex gap-16">
           <button class="btn btn-secondary" data-action="export">JSON 내보내기</button>
           <button class="btn btn-secondary" data-action="import">JSON 가져오기</button>
@@ -902,16 +885,16 @@
           const data = JSON.parse(reader.result);
           if (data.sessions && Array.isArray(data.sessions)) {
             data.sessions.forEach(s => STORAGE.saveSession(s));
-            alert(`${data.sessions.length}개 미션을 가져왔다.`);
+            alert(`${data.sessions.length}개 미션을 가져왔습니다.`);
             renderSettings();
-          } else alert('잘못된 파일 형식.');
-        } catch { alert('JSON 파싱 실패.'); }
+          } else alert('잘못된 파일 형식입니다.');
+        } catch { alert('JSON 파싱에 실패했습니다.'); }
       };
       reader.readAsText(file);
     });
 
     view.querySelector('[data-action="clear"]').addEventListener('click', () => {
-      if (confirm('모든 데이터를 삭제한다. 되돌릴 수 없다. 계속할까?')) {
+      if (confirm('모든 데이터가 삭제됩니다. 되돌릴 수 없습니다. 계속하시겠습니까?')) {
         STORAGE.clearAll();
         renderSettings();
       }
@@ -1006,7 +989,7 @@
   function formatProfileSummary(p) {
     const diff = { easy: '하', normal: '중', hard: '상' }[p.difficulty] || p.level || '중';
     const v = p.venue === 'gym' ? '복싱장' : '집';
-    return `난이도 ${diff} · ${v} · ${p.minutes}분`;
+    return `난이도 ${diff} · ${v}`;
   }
 
   function escape(s) {

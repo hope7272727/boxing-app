@@ -221,14 +221,14 @@
   }
 
   function buildCoachNote(profile) {
-    if (profile.fatigue === 'high') return '오늘은 무리하지 말고 폼에만 집중하라. 회복도 훈련이다.';
-    if (profile.goal === 'power') return '파워는 다리에서 나온다. 힙 로테이션을 절대 잊지 마라.';
-    if (profile.goal === 'technique') return '속도보다 정확한 궤적이 먼저다. 폼이 무너지면 멈춰라.';
+    if (profile.fatigue === 'high') return '오늘은 무리하지 마시고 폼에만 집중하세요. 회복도 훈련입니다.';
+    if (profile.goal === 'power') return '파워는 다리에서 나옵니다. 힙 로테이션을 절대 잊지 마세요.';
+    if (profile.goal === 'technique') return '속도보다 정확한 궤적이 먼저입니다. 폼이 무너지면 멈추세요.';
     const notes = [
-      '속도보다 정확한 궤적이 먼저다. 주먹을 뻗을 때 반대쪽 손은 반드시 턱을 보호하라.',
-      '파워는 다리에서 나온다. 힙 로테이션을 절대 잊지 마라.',
-      '가드 복귀가 늦으면 아무리 좋은 펀치도 의미 없다. 끝까지 방어.',
-      '호흡은 펀치와 함께. 내쉬며 치고, 들이마시며 회복.',
+      '속도보다 정확한 궤적이 먼저입니다. 주먹을 뻗을 때 반대쪽 손은 반드시 턱을 보호하세요.',
+      '파워는 다리에서 나옵니다. 힙 로테이션을 절대 잊지 마세요.',
+      '가드 복귀가 늦으면 아무리 좋은 펀치도 의미 없습니다. 끝까지 방어하세요.',
+      '호흡은 펀치와 함께 하세요. 내쉬며 치고, 들이마시며 회복하세요.',
     ];
     return notes[Math.floor(Math.random() * notes.length)];
   }
