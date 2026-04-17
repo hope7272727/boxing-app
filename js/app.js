@@ -463,7 +463,10 @@
     return `
       <div class="card-hero daily-combo-card mb-32">
         <div class="flex justify-between items-center mb-16">
-          <div class="chip">TODAY'S COMBINATION</div>
+          <div>
+            <h2 class="font-display headline-md mb-8">오늘의 콤비네이션</h2>
+            <div class="chip">TODAY'S COMBINATION</div>
+          </div>
           <button class="btn btn-sm btn-ghost" data-action="shuffle-combo">다른 콤보</button>
         </div>
         ${seq}
