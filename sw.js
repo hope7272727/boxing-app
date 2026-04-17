@@ -1,4 +1,4 @@
-const CACHE_NAME = 'roundone-v52';
+const CACHE_NAME = 'roundone-v53';
 const ASSETS = [
   '/',
   '/index.html',

@@ -903,11 +903,13 @@
         });
         const dateHeader = `${clickedDate.getMonth() + 1}월 ${clickedDate.getDate()}일`;
         const missionList = daySessions.map(s => {
+          const p = s.profile || {};
+          const summary = formatProfileSummary(p);
           const blocks = s.completedBlocks != null ? s.completedBlocks : (s.blocks || []).filter(b => b.completed).length;
           const total = s.totalBlocks != null ? s.totalBlocks : (s.blocks || []).length;
           return `<div style="margin-bottom:8px;">
-            <div class="title-md white">${escape(s.title)}</div>
-            <div class="body-sm"><span class="accent">${escape(s.intensity.replace(/_/g, ' '))}</span> · ${blocks}/${total} 블록 완료</div>
+            <div class="accent title-md">${escape(summary)}</div>
+            <div class="body-sm muted">${blocks}/${total} 블록 완료</div>
           </div>`;
         }).join('');
         detailEl.innerHTML = `
