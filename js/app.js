@@ -613,6 +613,14 @@
               <div class="label-sm mb-8">평균 칼로리</div>
               <div class="stat-value white">${sessions.length ? Math.round(totalCals / sessions.length) : 0}<span class="stat-unit"> kcal</span></div>
             </div>
+            <div class="stat-card">
+              <div class="label-sm mb-8">완료율</div>
+              <div class="stat-value">${sessions.length ? Math.round(sessions.reduce((s, ss) => s + ((ss.completedBlocks || 0) / (ss.totalBlocks || 1)), 0) / sessions.length * 100) : 0}<span class="stat-unit"> %</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="label-sm mb-8">이번 달</div>
+              <div class="stat-value white">${sessions.filter(s => { const d = new Date(s.completedAt); const n = new Date(); return d.getMonth() === n.getMonth() && d.getFullYear() === n.getFullYear(); }).length}<span class="stat-unit"> 회</span></div>
+            </div>
           </div>
 
           <div class="label-sm mb-16">최근 미션</div>
