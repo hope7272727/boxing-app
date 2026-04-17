@@ -135,15 +135,11 @@
 
     const todayBlock = current
       ? `
-        <div class="chip mb-16">오늘의 미션</div>
-        <h2 class="font-display display-md mb-16">${escape(current.title)}</h2>
-        <p class="body-lg mb-24">${escape(current.subtitle)}</p>
-        <div class="flex gap-16 mb-24">
-          <span class="label-sm">⚡ ${current.estMinutes}분</span>
-          <span class="label-sm">${current.intensity.replace(/_/g, ' ')}</span>
-          <span class="label-sm accent">${current.blocks.length} 블록</span>
+        <div class="chip mb-16">진행 중</div>
+        <div class="flex gap-16 mb-16">
+          <span class="label-sm">${escape(formatProfileSummary(current.profile))}</span>
         </div>
-        <button class="btn btn-primary" data-action="go-today">START MISSION</button>
+        <button class="btn btn-primary" data-action="go-today">이어하기</button>
       `
       : `
         <button class="btn btn-primary" data-action="new-session">START WORKOUT</button>
