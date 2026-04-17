@@ -679,7 +679,7 @@
   }
 
   function renderGoalDist(sessions) {
-    const labels = { technique: 'TECHNIQUE', power: 'POWER', cardio: 'HEALTH', endurance: 'ENDURANCE', weightloss: 'DIET' };
+    const labels = { technique: 'TECHNIQUE', cardio: 'HEALTH', weightloss: 'DIET' };
     const counts = {};
     sessions.forEach(s => {
       const g = s.profile?.goal || 'technique';
