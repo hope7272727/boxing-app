@@ -52,38 +52,37 @@
 <!-- 프로필 입력 모달 -->
 <div class="modal-backdrop" id="profileModal">
   <div class="modal">
-    <div class="label-md accent mb-8">NEW MISSION</div>
-    <h2 class="font-display display-md mb-24">오늘의 <span class="accent">파이터</span> 정보</h2>
+    <h2 class="font-display display-md mb-24">오늘의 <span class="accent">미션</span> 설정</h2>
 
     <div class="form-group">
       <label class="form-label">난이도</label>
       <div class="pill-group" data-group="difficulty">
-        <div class="pill" data-value="easy">하</div>
-        <div class="pill active" data-value="normal">중</div>
-        <div class="pill" data-value="hard">상</div>
+        <div class="pill" data-value="easy">LOW</div>
+        <div class="pill active" data-value="normal">MIDDLE</div>
+        <div class="pill" data-value="hard">HIGH</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="form-label">오늘 훈련 장소</label>
+      <label class="form-label">훈련 장소</label>
       <div class="pill-group" data-group="venue">
-        <div class="pill active" data-value="gym">복싱장</div>
-        <div class="pill" data-value="home">집</div>
+        <div class="pill active" data-value="gym">GYM</div>
+        <div class="pill" data-value="home">HOME</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="form-label">오늘의 목표</label>
+      <label class="form-label">목표</label>
       <div class="pill-group" data-group="goal">
-        <div class="pill active" data-value="technique">기술</div>
-        <div class="pill" data-value="cardio">체력</div>
-        <div class="pill" data-value="weightloss">감량</div>
+        <div class="pill active" data-value="technique">TECHNIQUE</div>
+        <div class="pill" data-value="cardio">HEALTH</div>
+        <div class="pill" data-value="weightloss">DIET</div>
       </div>
     </div>
 
     <div class="flex gap-16 mt-32" style="align-items:stretch;">
       <button class="btn btn-ghost" id="cancelProfile" style="min-width:80px;white-space:nowrap;">취소</button>
-      <button class="btn btn-primary" id="generateBtn" style="flex:1;">루틴 생성</button>
+      <button class="btn btn-primary" id="generateBtn" style="flex:1;">미션 생성</button>
     </div>
   </div>
 </div>

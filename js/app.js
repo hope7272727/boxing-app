@@ -999,9 +999,10 @@
   }
 
   function formatProfileSummary(p) {
-    const diff = { easy: '하', normal: '중', hard: '상' }[p.difficulty] || p.level || '중';
-    const v = p.venue === 'gym' ? '복싱장' : '집';
-    return `난이도 ${diff} · ${v}`;
+    const diff = { easy: 'LOW', normal: 'MIDDLE', hard: 'HIGH' }[p.difficulty] || 'MIDDLE';
+    const v = p.venue === 'gym' ? 'GYM' : 'HOME';
+    const g = { technique: 'TECHNIQUE', cardio: 'HEALTH', weightloss: 'DIET' }[p.goal] || '';
+    return `${diff} · ${v} · ${g}`;
   }
 
   function escape(s) {
