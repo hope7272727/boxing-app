@@ -448,10 +448,10 @@
         ? (info.hand === 'lead' ? '우' : '좌')
         : (info.hand === 'lead' ? '좌' : '우');
       const base = info.level === 'body' ? '바디' : punchNames[key] || key;
-      if (key === '1') return key + '-잽';
-      if (key === '2') return key + '-스트레이트';
-      return key + '-(' + dir + ')' + base;
-    }).join(', ');
+      if (key === '1') return '잽';
+      if (key === '2') return '스트레이트';
+      return '(' + dir + ')' + base;
+    }).join('-');
   }
 
   function renderDailyCombo() {
