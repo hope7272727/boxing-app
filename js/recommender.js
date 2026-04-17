@@ -1,14 +1,5 @@
 // 추천 로직 — 프로필 입력 기반 룰 기반 엔진
-// 입력: { level, venue, minutes, fatigue, goal, focus }
-//   level: beginner | intermediate | advanced
-//   venue: gym | home
-//   minutes: 30 | 45 | 60 | 90
-//   fatigue: low | medium | high
-//   goal: technique | power | cardio | endurance | weightloss
-//   focus: 선택적 추가 포커스 (예: footwork, defense 등) — 없으면 undefined
-
 (function () {
-  const pickOne = (arr, seed) => arr[seed % arr.length];
   const shuffle = (arr, seed) => {
     const a = arr.slice();
     let s = seed;
@@ -43,24 +34,17 @@
     return p;
   }
 
-  function adjustForTime(totalBlocks, minutes) {
-    if (minutes <= 30) return Math.max(3, totalBlocks - 3);
-    if (minutes <= 45) return Math.max(4, totalBlocks - 1);
-    if (minutes <= 60) return totalBlocks;
-    return totalBlocks + 2;
-  }
+  const MAX_BLOCKS = 8;
+  const MIN_BLOCKS = 6;
 
-  // 세션 블록 구조: { warmup, main[], finisher, cooldown }
   function buildSession(profile) {
     const { level, venue, minutes, fatigue, goal } = profile;
     const seed = Date.now() % 100000;
 
     const params = adjustForFatigue(window.VOLUME_PARAMS[level], fatigue);
-    const blockCount = adjustForTime(params.totalExercises, minutes);
 
     let pool = filterByVenue(filterByLevel(window.EXERCISES, level), venue);
 
-    // 카테고리별 풀
     const byCat = cat => shuffle(pool.filter(e => e.category === cat), seed + cat.length);
 
     const warmups    = byCat('warmup');
@@ -70,76 +54,65 @@
     const sparring   = byCat('sparring');
     const bodyEx     = byCat('bodyweight');
     const condEx     = byCat('conditioning');
-    const cooldowns  = byCat('cooldown');
 
     const blocks = [];
 
-    // 1) 워밍업 2개 (복싱장: 줄넘기 우선 / 집: 동적스트레칭 우선)
+    // 1) 워밍업 1개만
     const warmup1 = venue === 'gym'
       ? (warmups.find(w => w.id === 'jump_rope') || warmups[0])
       : (warmups.find(w => w.id === 'dynamic_stretch') || warmups[0]);
-    blocks.push(makeBlock(warmup1, 'warmup', { duration: 5, unit: 'min' }));
-    const warmup2 = warmups.find(w => w.id !== warmup1.id);
-    if (warmup2) blocks.push(makeBlock(warmup2, 'warmup', { duration: 3, unit: 'min' }));
+    if (warmup1) blocks.push(makeBlock(warmup1, 'warmup', { duration: 5, unit: 'min' }));
 
-    // 2) 메인: 장소/목표에 따라 구성
+    // 2) 메인
     if (venue === 'gym') {
-      // 섀도우 → 샌드백 중심 → (중급+ 스파링)
+      // 섀도우 1개
       if (shadows[0]) blocks.push(makeBlock(shadows[0], 'shadow', { rounds: Math.max(2, Math.round(params.rounds / 3)), roundMin: params.roundMin, restSec: params.restSec }));
 
-      // 콤비네이션 드릴 2-3개
-      const comboCount = Math.max(2, Math.min(3, Math.floor(params.rounds / 2)));
+      // 콤비네이션 2개
       const comboPick = pickByGoal(comboEx, goal);
-      comboPick.slice(0, comboCount).forEach(ex => {
+      comboPick.slice(0, 2).forEach(ex => {
         blocks.push(makeBlock(ex, 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: ex.combo }));
       });
 
-      // 샌드백 — 목표에 맞춰 선택 가중
+      // 샌드백 2개
       const bagPref = pickByGoal(bagEx, goal);
-      const bagCount = Math.max(2, Math.min(4, Math.floor(params.rounds / 2)));
-      bagPref.slice(0, bagCount).forEach(ex => {
-        blocks.push(makeBlock(ex, 'bag', { rounds: 1, roundMin: params.roundMin, restSec: params.restSec }));
+      bagPref.slice(0, 2).forEach(ex => {
+        blocks.push(makeBlock(ex, 'bag', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec }));
       });
 
-      // 스파링 — 중급 이상 & 피로도 높지 않을 때 & 시간 충분
+      // 스파링 1개 (중급+, 60분+, 컨디션 괜찮을 때)
       if (level !== 'beginner' && fatigue !== 'high' && minutes >= 60 && sparring[0]) {
         const sparType = goal === 'technique' ? (sparring.find(s => s.id === 'spar_technical') || sparring[0]) : sparring[0];
-        blocks.push(makeBlock(sparType, 'sparring', { rounds: Math.max(2, Math.round(params.rounds / 3)), roundMin: params.roundMin, restSec: params.restSec }));
+        blocks.push(makeBlock(sparType, 'sparring', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec }));
       }
 
     } else {
-      // home: 섀도우 + 콤보 + 맨몸 + 컨디셔닝
-      const shadowCount = Math.max(1, Math.round(params.rounds / 3));
+      // home: 섀도우 + 콤보 + 맨몸
+      // 섀도우 1개
       const shadowPick = pickByGoal(shadows, goal);
-      shadowPick.slice(0, shadowCount).forEach(ex => {
-        blocks.push(makeBlock(ex, 'shadow', { rounds: 1, roundMin: params.roundMin, restSec: params.restSec }));
-      });
+      if (shadowPick[0]) blocks.push(makeBlock(shadowPick[0], 'shadow', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec }));
 
-      // 콤비네이션 드릴 2개 (집에서도 섀도우 콤보)
-      const homeComboCount = Math.max(1, Math.min(2, comboEx.length));
+      // 콤비네이션 2개
       const homeComboPick = pickByGoal(comboEx, goal);
-      homeComboPick.slice(0, homeComboCount).forEach(ex => {
+      homeComboPick.slice(0, 2).forEach(ex => {
         blocks.push(makeBlock(ex, 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: ex.combo }));
       });
 
-      // 맨몸 서킷
-      const bodyCount = Math.max(3, Math.min(5, blockCount - blocks.length - 2));
+      // 맨몸 3개
       const bodyPick = pickByGoal(bodyEx, goal);
-      bodyPick.slice(0, bodyCount).forEach(ex => {
+      bodyPick.slice(0, 3).forEach(ex => {
         blocks.push(makeBlock(ex, 'bodyweight', { sets: 3, reps: params.reps.mid, restSec: 45 }));
       });
 
       // 컨디셔닝 피니셔 1개 (피로도 낮을 때만)
-      if (fatigue !== 'high' && condEx[0]) {
+      if (fatigue !== 'high' && condEx[0] && blocks.length < MAX_BLOCKS) {
         const finisher = goal === 'cardio' || goal === 'weightloss' ? (condEx.find(c => c.id === 'shadow_hiit') || condEx[0]) : condEx[0];
         blocks.push(makeBlock(finisher, 'conditioning', { duration: 8, unit: 'min' }));
       }
     }
 
-    // 3) 쿨다운
-    if (cooldowns[0]) blocks.push(makeBlock(cooldowns[0], 'cooldown', { duration: 5, unit: 'min' }));
-    const breath = cooldowns.find(c => c.id === 'breath_recovery');
-    if (breath) blocks.push(makeBlock(breath, 'cooldown', { duration: 2, unit: 'min' }));
+    // 최대 8개로 잘라내기 (쿨다운 제외)
+    while (blocks.length > MAX_BLOCKS) blocks.pop();
 
     // 메타
     const estMinutes = estimateTime(blocks);
@@ -223,16 +196,15 @@
   }
 
   function buildCoachNote(profile) {
+    if (profile.fatigue === 'high') return '오늘은 무리하지 말고 폼에만 집중하라. 회복도 훈련이다.';
+    if (profile.goal === 'power') return '파워는 다리에서 나온다. 힙 로테이션을 절대 잊지 마라.';
+    if (profile.goal === 'technique') return '속도보다 정확한 궤적이 먼저다. 폼이 무너지면 멈춰라.';
     const notes = [
       '속도보다 정확한 궤적이 먼저다. 주먹을 뻗을 때 반대쪽 손은 반드시 턱을 보호하라.',
-      '지구력이 눈에 띄게 좋아진다. 다음 세션에서는 복싱 리듬의 속도에 집중하자.',
       '파워는 다리에서 나온다. 힙 로테이션을 절대 잊지 마라.',
       '가드 복귀가 늦으면 아무리 좋은 펀치도 의미 없다. 끝까지 방어.',
       '호흡은 펀치와 함께. 내쉬며 치고, 들이마시며 회복.',
     ];
-    if (profile.fatigue === 'high') return '오늘은 무리하지 말고 폼에만 집중하라. 회복도 훈련이다.';
-    if (profile.goal === 'power') return '파워는 다리에서 나온다. 힙 로테이션을 절대 잊지 마라.';
-    if (profile.goal === 'technique') return '속도보다 정확한 궤적이 먼저다. 폼이 무너지면 멈춰라.';
     return notes[Math.floor(Math.random() * notes.length)];
   }
 
