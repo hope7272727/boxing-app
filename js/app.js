@@ -8,10 +8,9 @@
     route: 'dashboard',
     profile: {
       name: '',
-      level: 'intermediate',
+      difficulty: 'normal',
       venue: 'gym',
       minutes: 45,
-      fatigue: 'low',
       goal: 'technique',
     },
   };
@@ -78,11 +77,21 @@
   if (cancelBtn) cancelBtn.addEventListener('click', closeProfileModal);
   if (sideStartBtn) sideStartBtn.addEventListener('click', openProfileModal);
 
+  function difficultyToParams(difficulty) {
+    return {
+      easy:   { level: 'beginner',     fatigue: 'high' },
+      normal: { level: 'intermediate', fatigue: 'low' },
+      hard:   { level: 'advanced',     fatigue: 'low' },
+    }[difficulty] || { level: 'intermediate', fatigue: 'low' };
+  }
+
   if (generateBtn) generateBtn.addEventListener('click', () => {
     const fName = document.getElementById('fName');
     state.profile.name = fName ? fName.value.trim() : '';
     STORAGE.saveLastProfile(state.profile);
-    const session = RECOMMENDER.buildSession(state.profile);
+    const dp = difficultyToParams(state.profile.difficulty);
+    const buildProfile = { ...state.profile, level: dp.level, fatigue: dp.fatigue };
+    const session = RECOMMENDER.buildSession(buildProfile);
     STORAGE.setCurrent(session);
     closeProfileModal();
     setRoute('today');
@@ -739,9 +748,9 @@
   }
 
   function formatProfileSummary(p) {
-    const lv = { beginner: '초보', intermediate: '중급', advanced: '상급' }[p.level] || p.level;
+    const diff = { easy: '하', normal: '중', hard: '상' }[p.difficulty] || p.level || '중';
     const v = p.venue === 'gym' ? '복싱장' : '집';
-    return `${lv} · ${v} · ${p.minutes}분`;
+    return `난이도 ${diff} · ${v} · ${p.minutes}분`;
   }
 
   function escape(s) {
