@@ -73,7 +73,7 @@
         const dailyCombo = window.getDailyCombo ? window.getDailyCombo() : null;
         if (dailyCombo) {
           blocks.push(makeBlock(
-            { id: 'daily_combo', name: dailyCombo.name, category: 'combo', focus: dailyCombo.focus, cue: dailyCombo.cue },
+            { id: 'daily_combo', name: '오늘의 콤비네이션', category: 'combo', focus: dailyCombo.focus, cue: dailyCombo.cue },
             'combo',
             { rounds: 3, roundMin: params.roundMin, restSec: params.restSec, combo: dailyCombo.combo }
           ));
