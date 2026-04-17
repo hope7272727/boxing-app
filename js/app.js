@@ -43,7 +43,8 @@
     const last = STORAGE.getLastProfile();
     if (last) state.profile = { ...state.profile, ...last };
     syncPillsFromProfile();
-    document.getElementById('fName').value = state.profile.name || '';
+    const fNameEl = document.getElementById('fName');
+    if (fNameEl) fNameEl.value = state.profile.name || '';
     profileModal.classList.add('open');
   }
   function closeProfileModal() { profileModal.classList.remove('open'); }
