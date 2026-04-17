@@ -209,16 +209,16 @@
           <div class="stat-value white">${completed.length}</div>
         </div>
         <div class="stat-card">
-          <div class="label-sm mb-8">총 라운드</div>
-          <div class="stat-value">${totalRounds}</div>
+          <div class="label-sm mb-8">최대 연속</div>
+          <div class="stat-value">${calcMaxStreak(completed)}<span class="stat-unit"> 일</span></div>
         </div>
         <div class="stat-card">
-          <div class="label-sm mb-8">누적 시간</div>
-          <div class="stat-value white">${completed.reduce((s, ss) => s + (ss.actualMinutes || ss.estMinutes || 0), 0)}<span class="stat-unit"> 분</span></div>
+          <div class="label-sm mb-8">이번 주</div>
+          <div class="stat-value white">${weeklyStats.filter(m => m > 0).length}<span class="stat-unit"> / 7</span></div>
         </div>
         <div class="stat-card">
-          <div class="label-sm mb-8">현재 스트릭</div>
-          <div class="stat-value">${streak}<span class="stat-unit"> 일</span></div>
+          <div class="label-sm mb-8">총 칼로리</div>
+          <div class="stat-value">${completed.reduce((s, ss) => s + (ss.estCalories || 0), 0).toLocaleString()}<span class="stat-unit"> kcal</span></div>
         </div>
       </div>
     `;
@@ -803,6 +803,18 @@
       while (days.has(d.toDateString())) { streak++; d.setDate(d.getDate() - 1); }
     }
     return streak;
+  }
+
+  function calcMaxStreak(completed) {
+    if (completed.length === 0) return 0;
+    const daySet = [...new Set(completed.map(s => new Date(s.completedAt).toDateString()))];
+    const timestamps = daySet.map(d => new Date(d).getTime()).sort((a, b) => a - b);
+    let max = 1, cur = 1;
+    for (let i = 1; i < timestamps.length; i++) {
+      if (timestamps[i] - timestamps[i - 1] === 86400000) { cur++; max = Math.max(max, cur); }
+      else { cur = 1; }
+    }
+    return max;
   }
 
   function calcWeekly(completed) {
