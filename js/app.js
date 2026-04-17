@@ -291,7 +291,7 @@
 
       <div class="card mb-24">
         <div class="flex justify-between items-center mb-8">
-          <div class="label-sm">PROGRESS</div>
+          <div class="label-sm">TO DO LIST</div>
           <div class="body-sm">${done}/${total} 블록 완료 · ${pct}%</div>
         </div>
         <div class="progress"><div class="fill" style="width: ${pct}%"></div></div>
