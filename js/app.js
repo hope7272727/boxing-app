@@ -276,12 +276,8 @@
     view.innerHTML = `
       <div class="main-header">
         <div style="flex:1">
-          <div class="label-sm mb-8">오늘의 루틴 · ${escape(formatProfileSummary(current.profile))}</div>
-          <h1 class="font-display display-lg">
-            <span class="white">${escape(current.title.split('—')[0].trim())}</span><br />
-            <span class="accent">${escape(current.title.split('—')[1]?.trim() || '')}</span>
-          </h1>
-          <p class="body-lg mt-16">${escape(current.subtitle)}</p>
+          <div class="label-sm mb-8">오늘의 루틴</div>
+          <h1 class="font-display display-lg">${escape(formatProfileSummary(current.profile))}</h1>
         </div>
         <div class="card-elev" style="min-width: 220px;">
           <div class="flex justify-between mb-16">
