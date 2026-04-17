@@ -157,17 +157,16 @@
         <div class="card-elev" style="min-width: 200px;">
           ${(() => {
             const up = (window.STORAGE && window.STORAGE.getUserProfile) ? window.STORAGE.getUserProfile() : {};
+            const nick = up.nickname || '';
             const gd = up.gender === 'female' ? '여성' : '남성';
             const ag = up.age || '—';
             const h = up.height || '—';
             const w = up.weight || '—';
             const st = up.stance === 'southpaw' ? '사우스포' : '오소독스';
             return `
-              <div class="label-sm accent mb-16">MY PROFILE</div>
-              <div class="flex justify-between mb-8">
-                <span class="body-sm">${gd} / ${ag}세</span>
-                <span class="title-md white">${h}<span class="stat-unit">cm</span> · ${w}<span class="stat-unit">kg</span></span>
-              </div>
+              <div class="label-sm accent mb-16">MY PROFILE${nick ? ' · ' + escape(nick) : ''}</div>
+              <div class="title-md white mb-8">${gd} / ${ag}세</div>
+              <div class="title-md white mb-8">${h}<span class="stat-unit">cm</span> · ${w}<span class="stat-unit">kg</span></div>
               <div class="flex justify-between">
                 <span class="body-sm">스탠스</span>
                 <span class="title-md accent">${st}</span>
@@ -821,6 +820,10 @@
       <div class="card mb-24 profile-settings">
         <div class="label-sm accent mb-16">프로필 설정</div>
         <div class="form-group">
+          <label class="form-label">닉네임</label>
+          <input type="text" id="profileNickname" placeholder="파이터" value="${userProfile.nickname || ''}" />
+        </div>
+        <div class="form-group">
           <label class="form-label">성별</label>
           <div class="pill-group" data-group="profileGender">
             <div class="pill ${userProfile.gender !== 'female' ? 'active' : ''}" data-value="male">남성</div>
@@ -913,6 +916,7 @@
 
     // 프로필 저장
     view.querySelector('[data-action="save-profile"]').addEventListener('click', () => {
+      const nickname = document.getElementById('profileNickname').value.trim();
       const genderPill = view.querySelector('[data-group="profileGender"] .pill.active');
       const gender = genderPill ? genderPill.dataset.value : 'male';
       const age = document.getElementById('profileAge').value.trim();
@@ -920,7 +924,7 @@
       const weight = document.getElementById('profileWeight').value.trim();
       const stancePill = view.querySelector('[data-group="profileStance"] .pill.active');
       const stance = stancePill ? stancePill.dataset.value : 'orthodox';
-      const profile = { gender: gender, age: age, height: height, weight: weight, stance: stance };
+      const profile = { nickname: nickname, gender: gender, age: age, height: height, weight: weight, stance: stance };
       STORAGE.saveUserProfile(profile);
       if (window.AUTH && window.AUTH.user) {
         window.AUTH.saveProfileCloud(profile);
