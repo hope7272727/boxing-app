@@ -74,8 +74,10 @@
 
     const blocks = [];
 
-    // 1) 워밍업 2개 (줄넘기 우선)
-    const warmup1 = warmups.find(w => w.id === 'jump_rope') || warmups[0];
+    // 1) 워밍업 2개 (복싱장: 줄넘기 우선 / 집: 동적스트레칭 우선)
+    const warmup1 = venue === 'gym'
+      ? (warmups.find(w => w.id === 'jump_rope') || warmups[0])
+      : (warmups.find(w => w.id === 'dynamic_stretch') || warmups[0]);
     blocks.push(makeBlock(warmup1, 'warmup', { duration: 5, unit: 'min' }));
     const warmup2 = warmups.find(w => w.id !== warmup1.id);
     if (warmup2) blocks.push(makeBlock(warmup2, 'warmup', { duration: 3, unit: 'min' }));

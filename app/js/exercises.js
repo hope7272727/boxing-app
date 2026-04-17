@@ -4,7 +4,7 @@
 window.EXERCISES = [
   // ---- WARMUP
   {
-    id: 'jump_rope', name: '줄넘기', category: 'warmup', venue: 'both', level: 'beginner',
+    id: 'jump_rope', name: '줄넘기', category: 'warmup', venue: 'gym', level: 'beginner',
     focus: '심박수/풋워크', cue: '가볍게 발끝으로, 어깨 힘 빼고 손목 스냅으로 돌리기',
     description: '복싱의 시그니처 워밍업. 발목·종아리·손목을 깨우면서 라운드 타이밍에 익숙해지게 만든다.',
     steps: [
@@ -382,7 +382,7 @@ window.EXERCISES = [
     imgQuery: 'decline push up',
   },
   {
-    id: 'pullup', name: '풀업', category: 'bodyweight', venue: 'both', level: 'intermediate',
+    id: 'pullup', name: '풀업', category: 'bodyweight', venue: 'gym', level: 'intermediate',
     focus: '등·이두', cue: '어깨 내리고 턱이 바 위로. 반동 없이 천천히 내려오기',
     description: '등 근육·이두의 최강 맨몸 운동. 복서의 풀백(팔 회수) 속도에 직결.',
     steps: [
@@ -395,7 +395,7 @@ window.EXERCISES = [
     imgQuery: 'pull up bar',
   },
   {
-    id: 'chinup', name: '친업', category: 'bodyweight', venue: 'both', level: 'beginner',
+    id: 'chinup', name: '친업', category: 'bodyweight', venue: 'gym', level: 'beginner',
     focus: '이두·등', cue: '손등이 내 쪽. 풀업보다 쉬움, 풀업 못하면 여기부터',
     description: '이두 관여가 커서 풀업보다 쉽다. 풀업 진입의 징검다리.',
     steps: [
@@ -627,7 +627,7 @@ window.EXERCISES = [
     imgQuery: 'jumping jacks',
   },
   {
-    id: 'shuttle_run', name: '셔틀런 (왕복)', category: 'conditioning', venue: 'both', level: 'intermediate',
+    id: 'shuttle_run', name: '셔틀런 (왕복)', category: 'conditioning', venue: 'gym', level: 'intermediate',
     focus: '무산소', cue: '5-10m 왕복. 방향 바꿀 때 자세 낮추고 폭발적으로',
     description: '방향 전환 + 스프린트. 복싱 풋워크의 폭발력과 직결.',
     steps: [
@@ -653,7 +653,7 @@ window.EXERCISES = [
     imgQuery: 'shadow boxing hiit',
   },
   {
-    id: 'interval_run', name: '인터벌 러닝', category: 'conditioning', venue: 'home', level: 'intermediate',
+    id: 'interval_run', name: '인터벌 러닝', category: 'conditioning', venue: 'gym', level: 'intermediate',
     focus: '심폐', cue: '1분 전력 - 2분 조깅, 5-8세트. 복싱 라운드 흉내',
     description: '복싱 라운드 구조를 모방한 야외 러닝.',
     steps: [
@@ -667,7 +667,7 @@ window.EXERCISES = [
     imgQuery: 'interval running',
   },
   {
-    id: 'stair_climb', name: '계단 오르기', category: 'conditioning', venue: 'home', level: 'beginner',
+    id: 'stair_climb', name: '계단 오르기', category: 'conditioning', venue: 'gym', level: 'beginner',
     focus: '하체·심폐', cue: '한 계단씩 빠르게. 힘들면 두 계단씩으로 파워 훈련',
     description: '집 근처에서 가능한 하체 카디오. 넓적다리·종아리 동시 자극.',
     steps: [
