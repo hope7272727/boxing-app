@@ -9,6 +9,7 @@
     profile: {
       name: '',
       difficulty: 'normal',
+      stance: 'orthodox',
       venue: 'gym',
       minutes: 45,
       goal: 'technique',
@@ -444,6 +445,7 @@
   function renderComboSequence(combo) {
     if (!combo || !combo.length) return '';
     const legend = window.PUNCH_LEGEND || {};
+    const stance = (state.profile && state.profile.stance) || 'orthodox';
     const pills = combo.map(p => {
       const key = String(p);
       const info = legend[key];
@@ -451,7 +453,14 @@
       const isBody = info && info.level === 'body';
       const cls = isDefense ? 'combo-pill defense' : isBody ? 'combo-pill body' : 'combo-pill';
       const label = info ? info.short : key;
-      return `<span class="${cls}" title="${info ? info.name : key}"><span class="combo-num">${key}</span><span class="combo-label">${label}</span></span>`;
+      let handTag = '';
+      if (info && info.hand && info.hand !== 'none') {
+        const handLabel = stance === 'southpaw'
+          ? (info.hand === 'lead' ? '오' : '왼')
+          : (info.hand === 'lead' ? '왼' : '오');
+        handTag = `<span class="combo-hand">${handLabel}</span>`;
+      }
+      return `<span class="${cls}" title="${info ? info.name : key}"><span class="combo-num">${key}</span><span class="combo-label">${label}</span>${handTag}</span>`;
     });
     return `<div class="combo-sequence">${pills.join('<span class="combo-arrow">→</span>')}</div>`;
   }
