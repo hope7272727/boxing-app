@@ -1,10 +1,13 @@
 {
   "hosting": {
-    "public": "app",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "design/**",
+      "README.md",
+      "shots/**"
     ],
     "headers": [
       {

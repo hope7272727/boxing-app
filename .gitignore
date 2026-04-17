@@ -22,7 +22,7 @@ desktop.ini
 *~
 
 # Screenshots
-app/shots/
+shots/
 
 # Env / secrets
 .env
