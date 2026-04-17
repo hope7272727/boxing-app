@@ -792,7 +792,7 @@
     view.innerHTML = `
       <div class="main-header">
         <div>
-          <div class="label-sm mb-8">MISSION HISTORY &amp; PERFORMANCE DATA</div>
+          <div class="label-sm mb-8">훈련 기록</div>
           <h1 class="font-display display-lg"><span class="white">TRAINING</span><span class="accent">_LOGS</span></h1>
         </div>
       </div>
@@ -962,8 +962,8 @@
     view.innerHTML = `
       <div class="main-header">
         <div>
-          <div class="label-sm mb-8">GUIDE</div>
-          <h1 class="font-display display-lg">이용<span class="accent">가이드</span></h1>
+          <div class="label-sm mb-8">이용 가이드</div>
+          <h1 class="font-display display-lg"><span class="white">USER</span><span class="accent">_GUIDE</span></h1>
         </div>
       </div>
 
