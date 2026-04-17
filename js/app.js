@@ -145,9 +145,6 @@
         <button class="btn btn-primary" data-action="go-today">START MISSION</button>
       `
       : `
-        <div class="chip mb-16">NEW SESSION</div>
-        <h2 class="font-display display-md mb-16">오늘 준비됐나?</h2>
-        <p class="body-lg mb-24">프로필 입력하면 오늘 딱 맞는 루틴을 뽑아준다. 시작하자.</p>
         <button class="btn btn-primary" data-action="new-session">START WORKOUT</button>
       `;
 
@@ -160,7 +157,7 @@
             <span class="white">PUSH THE</span><br />
             <span class="accent">LIMITS.</span>
           </h1>
-          <p class="body-lg mt-16">${sessions.length === 0 ? '첫 세션을 시작하자.' : `이번 주 ${weeklyMinutes}분 — 계속 가자, 파이터.`}</p>
+          ${weeklyMinutes > 0 ? `<p class="body-lg mt-16">이번 주 ${weeklyMinutes}분</p>` : ''}
         </div>
         <div class="card-elev" style="min-width: 200px; text-align: right;">
           <div class="label-sm mb-8">CURRENT STREAK</div>
@@ -173,14 +170,12 @@
       <div class="grid grid-2 mb-32">
         <div class="card-hero">${todayBlock}</div>
         <div class="card">
-          <div class="label-sm mb-16">QUICK LOG</div>
-          ${completed.length === 0
-            ? '<p class="body-sm">아직 완료된 세션이 없다. 오늘이 1일차.</p>'
-            : `<p class="body-sm mb-16">최근: <span class="accent">${escape(completed[completed.length - 1].title)}</span></p>
-               <div class="label-sm mb-8">완료된 세션</div>
+          ${completed.length > 0
+            ? `<div class="label-sm mb-8">완료 세션</div>
                <div class="font-display accent" style="font-size: 2.5rem; line-height: 1;">${completed.length}</div>`
+            : ''
           }
-          <button class="btn btn-secondary w-full mt-24" data-action="new-session">NEW SESSION</button>
+          <button class="btn btn-secondary w-full ${completed.length > 0 ? 'mt-24' : ''}" data-action="new-session">NEW SESSION</button>
         </div>
       </div>
 
