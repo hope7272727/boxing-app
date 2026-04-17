@@ -961,7 +961,7 @@ window.PUNCH_LEGEND = {
 window.DAILY_COMBOS = [
   {
     name: '더킹 카운터 스톰',
-    combo: [1, 2, 'DK', '6b', 6, 3, 2],
+    combo: [1, 2, 'DK', 6, 3, 2],
     cue: '원투로 진입 → 더킹으로 카운터 회피 → 바디어퍼-어퍼-훅-크로스 폭풍',
     focus: '공방전환',
     difficulty: 'ADVANCED',
@@ -996,7 +996,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '더블 더킹 콤보',
-    combo: [1, 'DK', '5b', 2, 3, 'DK', '5b', 3, 2],
+    combo: [1, 'DK', 5, 2, 3, 'DK', 3, 2],
     cue: '잽-더킹-바디어퍼-크로스-훅, 다시 더킹-바디어퍼-훅-크로스. 더킹이 리듬',
     focus: '더킹 활용',
     difficulty: 'ADVANCED',
@@ -1052,7 +1052,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '더킹 훅 러시',
-    combo: [1, 'DK', 3, 4, 'DK', '6b', 4, 2],
+    combo: [1, 'DK', 3, 4, 'DK', 4, 2],
     cue: '잽-더킹-좌훅-우훅-더킹-바디어퍼-우훅-크로스. 더킹 후 훅 연타',
     focus: '훅 연타',
     difficulty: 'ADVANCED',
@@ -1073,7 +1073,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '어퍼컷 시티',
-    combo: [1, 5, 2, 6, 'DK', '6b', 6, 3, 2],
+    combo: [1, 5, 2, 6, 'DK', 4, 3, 2],
     cue: '잽-리드어퍼-크로스-리어어퍼-더킹-바디어퍼-리어어퍼-훅-크로스. 어퍼컷 축제',
     focus: '어퍼컷',
     difficulty: 'ADVANCED',
@@ -1130,7 +1130,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '더블잽 프레셔',
-    combo: [1, 1, 3, 2, 'DK', '6b', 2, 3],
+    combo: [1, 1, 3, 2, 'DK', 6, 3, 2],
     cue: '더블잽으로 가드 열고 훅-크로스, 더킹 후 바디어퍼-크로스-훅 마무리',
     focus: '잽 프레셔',
     difficulty: 'INTERMEDIATE',
@@ -1165,14 +1165,14 @@ window.DAILY_COMBOS = [
   },
   {
     name: '클로즈레인지 폭풍',
-    combo: [5, '5b', 6, '6b', 3, 4, 'DK', '6b', 2],
+    combo: [5, '5b', 6, '6b', 3, 4, 'DK', 6, 2],
     cue: '어퍼-바디어퍼-어퍼-바디어퍼-훅-훅-더킹-바디어퍼-크로스. 근접 연타',
     focus: '인파이팅',
     difficulty: 'EXPERT',
   },
   {
     name: '리드핸드 도미네이터',
-    combo: [1, 3, 5, '5b', 1, 3, 'DK', '5b'],
+    combo: [1, 3, 5, '5b', 1, 3, 'DK', 1, 2],
     cue: '잽-훅-어퍼-바디어퍼-잽-훅 리드핸드 연속, 더킹-바디어퍼 마무리',
     focus: '리드핸드',
     difficulty: 'ADVANCED',
@@ -1186,7 +1186,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '래피드 파이어',
-    combo: [1, 1, 1, 2, 3, 4, 'DK', '6b', 2],
+    combo: [1, 1, 1, 2, 3, 4, 'DK', 2, 3],
     cue: '트리플잽-크로스-좌훅-우훅-더킹-바디어퍼-크로스. 연사 후 카운터',
     focus: '핸드스피드',
     difficulty: 'ADVANCED',
@@ -1235,7 +1235,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '어퍼 바디 스톰',
-    combo: [5, 6, '5b', '6b', 'WV', 3, 2, 'DK', '6b', 2],
+    combo: [5, 6, '5b', '6b', 'WV', 3, 2, 'DK', 4, 2],
     cue: '어퍼-어퍼-바디어퍼-바디어퍼-위브-훅-크로스-더킹-바디어퍼-크로스',
     focus: '어퍼컷 바리에이션',
     difficulty: 'EXPERT',
@@ -1249,7 +1249,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '더킹 어퍼 러시',
-    combo: ['DK', '5b', 6, 'DK', '6b', 6, 3, 4, 2],
+    combo: ['DK', 5, 6, 'DK', 6, 3, 4, 2],
     cue: '더킹-바디어퍼-리어어퍼-더킹-바디어퍼-리어어퍼-좌훅-우훅-크로스. 더킹마다 어퍼 폭격',
     focus: '더킹 어퍼',
     difficulty: 'ADVANCED',
@@ -1298,7 +1298,7 @@ window.DAILY_COMBOS = [
   },
   {
     name: '토네이도 콤보',
-    combo: [1, 2, 3, 4, 'WV', 5, 6, '2b', 'DK', '6b', 4, 2],
+    combo: [1, 2, 3, 4, 'WV', 5, 6, '2b', 'DK', 2, 3, 2],
     cue: '원투-양훅-위브-양어퍼-바디-더킹-바디어퍼-우훅-크로스. 12연타 회오리',
     focus: '올라운드',
     difficulty: 'EXPERT',

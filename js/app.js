@@ -710,7 +710,7 @@
           <div class="card-elev" style="padding:12px;"><strong>SB</strong> — 스텝백 (뒤로 빠지기)</div>
           <div class="card-elev" style="padding:12px;"><strong>PV</strong> — 피벗 (발을 축으로 각도 변경)</div>
         </div>
-        <div class="body-sm mt-16">더킹 후에는 항상 같은 손으로 바디어퍼가 이어집니다.</div>
+        <div class="body-sm mt-16">더킹 후에는 항상 같은 손으로 이어집니다.</div>
       </div>
 
       <div class="card mb-24">
