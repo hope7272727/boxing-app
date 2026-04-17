@@ -746,11 +746,71 @@ input:focus, select:focus, textarea:focus {
 .text-center { text-align: center; } .text-right { text-align: right; }
 .w-full { width: 100%; }
 
+/* PWA standalone mode */
+@media (display-mode: standalone) {
+  body { padding-top: env(safe-area-inset-top); }
+}
+
 /* responsive */
 @media (max-width: 768px) {
   .app { grid-template-columns: 1fr; }
   .sidebar { display: none; }
-  .main { padding: 20px; }
-  .session-block { grid-template-columns: 60px 1fr; }
-  .session-block .check-btn { grid-column: 1 / -1; width: 100%; }
+  .main { padding: 16px 16px 100px; }
+
+  .mobile-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface-lowest);
+    z-index: 50;
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+    justify-content: space-around;
+  }
+  .mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--on-surface-muted);
+    text-decoration: none;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+  }
+  .mobile-nav a .icon { font-size: 1.2rem; }
+  .mobile-nav a.active { color: var(--primary); }
+
+  .main-header { flex-direction: column; gap: 16px; }
+  .display-lg { font-size: 1.8rem; }
+  .display-md { font-size: 1.4rem; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-stats { grid-template-columns: repeat(2, 1fr); }
+
+  .session-block { grid-template-columns: 50px 1fr 44px; gap: 12px; padding: 16px; }
+  .block-index { font-size: 1.4rem; }
+  .block-name { font-size: 1.05rem; }
+  .check-btn { width: 44px; height: 44px; }
+
+  .combo-sequence { gap: 4px; padding: 10px 12px; }
+  .combo-pill { min-width: 38px; padding: 6px 4px; }
+  .combo-num { font-size: 1rem; }
+  .combo-label { font-size: 0.5rem; }
+
+  .log-row { grid-template-columns: 60px 1fr; gap: 12px; padding: 14px; }
+  .log-row > :nth-child(3),
+  .log-row > :nth-child(4) { display: none; }
+
+  .card-hero { padding: 24px; }
+  .card { padding: 20px; }
+  .card-elev { padding: 16px; }
+
+  .modal { padding: 24px; }
+  .modal-lg .modal-body { padding: 24px; }
+  .modal-hero { height: 200px; padding: 20px; }
 }
+
+.mobile-nav { display: none; }

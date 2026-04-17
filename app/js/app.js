@@ -16,14 +16,24 @@
     },
   };
 
+  const mobileNav = document.getElementById('mobileNav');
+
   // ---------- ROUTER ----------
   function setRoute(r) {
     state.route = r;
     [...nav.querySelectorAll('a')].forEach(a => a.classList.toggle('active', a.dataset.route === r));
+    if (mobileNav) [...mobileNav.querySelectorAll('a')].forEach(a => a.classList.toggle('active', a.dataset.route === r));
     render();
+    window.scrollTo(0, 0);
   }
 
   nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-route]');
+    if (!a) return;
+    setRoute(a.dataset.route);
+  });
+
+  if (mobileNav) mobileNav.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-route]');
     if (!a) return;
     setRoute(a.dataset.route);
