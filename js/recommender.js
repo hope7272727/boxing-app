@@ -68,11 +68,17 @@
       // 섀도우 1개
       if (shadows[0]) blocks.push(makeBlock(shadows[0], 'shadow', { rounds: Math.max(2, Math.round(params.rounds / 3)), roundMin: params.roundMin, restSec: params.restSec }));
 
-      // 콤비네이션 2개
+      // 콤비네이션: 오늘의 콤보 1개 + 랜덤 1개
+      const dailyCombo = window.getDailyCombo ? window.getDailyCombo() : null;
+      if (dailyCombo) {
+        blocks.push(makeBlock(
+          { id: 'daily_combo', name: dailyCombo.name, category: 'combo', focus: dailyCombo.focus, cue: dailyCombo.cue },
+          'combo',
+          { rounds: 3, roundMin: params.roundMin, restSec: params.restSec, combo: dailyCombo.combo }
+        ));
+      }
       const comboPick = pickByGoal(comboEx, goal);
-      comboPick.slice(0, 2).forEach(ex => {
-        blocks.push(makeBlock(ex, 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: ex.combo }));
-      });
+      if (comboPick[0]) blocks.push(makeBlock(comboPick[0], 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: comboPick[0].combo }));
 
       // 샌드백 2개
       const bagPref = pickByGoal(bagEx, goal);
@@ -92,15 +98,18 @@
       const shadowPick = pickByGoal(shadows, goal);
       if (shadowPick[0]) blocks.push(makeBlock(shadowPick[0], 'shadow', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec }));
 
-      // 콤비네이션 2개
-      const homeComboPick = pickByGoal(comboEx, goal);
-      homeComboPick.slice(0, 2).forEach(ex => {
-        blocks.push(makeBlock(ex, 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: ex.combo }));
-      });
+      // 콤비네이션 — 기술 목표일 때만
+      if (goal === 'technique') {
+        const homeComboPick = pickByGoal(comboEx, goal);
+        homeComboPick.slice(0, 2).forEach(ex => {
+          blocks.push(makeBlock(ex, 'combo', { rounds: 2, roundMin: params.roundMin, restSec: params.restSec, combo: ex.combo }));
+        });
+      }
 
-      // 맨몸 3개
+      // 맨몸 (기술이면 3개, 아니면 4개)
+      const bodyCount = goal === 'technique' ? 3 : 4;
       const bodyPick = pickByGoal(bodyEx, goal);
-      bodyPick.slice(0, 3).forEach(ex => {
+      bodyPick.slice(0, bodyCount).forEach(ex => {
         blocks.push(makeBlock(ex, 'bodyweight', { sets: 3, reps: params.reps.mid, restSec: 45 }));
       });
 
