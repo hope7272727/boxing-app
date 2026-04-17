@@ -157,9 +157,28 @@
           </h1>
           ${weeklyMinutes > 0 ? `<p class="body-lg mt-16">이번 주 ${weeklyMinutes}분</p>` : ''}
         </div>
-        <div class="card-elev" style="min-width: 200px; text-align: right;">
-          <div class="label-sm mb-8">CURRENT STREAK</div>
-          <div class="font-display" style="font-size: 3rem; line-height: 1;">${streak}<span style="font-size: 1rem; color: var(--on-surface-dim); margin-left: 6px;">DAYS</span></div>
+        <div class="card-elev" style="min-width: 200px;">
+          ${(() => {
+            const up = (window.STORAGE && window.STORAGE.getUserProfile) ? window.STORAGE.getUserProfile() : {};
+            const h = up.height || '—';
+            const w = up.weight || '—';
+            const st = up.stance === 'southpaw' ? '사우스포' : '오소독스';
+            return `
+              <div class="label-sm accent mb-16">MY PROFILE</div>
+              <div class="flex justify-between mb-8">
+                <span class="body-sm">키</span>
+                <span class="title-md white">${h}<span class="stat-unit"> cm</span></span>
+              </div>
+              <div class="flex justify-between mb-8">
+                <span class="body-sm">몸무게</span>
+                <span class="title-md white">${w}<span class="stat-unit"> kg</span></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="body-sm">스탠스</span>
+                <span class="title-md accent">${st}</span>
+              </div>
+            `;
+          })()}
         </div>
       </div>
 
