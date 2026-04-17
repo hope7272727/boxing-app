@@ -150,6 +150,7 @@
       `;
 
     view.innerHTML = `
+      ${renderAuthBar()}
       <div class="main-header">
         <div>
           <div class="label-sm mb-8">대시보드</div>
@@ -235,6 +236,12 @@
         else if (act === 'shuffle-combo') {
           window.shuffleDailyCombo();
           renderDashboard();
+        }
+        else if (act === 'google-login' && window.AUTH) {
+          window.AUTH.login();
+        }
+        else if (act === 'logout' && window.AUTH) {
+          window.AUTH.logout().then(function () { renderDashboard(); });
         }
       });
     });
@@ -354,6 +361,7 @@
       current.completedBlocks = done;
       current.totalBlocks = total;
       STORAGE.saveSession(current);
+      if (window.AUTH && window.AUTH.user) window.AUTH.saveSessionCloud(current);
       STORAGE.clearCurrent();
       alert(`세션 완료! ${done}/${total} 블록 기록됨.`);
       setRoute('logs');
@@ -763,7 +771,31 @@
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
+  // ---------- AUTH UI HELPER ----------
+  function renderAuthBar() {
+    const user = window.AUTH ? window.AUTH.user : null;
+    if (user) {
+      return `<div class="auth-bar">
+        <span class="body-sm">${escape(user.displayName || user.email)}</span>
+        <button class="btn btn-sm btn-ghost" data-action="logout">로그아웃</button>
+      </div>`;
+    }
+    return `<div class="auth-bar">
+      <button class="btn btn-sm btn-primary" data-action="google-login">Google 로그인</button>
+    </div>`;
+  }
+
   // ---------- INIT ----------
+  if (window.AUTH) {
+    window.AUTH.onAuthChange(function (user) {
+      if (user) {
+        window.AUTH.syncFromCloud().then(function () { render(); });
+      } else {
+        render();
+      }
+    });
+  }
+
   const hash = (window.location.hash || '').replace('#', '');
   if (['dashboard', 'today', 'logs', 'settings'].includes(hash)) {
     setRoute(hash);

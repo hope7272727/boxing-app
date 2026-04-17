@@ -766,6 +766,18 @@ input:focus, select:focus, textarea:focus {
 .text-center { text-align: center; } .text-right { text-align: right; }
 .w-full { width: 100%; }
 
+/* =========================
+   AUTH BAR
+   ========================= */
+.auth-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
 /* PWA standalone mode */
 @media (display-mode: standalone) {
   body { padding-top: env(safe-area-inset-top); }
