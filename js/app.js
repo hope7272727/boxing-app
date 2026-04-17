@@ -435,21 +435,23 @@
     const legend = window.PUNCH_LEGEND || {};
     const userProfile = (window.STORAGE && window.STORAGE.getUserProfile) ? window.STORAGE.getUserProfile() : {};
     const stance = userProfile.stance || 'orthodox';
-    const names = {
-      1: '잽', 2: '크로스', 3: '훅', 4: '훅', 5: '어퍼', 6: '어퍼',
+    const punchNames = {
+      1: '잽', 2: '스트레이트', 3: '훅', 4: '훅', 5: '어퍼', 6: '어퍼',
       '2b': '바디', '5b': '바디', '6b': '바디',
       'SL': '슬립', 'WV': '위브', 'DK': '더킹', 'SB': '스텝백', 'PV': '피벗',
     };
     return combo.map(p => {
       const key = String(p);
       const info = legend[key];
-      if (!info || info.type === 'defense') return names[key] || key;
+      if (!info || info.type === 'defense') return punchNames[key] || key;
       const dir = stance === 'southpaw'
         ? (info.hand === 'lead' ? '우' : '좌')
         : (info.hand === 'lead' ? '좌' : '우');
-      const base = info.level === 'body' ? '바디' : names[key] || key;
-      return dir + base;
-    }).join('-');
+      const base = info.level === 'body' ? '바디' : punchNames[key] || key;
+      if (key === '1') return key + '-잽';
+      if (key === '2') return key + '-스트레이트';
+      return key + '-(' + dir + ')' + base;
+    }).join(', ');
   }
 
   function renderDailyCombo() {
