@@ -273,22 +273,18 @@
       <div class="main-header">
         <div style="flex:1">
           <div class="chip mb-16">일일 퀘스트</div>
-          <div class="font-display headline-md accent mt-8">${escape(formatProfileSummary(current.profile))}</div>
         </div>
         <div class="card-elev" style="min-width: 220px;">
-          <div class="flex justify-between mb-16">
+          <div class="font-display headline-md accent mb-8">${escape(formatProfileSummary(current.profile))}</div>
+          <div class="flex justify-between">
             <div>
-              <div class="label-sm">INTENSITY</div>
-              <div class="title-md mt-8 accent">${current.intensity.replace(/_/g, ' ')}</div>
-            </div>
-            <div class="text-right">
               <div class="label-sm">예상</div>
               <div class="title-md mt-8">${current.estMinutes}분</div>
             </div>
-          </div>
-          <div class="mb-16">
-            <div class="label-sm mb-8">예상 칼로리</div>
-            <div class="font-display accent" style="font-size: 1.8rem;">${current.estCalories} <span style="font-size: 0.8rem; color: var(--on-surface-dim);">KCAL</span></div>
+            <div class="text-right">
+              <div class="label-sm">칼로리</div>
+              <div class="title-md mt-8 accent">${current.estCalories} KCAL</div>
+            </div>
           </div>
         </div>
       </div>
