@@ -1012,4 +1012,44 @@ input:focus, select:focus, textarea:focus {
   border-bottom: none;
 }
 
+/* =========================
+   EXERCISE PICKER (Custom Mode)
+   ========================= */
+.exercise-picker {
+  max-width: 600px;
+  width: 90%;
+  padding: 32px;
+}
+.exercise-search {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface-high);
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--on-surface);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.15s;
+}
+.exercise-search:focus {
+  outline: none;
+  border-bottom-color: var(--primary);
+}
+.exercise-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.exercise-item {
+  padding: 14px 16px;
+  background: var(--surface-high);
+  margin-bottom: 6px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.exercise-item:hover {
+  background: var(--surface-highest);
+  border-left-color: var(--primary);
+}
+
 .mobile-nav { display: none; }

@@ -93,15 +93,37 @@
     const fName = document.getElementById('fName');
     state.profile.name = fName ? fName.value.trim() : '';
     STORAGE.saveLastProfile(state.profile);
-    const dp = difficultyToParams(state.profile.difficulty);
     const userProf = STORAGE.getUserProfile();
     const stanceVal = userProf.stance || 'orthodox';
     const weightVal = parseFloat(userProf.weight) || 70;
-    const buildProfile = { ...state.profile, minutes: 45, level: dp.level, fatigue: dp.fatigue, stance: stanceVal, weight: weightVal, height: userProf.height, age: userProf.age, gender: userProf.gender };
-    const session = RECOMMENDER.buildSession(buildProfile);
-    STORAGE.setCurrent(session);
-    closeProfileModal();
-    setRoute('today');
+    const buildProfile = { ...state.profile, minutes: 45, stance: stanceVal, weight: weightVal, height: userProf.height, age: userProf.age, gender: userProf.gender };
+
+    if (state.profile.difficulty === 'custom') {
+      const session = {
+        id: 'session_' + Date.now(),
+        createdAt: new Date().toISOString(),
+        profile: buildProfile,
+        title: 'CUSTOM',
+        subtitle: '',
+        estMinutes: 0,
+        intensity: 'CUSTOM',
+        estCalories: 0,
+        blocks: [],
+        notes: '',
+        isCustom: true,
+      };
+      STORAGE.setCurrent(session);
+      closeProfileModal();
+      setRoute('today');
+    } else {
+      const dp = difficultyToParams(state.profile.difficulty);
+      buildProfile.level = dp.level;
+      buildProfile.fatigue = dp.fatigue;
+      const session = RECOMMENDER.buildSession(buildProfile);
+      STORAGE.setCurrent(session);
+      closeProfileModal();
+      setRoute('today');
+    }
   });
 
   // ---------- VIEWS ----------
@@ -314,19 +336,23 @@
       </div>
 
       <div>
-        ${current.blocks.map((b, i) => renderBlock(b, i)).join('')}
+        ${current.blocks.map((b, i) => renderBlock(b, i, current.isCustom)).join('')}
       </div>
 
-      <div class="card-elev mt-32">
+      ${current.isCustom ? '<button class="btn btn-secondary mt-16 mb-16" data-action="add-exercise">+ 운동 추가</button>' : ''}
+
+      ${current.isCustom ? '' : `<div class="card-elev mt-32">
         <div class="label-sm accent mb-8">COACH'S NOTE</div>
         <p class="body-lg" style="font-style: italic;">"${escape(current.notes)}"</p>
-      </div>
+      </div>`}
 
       <div class="flex gap-16 mt-32">
         <button class="btn btn-danger" data-action="discard">DISCARD</button>
-        <button class="btn btn-ghost" data-action="regenerate">루틴 다시 뽑기</button>
+        ${current.isCustom ? '' : '<button class="btn btn-ghost" data-action="regenerate">루틴 다시 뽑기</button>'}
         <button class="btn btn-primary" data-action="finish">FINISH &amp; LOG</button>
       </div>
+
+      ${current.isCustom ? renderExercisePickerModal() : ''}
     `;
 
     view.querySelectorAll('[data-exercise-detail]').forEach(el => {
@@ -351,7 +377,8 @@
         setRoute('dashboard');
       }
     });
-    view.querySelector('[data-action="regenerate"]').addEventListener('click', () => {
+    const regenBtn = view.querySelector('[data-action="regenerate"]');
+    if (regenBtn) regenBtn.addEventListener('click', () => {
       if (confirm('새 루틴으로 교체하시겠습니까? (현재 진행 상황 사라짐)')) {
         const fresh = RECOMMENDER.buildSession(current.profile);
         STORAGE.setCurrent(fresh);
@@ -363,6 +390,10 @@
         if (!confirm('완료된 블록이 없습니다. 그래도 기록하시겠습니까?')) return;
       }
       current.completedAt = new Date().toISOString();
+      if (current.isCustom) {
+        current.estCalories = current.blocks.length * 45;
+        current.estMinutes = current.blocks.length * 5;
+      }
       current.actualMinutes = current.estMinutes;
       current.completedBlocks = done;
       current.totalBlocks = total;
@@ -372,6 +403,28 @@
       alert(`미션 완료! ${done}/${total} 블록이 기록되었습니다.`);
       setRoute('logs');
     });
+
+    // Custom mode: add exercise button
+    const addExBtn = view.querySelector('[data-action="add-exercise"]');
+    if (addExBtn) {
+      addExBtn.addEventListener('click', () => {
+        const pickerBackdrop = document.getElementById('exercisePickerModal');
+        if (pickerBackdrop) pickerBackdrop.classList.add('open');
+      });
+    }
+
+    // Custom mode: delete block buttons
+    if (current.isCustom) {
+      view.querySelectorAll('[data-block-delete]').forEach(el => {
+        el.addEventListener('click', () => {
+          const i = parseInt(el.dataset.blockDelete, 10);
+          current.blocks.splice(i, 1);
+          STORAGE.setCurrent(current);
+          renderToday();
+        });
+      });
+      initExercisePicker(current);
+    }
   }
 
   // ---------- EXERCISE DETAIL MODAL ----------
@@ -506,7 +559,7 @@
     return `<div class="combo-sequence">${pills.join('<span class="combo-arrow">→</span>')}</div>`;
   }
 
-  function renderBlock(b, i) {
+  function renderBlock(b, i, isCustom) {
     const params = b.params || {};
     let metaText = '';
     if (params.duration) metaText = `<strong>${params.duration}</strong>${params.unit === 'min' ? ' MIN' : ''}`;
@@ -541,9 +594,107 @@
           <div class="block-cue">${b.params && b.params.combo ? escape(comboToText(b.params.combo)) : escape(b.cue)}</div>
           <div class="block-meta">${metaText}</div>
         </div>
-        <button class="check-btn" data-block-toggle="${i}">${b.completed ? '✓' : '○'}</button>
+        <div style="display:flex;gap:8px;align-items:center;">
+          ${isCustom ? `<button class="check-btn" data-block-delete="${i}" title="삭제" style="color:var(--primary-dim);border-color:var(--primary-dim);">✗</button>` : ''}
+          <button class="check-btn" data-block-toggle="${i}">${b.completed ? '✓' : '○'}</button>
+        </div>
       </div>
     `;
+  }
+
+  // ---------- EXERCISE PICKER (Custom Mode) ----------
+  function renderExercisePickerModal() {
+    const cats = [
+      { value: '', label: '전체' },
+      { value: 'warmup', label: '워밍업' },
+      { value: 'shadow', label: '섀도우' },
+      { value: 'bag', label: '샌드백' },
+      { value: 'combo', label: '콤비네이션' },
+      { value: 'bodyweight', label: '맨몸' },
+      { value: 'conditioning', label: '컨디셔닝' },
+    ];
+    const catPills = cats.map(c => `<div class="pill ${c.value === '' ? 'active' : ''}" data-picker-cat="${c.value}">${c.label}</div>`).join('');
+    return `
+      <div class="modal-backdrop" id="exercisePickerModal">
+        <div class="modal exercise-picker">
+          <h2 class="font-display headline-md mb-16">운동 <span class="accent">선택</span></h2>
+          <input type="text" class="exercise-search" id="exerciseSearchInput" placeholder="운동 검색..." />
+          <div class="pill-group mt-16 mb-16" id="exercisePickerCats">${catPills}</div>
+          <div class="exercise-list" id="exercisePickerList"></div>
+          <button class="btn btn-ghost mt-16" data-action="close-picker">닫기</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function initExercisePicker(current) {
+    const pickerBackdrop = document.getElementById('exercisePickerModal');
+    if (!pickerBackdrop) return;
+    let filterCat = '';
+    let filterText = '';
+
+    function renderPickerList() {
+      const listEl = document.getElementById('exercisePickerList');
+      if (!listEl) return;
+      const exercises = window.EXERCISES.filter(ex => {
+        if (filterCat && ex.category !== filterCat) return false;
+        if (filterText && ex.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return false;
+        return true;
+      });
+      listEl.innerHTML = exercises.map(ex => {
+        const catLabel = window.CATEGORY_LABELS[ex.category] || ex.category;
+        return `<div class="exercise-item" data-pick-exercise="${ex.id}">
+          <div class="title-md">${escape(ex.name)}</div>
+          <div class="body-sm"><span class="accent">${escape(catLabel)}</span> · ${escape(ex.focus)}</div>
+        </div>`;
+      }).join('');
+    }
+
+    renderPickerList();
+
+    const searchInput = document.getElementById('exerciseSearchInput');
+    if (searchInput) searchInput.addEventListener('input', (e) => { filterText = e.target.value; renderPickerList(); });
+
+    const catsEl = document.getElementById('exercisePickerCats');
+    if (catsEl) catsEl.addEventListener('click', (e) => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      catsEl.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      filterCat = pill.dataset.pickerCat;
+      renderPickerList();
+    });
+
+    pickerBackdrop.addEventListener('click', (e) => {
+      // Pick exercise
+      const item = e.target.closest('[data-pick-exercise]');
+      if (item) {
+        const exId = item.dataset.pickExercise;
+        const ex = window.getExerciseById(exId);
+        if (!ex) return;
+        const block = {
+          id: ex.id,
+          name: ex.name,
+          category: ex.category,
+          phase: ex.category,
+          focus: ex.focus,
+          cue: ex.cue,
+          params: ex.category === 'combo' ? { rounds: 2, roundMin: 3, restSec: 60, combo: ex.combo } :
+                  ex.category === 'bodyweight' ? { sets: 3, reps: 15, restSec: 45 } :
+                  { rounds: 3, roundMin: 3, restSec: 60 },
+          completed: false,
+        };
+        current.blocks.push(block);
+        STORAGE.setCurrent(current);
+        pickerBackdrop.classList.remove('open');
+        renderToday();
+        return;
+      }
+      // Close picker
+      if (e.target === pickerBackdrop || e.target.closest('[data-action="close-picker"]')) {
+        pickerBackdrop.classList.remove('open');
+      }
+    });
   }
 
   // ---------- LOGS ----------
@@ -1050,7 +1201,7 @@
   }
 
   function formatProfileSummary(p) {
-    const diff = { easy: 'LOW', normal: 'MIDDLE', hard: 'HIGH' }[p.difficulty] || 'MIDDLE';
+    const diff = { easy: 'LOW', normal: 'MIDDLE', hard: 'HIGH', custom: 'CUSTOM' }[p.difficulty] || 'MIDDLE';
     const v = p.venue === 'gym' ? 'GYM' : 'HOME';
     const g = { technique: 'TECHNIQUE', power: 'POWER', cardio: 'HEALTH', weightloss: 'DIET' }[p.goal] || '';
     return `${diff} · ${v} · ${g}`;
