@@ -847,14 +847,6 @@
         </div>
       </div>
 
-      <div class="card mb-24">
-        <div class="label-sm accent mb-16">이 앱에 대해</div>
-        <p class="body-sm">
-          IRON_PUNCH는 복싱 훈련 기록/추천 도구다. 맨몸·샌드백·섀도우·스파링 중심으로 구성되며, 기구를 사용하는 웨이트는 포함되지 않는다.
-          주 3일 복싱장 + 비복싱장 날을 대비한 홈 루틴을 둘 다 추천한다.
-        </p>
-      </div>
-
       <input type="file" id="importFile" accept=".json" style="display:none" />
     `;
 
