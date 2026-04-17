@@ -177,27 +177,28 @@
       </div>
 
       <div class="card mb-32">
-        <div class="flex justify-between items-center mb-16">
-          <div>
-            <div class="label-sm">WEEKLY PROGRESS</div>
-            <div class="title-md mt-8">주간 활동량 (분)</div>
-          </div>
-          <div class="font-display accent" style="font-size: 2rem;">${weeklyMinutes}</div>
-        </div>
-        <div class="chart">
-          ${weeklyStats.map((m, i) => {
-            const max = Math.max(...weeklyStats, 1);
-            const h = Math.max(6, (m / max) * 100);
-            const today = new Date().getDay();
-            const idx = (today + 6) % 7;
-            return `<div class="bar ${i === idx ? 'active' : ''}" style="height:${h}%" title="${m}분"></div>`;
-          }).join('')}
-        </div>
-        <div class="chart-labels">
+        <div class="label-sm mb-16">이번 주 미션</div>
+        <div class="week-check">
           ${['월','화','수','목','금','토','일'].map((d, i) => {
             const today = new Date().getDay();
             const idx = (today + 6) % 7;
-            return `<span class="${i === idx ? 'today' : ''}">${d}</span>`;
+            const now = new Date();
+            const monday = new Date(now);
+            monday.setDate(now.getDate() - idx);
+            monday.setHours(0, 0, 0, 0);
+            const dayDate = new Date(monday);
+            dayDate.setDate(monday.getDate() + i);
+            const done = completed.some(s => {
+              const cd = new Date(s.completedAt);
+              return cd.toDateString() === dayDate.toDateString();
+            });
+            const isToday = i === idx;
+            const isPast = i < idx;
+            const cls = done ? 'day-done' : (isPast ? 'day-missed' : (isToday ? 'day-today' : 'day-future'));
+            return `<div class="day-cell ${cls}">
+              <div class="day-label">${d}</div>
+              <div class="day-icon">${done ? '✓' : (isPast ? '✗' : (isToday ? '—' : ''))}</div>
+            </div>`;
           }).join('')}
         </div>
       </div>

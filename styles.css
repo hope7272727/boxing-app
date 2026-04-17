@@ -269,8 +269,40 @@ button, input, select, textarea, .card, .btn, .chip, .pill {
 .stat-card .stat-unit { color: var(--on-surface-dim); font-size: 0.85rem; font-weight: 500; }
 
 /* =========================
-   WEEKLY CHART
+   WEEKLY CHECK
    ========================= */
+.week-check {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+.day-cell {
+  text-align: center;
+  padding: 12px 4px;
+  background: var(--surface-highest);
+}
+.day-label {
+  font-size: 0.65rem;
+  color: var(--on-surface-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.day-icon {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.day-done { background: var(--surface-highest); }
+.day-done .day-icon { color: var(--primary); }
+.day-done .day-label { color: var(--primary); }
+.day-missed .day-icon { color: var(--on-surface-muted); }
+.day-today { background: var(--surface-low); border: 2px solid var(--primary); }
+.day-today .day-icon { color: var(--on-surface-dim); }
+.day-today .day-label { color: var(--primary); }
+.day-future .day-icon { color: var(--surface-highest); }
+
+/* legacy chart (keep for logs) */
 .chart {
   display: flex;
   align-items: flex-end;
