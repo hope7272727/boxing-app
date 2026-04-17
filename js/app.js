@@ -154,8 +154,8 @@
         <div>
           <div class="label-sm mb-8">대시보드</div>
           <h1 class="font-display display-lg">
-            <span class="white">PUSH THE</span><br />
-            <span class="accent">LIMITS.</span>
+            <span class="white">Round One,</span><br />
+            <span class="accent">Fight!</span>
           </h1>
           ${weeklyMinutes > 0 ? `<p class="body-lg mt-16">이번 주 ${weeklyMinutes}분</p>` : ''}
         </div>
