@@ -346,10 +346,11 @@
         <p class="body-lg" style="font-style: italic;">"${escape(current.notes)}"</p>
       </div>`}
 
-      <div class="flex gap-16 mt-32">
-        <button class="btn btn-danger" data-action="discard">DISCARD</button>
-        ${current.isCustom ? '' : '<button class="btn btn-ghost" data-action="regenerate">루틴 다시 뽑기</button>'}
-        <button class="btn btn-primary" data-action="finish">FINISH &amp; LOG</button>
+      <div class="flex gap-16 mt-32" style="flex-wrap:wrap;">
+        <button class="btn btn-danger btn-sm" data-action="discard">초기화</button>
+        ${current.isCustom ? '' : '<button class="btn btn-ghost btn-sm" data-action="regenerate">미션 다시 뽑기</button>'}
+        <button class="btn btn-ghost btn-sm" data-action="add-random-block">미션 추가</button>
+        <button class="btn btn-primary btn-sm" data-action="finish" style="flex:1;">FINISH &amp; LOG</button>
       </div>
 
       ${current.isCustom ? renderExercisePickerModal() : ''}
@@ -379,11 +380,31 @@
     });
     const regenBtn = view.querySelector('[data-action="regenerate"]');
     if (regenBtn) regenBtn.addEventListener('click', () => {
-      if (confirm('새 루틴으로 교체하시겠습니까? (현재 진행 상황 사라짐)')) {
+      if (confirm('새 미션으로 교체하시겠습니까? (현재 진행 상황이 사라집니다)')) {
         const fresh = RECOMMENDER.buildSession(current.profile);
         STORAGE.setCurrent(fresh);
         renderToday();
       }
+    });
+    const addBlockBtn = view.querySelector('[data-action="add-random-block"]');
+    if (addBlockBtn) addBlockBtn.addEventListener('click', () => {
+      const pool = window.EXERCISES.filter(e => e.category !== 'warmup' && e.category !== 'cooldown');
+      const ex = pool[Math.floor(Math.random() * pool.length)];
+      const block = {
+        id: ex.id,
+        name: ex.name,
+        category: ex.category,
+        phase: ex.category,
+        focus: ex.focus,
+        cue: ex.cue,
+        params: ex.category === 'combo' ? { rounds: 2, roundMin: 3, restSec: 60, combo: ex.combo } :
+                ex.category === 'bodyweight' ? { sets: 3, reps: 15, restSec: 45 } :
+                { rounds: 3, roundMin: 3, restSec: 60 },
+        completed: false,
+      };
+      current.blocks.push(block);
+      STORAGE.setCurrent(current);
+      renderToday();
     });
     view.querySelector('[data-action="finish"]').addEventListener('click', () => {
       if (done === 0) {
@@ -1016,7 +1037,9 @@
         <div class="body-sm mb-8"><strong class="white">체크 버튼 (○/✓)</strong> — 오른쪽 버튼을 눌러 완료 체크. 체크하면 해당 운동이 완료 처리됨.</div>
         <div class="body-sm mb-8"><strong class="white">콤비네이션 블록</strong> — 펀치 넘버가 시각적으로 표시. 아래에 좌/우 방향 포함 설명. 스탠스 설정에 따라 자동 변환.</div>
         <div class="body-sm mb-8"><strong class="white">FINISH & LOG</strong> — 미션 종료 후 기록 저장. 로그인 시 클라우드에도 자동 백업.</div>
-        <div class="body-sm"><strong class="white">루틴 다시 뽑기</strong> — 현재 미션을 버리고 같은 조건으로 새 루틴 생성.</div>
+        <div class="body-sm mb-8"><strong class="white">미션 다시 뽑기</strong> — 현재 미션을 버리고 같은 조건으로 새 미션 생성.</div>
+        <div class="body-sm mb-8"><strong class="white">미션 추가</strong> — 랜덤 운동 블록 1개 추가.</div>
+        <div class="body-sm"><strong class="white">초기화</strong> — 현재 미션을 취소합니다.</div>
       </div>
 
       <div class="card mb-24">
