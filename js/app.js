@@ -321,7 +321,7 @@
           <div class="flex justify-between">
             <div class="text-right">
               <div class="label-sm">칼로리</div>
-              <div class="title-md mt-8 accent">${current.estCalories} KCAL</div>
+              <div class="title-md mt-8 accent" data-cal-display>${current.estCalories} KCAL</div>
             </div>
           </div>
         </div>
@@ -360,6 +360,39 @@
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         openExerciseModal(el.dataset.exerciseDetail);
+      });
+    });
+
+    view.querySelectorAll('.inline-edit').forEach(el => {
+      el.addEventListener('change', () => {
+        const idx = parseInt(el.dataset.blockIdx, 10);
+        const field = el.dataset.field;
+        const val = parseInt(el.value, 10) || 1;
+        if (current.blocks[idx] && current.blocks[idx].params) {
+          current.blocks[idx].params[field] = val;
+          STORAGE.setCurrent(current);
+          // 칼로리 재계산
+          const userProf = STORAGE.getUserProfile();
+          const w = parseFloat(userProf.weight) || 70;
+          const g = userProf.gender || 'male';
+          const a = parseInt(userProf.age) || 25;
+          const h = parseFloat(userProf.height) || 170;
+          let totalMin = 0;
+          current.blocks.forEach(b => {
+            const p = b.params || {};
+            if (p.duration) totalMin += p.duration;
+            else if (p.rounds) totalMin += p.rounds * (p.roundMin || 2) + (p.rounds * (p.restSec || 60)) / 60;
+            else if (p.sets) totalMin += (p.sets * (p.reps || 10) * 3 + p.sets * (p.restSec || 45)) / 60;
+          });
+          const met = current.intensity === 'HIGH_VOLTAGE' ? 10 : current.intensity === 'MODERATE' ? 7 : 4.5;
+          var bmr = g === 'female' ? 655.1 + 9.563*w + 1.85*h - 4.676*a : 66.5 + 13.75*w + 5.003*h - 6.755*a;
+          current.estCalories = Math.round(met * (bmr/1440) * totalMin);
+          current.estMinutes = Math.round(totalMin);
+          STORAGE.setCurrent(current);
+          // 칼로리 표시 업데이트
+          const calEl = view.querySelector('[data-cal-display]');
+          if (calEl) calEl.textContent = current.estCalories + ' KCAL';
+        }
       });
     });
 
@@ -583,9 +616,10 @@
   function renderBlock(b, i, isCustom) {
     const params = b.params || {};
     let metaText = '';
-    if (params.duration) metaText = `<strong>${params.duration}</strong>${params.unit === 'min' ? ' MIN' : ''}`;
-    else if (params.rounds) metaText = `<strong>${params.rounds}</strong> RDS × <strong>${params.roundMin}</strong>M · 휴식 ${params.restSec}S`;
-    else if (params.sets) metaText = `<strong>${params.sets}</strong> 세트 × <strong>${params.reps}</strong> 회 · 휴식 ${params.restSec}S`;
+    const editNum = (field, val, unit, idx) => `<input type="number" class="inline-edit" data-block-idx="${idx}" data-field="${field}" value="${val}" min="1" /> <span class="muted">${unit}</span>`;
+    if (params.duration) metaText = `${editNum('duration', params.duration, 'MIN', i)}`;
+    else if (params.rounds) metaText = `${editNum('rounds', params.rounds, 'RDS', i)} × ${editNum('roundMin', params.roundMin, 'M', i)} · 휴식 ${editNum('restSec', params.restSec, 'S', i)}`;
+    else if (params.sets) metaText = `${editNum('sets', params.sets, '세트', i)} × ${editNum('reps', params.reps, '회', i)} · 휴식 ${editNum('restSec', params.restSec, 'S', i)}`;
 
     const phaseLabel = {
       warmup: 'WARM-UP',
