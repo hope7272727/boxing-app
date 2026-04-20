@@ -347,10 +347,10 @@
       </div>`}
 
       <div class="flex gap-16 mt-32" style="flex-wrap:wrap;">
-        <button class="btn btn-danger btn-sm" data-action="discard">초기화</button>
-        ${current.isCustom ? '' : '<button class="btn btn-ghost btn-sm" data-action="regenerate">미션 다시 뽑기</button>'}
-        <button class="btn btn-ghost btn-sm" data-action="add-random-block">미션 추가</button>
-        <button class="btn btn-primary btn-sm" data-action="finish" style="flex:1;">FINISH &amp; LOG</button>
+        <button class="btn btn-danger" data-action="discard">초기화</button>
+        ${current.isCustom ? '' : '<button class="btn btn-ghost" data-action="regenerate">미션 다시 뽑기</button>'}
+        <button class="btn btn-ghost" data-action="add-random-block">미션 추가</button>
+        <button class="btn btn-primary" data-action="finish" style="flex:1;">미션 종료</button>
       </div>
 
       ${current.isCustom ? renderExercisePickerModal() : ''}
